@@ -2,6 +2,9 @@
 ## Directory-based project format:
 .idea/
 
+# IntelliJ
+/out/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
