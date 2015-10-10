@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Driver {
 
-    private final SimpleStringProperty username = new SimpleStringProperty("");
-    private final SimpleStringProperty password = new SimpleStringProperty("");
+    private final SimpleStringProperty username;
+    private final SimpleStringProperty password;
 
     public Driver(String username, String password) {
-        setUsername(username);
-        setPassword(password);
+        this.username =  new SimpleStringProperty(username);
+        this.password =  new SimpleStringProperty(password);
     }
 
     public String getUsername() {
