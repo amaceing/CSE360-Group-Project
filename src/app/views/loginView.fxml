@@ -5,7 +5,7 @@
 <BorderPane fx:controller="app.controllers.LoginController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
           stylesheets="@styles/main.css">
     <top>
-        <fx:include source="topBar.fxml" />
+        <fx:include source="topBar.fxml" fx:id="topBar"/>
     </top>
 
     <left>
@@ -17,14 +17,15 @@
     <center>
         <VBox styleClass="driver-login" alignment="CENTER_LEFT" spacing="15">
             <Label text="Username"/>
-            <TextField id="textfield" fx:id="usernameTextField"/>
+            <TextField fx:id="usernameTextField"/>
             <Label text="Password"/>
-            <TextField id="textfield" fx:id="passwordTextField"/>
+            <TextField fx:id="passwordTextField"/>
+            <Button text="Log in" onAction="#handleLoginAction"/>
         </VBox>
     </center>
 
     <bottom>
-        <fx:include source="bottomBar.fxml" />
+        <fx:include source="bottomBar.fxml" fx:id="bottomBar"/>
     </bottom>
 
 
