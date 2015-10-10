@@ -25,4 +25,16 @@ public class BottomBarController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
     }
+
+    public Label getRight() {
+        return right;
+    }
+
+    public Label getLeft() {
+        return left;
+    }
+
+    public Label getCenter() {
+        return center;
+    }
 }
