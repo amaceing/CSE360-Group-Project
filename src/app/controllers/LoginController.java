@@ -1,12 +1,11 @@
 package app.controllers;
 
+import app.VistaNavigator;
 import com.pepperonas.fxiconics.*;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Font;
 
@@ -36,7 +35,6 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-//        Parent root = FXMLLoader.load(getClass().getResource("views/dashboardView.fxml"));
-//        FXMLLoader root = new FXMLLoader(getClass().getResource("views/dashboardView.fxml"));
+        VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
     }
 }
