@@ -22,14 +22,7 @@ public class Main extends Application {
 
         stage.show();
     }
-
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("views/loginView.fxml"));
-//        primaryStage.setTitle("");
-//        primaryStage.setScene(new Scene(root, 800, 500));
-//        primaryStage.show();
-//    }
+    
 
     /**
      * Loads the main fxml layout.
