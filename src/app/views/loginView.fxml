@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import com.pepperonas.fxiconics.FxIconicsLabel?>
 
-<BorderPane fx:controller="app.controllers.LoginController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-          stylesheets="@styles/main.css">
+<BorderPane fx:controller="app.controllers.LoginController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
     <top>
         <fx:include source="topBar.fxml" fx:id="topBar"/>
     </top>

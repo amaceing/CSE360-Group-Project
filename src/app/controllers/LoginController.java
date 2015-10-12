@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.VistaNavigator;
 import com.pepperonas.fxiconics.*;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
@@ -34,6 +35,6 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-        // Handle Login
+        VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
     }
 }
