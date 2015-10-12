@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private Label audio;
+    private Label radio;
 
     @FXML
     private Label phone;
@@ -32,9 +32,9 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Font font = FxIconics.getAwesomeFont(128);
-        audio.setFont(font);
-        audio.setText(FxFontAwesome.Icons.faw_music.toString());
+        Font font = FxIconics.getAwesomeFont(114);
+        radio.setFont(font);
+        radio.setText(FxFontAwesome.Icons.faw_music.toString());
 
         phone.setFont(font);
         phone.setText(FxFontAwesome.Icons.faw_phone.toString());

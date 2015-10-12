@@ -2,20 +2,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:controller="app.controllers.DashboardController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@styles/main.css">
+<BorderPane fx:controller="app.controllers.DashboardController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
     <top>
         <fx:include source="topBar.fxml" fx:id="topBar"/>
     </top>
 
     <center>
-        <HBox styleClass="dashboard-icons" alignment="CENTER" spacing="50">
-            <Label fx:id="audio"/>
-            <Label fx:id="phone"/>
-            <Label fx:id="routes"/>
-            <Label fx:id="profile"/>
-            <Label fx:id="info"/>
-        </HBox>
+        <VBox alignment="CENTER" spacing="100">
+            <HBox spacing="200" alignment="CENTER">
+                <VBox alignment="CENTER">
+                    <Label fx:id="speed" text="93" styleClass="large-label"/>
+                    <Label text="mph" styleClass="medium-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="mileageLeft" text="273" styleClass="large-label"/>
+                    <Label text="mph" styleClass="medium-label"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="dashboard-icons" alignment="CENTER" spacing="50">
+                <VBox alignment="CENTER">
+                    <Label fx:id="radio"/>
+                    <Label text="Radio" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="phone"/>
+                    <Label text="Phone" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="routes"/>
+                    <Label text="Routes" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="profile"/>
+                    <Label text="Profile" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="info"/>
+                    <Label text="Info" styleClass="icon-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
     </center>
 
     <bottom>
