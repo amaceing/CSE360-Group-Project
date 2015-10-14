@@ -7,6 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +33,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Label info;
 
+    @FXML
+    private Label speed;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font font = FxIconics.getAwesomeFont(114);
@@ -47,5 +53,32 @@ public class DashboardController implements Initializable {
 
         info.setFont(font);
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
+    }
+
+//    public ActionListener getDeleteListener () {
+//        return new ActionListener() {
+//            @Override public void actionPerformed (ActionEvent e) {
+//                m.deleteSomething();
+//            }
+//        };
+//    }
+
+    public ActionListener drive(KeyEvent event)
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (event.getKeyCode() == KeyEvent.VK_UP)
+                {
+                    speed.setText("420");
+
+                }
+
+                if(event.getKeyCode() == KeyEvent.VK_DOWN)
+                {
+
+                }
+            }
+        };
     }
 }

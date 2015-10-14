@@ -16,7 +16,7 @@
                 </VBox>
                 <VBox alignment="CENTER">
                     <Label fx:id="mileageLeft" text="273" styleClass="large-label"/>
-                    <Label text="mph" styleClass="medium-label"/>
+                    <Label text="miles left" styleClass="medium-label"/>
                 </VBox>
             </HBox>
             <HBox styleClass="dashboard-icons" alignment="CENTER" spacing="50">
