@@ -21,7 +21,7 @@ public class Session {
 
     public void endSession() {
         endTime = LocalTime.now();
-        duration = ChronoUnit.MINUTES.between(startTime, endTime);
+        duration = ChronoUnit.SECONDS.between(startTime, endTime);
     }
 
     public void printDuration() {
