@@ -1,8 +1,10 @@
 package app.controllers;
 
+import app.VistaNavigator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,9 +23,19 @@ public class BottomBarController implements Initializable {
     @FXML
     private Label right;
 
+    @FXML
+    private Button accel;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
+    }
+
+    @FXML
+    protected void accelerateAction(ActionEvent actionEvent) {
+        System.out.println("Test");
     }
 
     public Label getRight() {
@@ -37,4 +49,5 @@ public class BottomBarController implements Initializable {
     public Label getCenter() {
         return center;
     }
+
 }

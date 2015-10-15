@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane styleClass="bottom-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" fx:controller="app.controllers.BottomBarController">
+<GridPane styleClass="bottom-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" fx:controller="app.controllers.BottomBarController" fx:id="bottomGrid">
     <columnConstraints>
         <ColumnConstraints percentWidth="33" halignment="LEFT"/>
         <ColumnConstraints percentWidth="33" halignment="CENTER"/>
@@ -10,7 +10,12 @@
     </columnConstraints>
     <children>
         <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="Left" fx:id="left"/>
-        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" text="Center" fx:id="center"/>
+        <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="0" text="Center" fx:id="center"/>-->
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" spacing="10" fx:id="driveBox">
+            <Button text="-"></Button>
+            <Label text="Drive"/>
+            <Button text="+" onAction="#accelerateAction"></Button>
+        </HBox>
         <Label GridPane.columnIndex="2" GridPane.rowIndex="0" text="Right" fx:id="right"/>
     </children>
 </GridPane>
