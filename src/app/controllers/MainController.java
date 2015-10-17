@@ -9,7 +9,7 @@ import app.models.Session;
  * Main controller class for the entire layout.
  */
 public class MainController {
-    public Session session;
+    private static Session session;
 
     /** Holder of a switchable vista. */
     @FXML
@@ -24,4 +24,11 @@ public class MainController {
         vistaHolder.getChildren().setAll(node);
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 }

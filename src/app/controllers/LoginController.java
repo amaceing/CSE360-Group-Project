@@ -35,14 +35,17 @@ public class LoginController implements Initializable {
         user.setFont(font);
         user.setText(FxFontAwesome.Icons.faw_user.toString());
         bottomBarController.hideLogOutButton();
+
+        mainController = VistaNavigator.getMainController();
     }
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-        mainController = VistaNavigator.getMainController();
-        mainController.session.setSessionUserName(usernameTextField.getText());
-        mainController.session.setSessionPassword(passwordTextField.getText());
-        if (mainController.session.validateLogin()) {
+        Session session = new Session();
+        mainController.setSession(session);
+        mainController.getSession().setSessionUserName(usernameTextField.getText());
+        mainController.getSession().setSessionPassword(passwordTextField.getText());
+        if (mainController.getSession().validateLogin()) {
             System.out.println("user can log in");
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {

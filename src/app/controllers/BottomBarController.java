@@ -37,7 +37,6 @@ public class BottomBarController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
         mainController = VistaNavigator.getMainController();
-        mainController.session = new Session();
     }
 
     public Label getRight() {
@@ -57,9 +56,10 @@ public class BottomBarController implements Initializable {
     }
 
     public void endSession() {
-        mainController.session.endSession();
-        mainController.session.printDuration();
+        mainController.getSession().endSession();
+        mainController.getSession().printDuration();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
+        mainController.setSession(null);
     }
 
     public void hideLogOutButton() {
