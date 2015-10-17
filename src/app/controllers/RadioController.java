@@ -1,4 +1,5 @@
 package app.controllers;
+import app.VistaNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -24,6 +25,7 @@ public class RadioController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AMButton.getStyleClass().add("active");
+        topBarController.setBackButton(VistaNavigator.DASHBOARD);
     }
 
 }

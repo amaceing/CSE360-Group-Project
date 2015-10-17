@@ -55,7 +55,8 @@ public class DashboardController implements Initializable {
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
     }
 
-    @FXML public void handleRadioClick(MouseEvent arg0) {
+    @FXML
+    public void handleRadioClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
 }
