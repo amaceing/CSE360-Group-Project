@@ -12,6 +12,8 @@ import java.io.IOException;
 public class Main extends Application {
     public Session session;
 
+    private Scene scene;
+
     @Override
     public void start(Stage stage) throws Exception{
         stage.setTitle("All-In-One Car System");
@@ -24,7 +26,7 @@ public class Main extends Application {
 
         stage.show();
     }
-    
+
 
     /**
      * Loads the main fxml layout.
@@ -59,7 +61,7 @@ public class Main extends Application {
      * @return the created scene.
      */
     private Scene createScene(Pane mainPane) {
-        Scene scene = new Scene(
+        scene = new Scene(
                 mainPane, 800, 500
         );
 
@@ -67,6 +69,10 @@ public class Main extends Application {
                 getClass().getResource("views/styles/main.css").toExternalForm()
         );
 
+        return scene;
+    }
+
+    public Scene getScene() {
         return scene;
     }
 
