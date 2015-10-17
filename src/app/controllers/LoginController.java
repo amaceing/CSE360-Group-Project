@@ -37,13 +37,5 @@ public class LoginController implements Initializable {
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
         VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
-        Session session = new Session();
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        session.endSession();
-        session.printDuration();
     }
 }

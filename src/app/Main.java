@@ -10,6 +10,7 @@ import app.controllers.MainController;
 import java.io.IOException;
 
 public class Main extends Application {
+    public Session session;
 
     @Override
     public void start(Stage stage) throws Exception{
