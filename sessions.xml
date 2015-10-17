@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_60" class="java.beans.XMLDecoder">
- <object class="app.models.Session" id="Session0">
-  <void class="app.models.Session" method="getField">
-   <string>duration</string>
-   <void method="set">
-    <object idref="Session0"/>
-    <long>3</long>
-   </void>
+ <object class="app.models.Session">
+  <void property="duration">
+   <long>6</long>
   </void>
  </object>
 </java>

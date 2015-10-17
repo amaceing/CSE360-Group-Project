@@ -9,11 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Font;
+import app.controllers.MainController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    private static MainController mainController;
 
     @FXML
     private Label user;
@@ -37,6 +39,14 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-        VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
+        mainController = VistaNavigator.getMainController();
+        mainController.session.setSessionUserName(usernameTextField.getText());
+        mainController.session.setSessionPassword(passwordTextField.getText());
+        if (mainController.session.validateLogin()) {
+            System.out.println("user can log in");
+            VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
+        } else {
+            System.out.println("user cannot log in");
+        }
     }
 }

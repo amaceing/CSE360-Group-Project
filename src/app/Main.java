@@ -10,8 +10,7 @@ import app.controllers.MainController;
 import java.io.IOException;
 
 public class Main extends Application {
-    public Session session;
-
+    private static Session session;
     private Scene scene;
 
     @Override
@@ -76,6 +75,13 @@ public class Main extends Application {
         return scene;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public static void main(String[] args) {
         launch(args);

@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import sun.rmi.rmic.Main;
 import app.xmlModels.SessionClassWrapper;
+import app.controllers.MainController;
 
 
 
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
  * Created by arinhouck on 10/9/15.
  */
 public class BottomBarController implements Initializable {
-    public Session session;
+    private MainController mainController;
 
     @FXML
     private Label left;
@@ -35,7 +36,8 @@ public class BottomBarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
-        session = new Session();
+        mainController = VistaNavigator.getMainController();
+        mainController.session = new Session();
     }
 
     public Label getRight() {
@@ -55,17 +57,13 @@ public class BottomBarController implements Initializable {
     }
 
     public void endSession() {
-        session.endSession();
-        session.printDuration();
+        mainController.session.endSession();
+        mainController.session.printDuration();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
-        writeSessionToXML();
     }
 
     public void hideLogOutButton() {
         logoutButton.setVisible(false);
     }
 
-    public void writeSessionToXML() {
-        SessionClassWrapper.write(session, "sessions.xml");
-    }
 }
