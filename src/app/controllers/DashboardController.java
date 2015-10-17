@@ -30,6 +30,12 @@ public class DashboardController implements Initializable {
     @FXML
     private Label info;
 
+//    @FXML
+//    private TopBarController topBar;
+
+//    @FXML
+//    private BottomBarController bottomBar;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font font = FxIconics.getAwesomeFont(114);

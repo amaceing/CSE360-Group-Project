@@ -6,8 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import sun.rmi.rmic.Main;
+import app.xmlModels.SessionClassWrapper;
+
 
 
 import java.net.URL;
@@ -57,9 +58,14 @@ public class BottomBarController implements Initializable {
         session.endSession();
         session.printDuration();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
+        writeSessionToXML();
     }
 
     public void hideLogOutButton() {
         logoutButton.setVisible(false);
+    }
+
+    public void writeSessionToXML() {
+        SessionClassWrapper.write(session, "sessions.xml");
     }
 }
