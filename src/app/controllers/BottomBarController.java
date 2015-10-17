@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,9 +49,17 @@ public class BottomBarController implements Initializable {
         return center;
     }
 
+    public Button getLogoutButton() {
+        return logoutButton;
+    }
+
     public void endSession() {
         session.endSession();
         session.printDuration();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
+    }
+
+    public void hideLogOutButton() {
+        logoutButton.setVisible(false);
     }
 }

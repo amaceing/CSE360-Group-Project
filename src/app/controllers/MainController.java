@@ -3,11 +3,13 @@ package app.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
+import app.models.Session;
 
 /**
  * Main controller class for the entire layout.
  */
 public class MainController {
+    public Session session;
 
     /** Holder of a switchable vista. */
     @FXML

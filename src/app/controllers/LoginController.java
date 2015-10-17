@@ -32,6 +32,7 @@ public class LoginController implements Initializable {
         Font font = FxIconics.getAwesomeFont(196);
         user.setFont(font);
         user.setText(FxFontAwesome.Icons.faw_user.toString());
+        bottomBarController.hideLogOutButton();
     }
 
     @FXML
