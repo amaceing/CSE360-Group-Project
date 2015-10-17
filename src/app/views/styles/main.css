@@ -1,3 +1,5 @@
+/* Basic */
+
 .root {
     -fx-background-color: #000000;
 }
@@ -5,14 +7,13 @@
     -fx-padding: 25;
 }
 
+
 .top-bar, .bottom-bar {
     -fx-padding: 5;
     -fx-background-color: #333333;
 }
 
-.driver-login {
-    -fx-padding: 30;
-}
+
 
 .label{
     -fx-text-fill: #e8e8e8;
@@ -31,5 +32,66 @@
 .icon-label {
     -fx-font-size: 18;
     -fx-padding: 5;
+}
+
+.large-header {
+    -fx-font-size: 36;
+}
+
+.medium-header {
+    -fx-font-size: 24;
+}
+
+/* Login */
+
+.driver-login {
+    -fx-padding: 30;
+}
+
+/* Radio */
+
+.segmented-button-bar .button {
+    -fx-font-size: 18;
+    -light-black: rgb(74, 75, 78);
+    -dark-highlight: rgb(87, 89, 92);
+    -dark-black: rgb(39, 40, 40);
+    -darkest-black: rgb(5, 5, 5);
+    -mid-gray: rgb(216, 222, 227);
+    -fx-background-color: -darkest-black, -dark-highlight, linear-gradient(to bottom, -light-black 2%, -dark-black 98%);
+    -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0;
+    -fx-padding: 0.4em 1.833333em 0.4em 1.833333em;
+    -fx-text-fill: #e8e8e8;
+}
+
+.segmented-button-bar .button.first {
+    -fx-background-insets: 0, 1, 2 1 1 1;
+    -fx-background-radius: 3 0 0 3, 2 0 0 2, 2 0 0 2;
+}
+
+.segmented-button-bar .button.last {
+    -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+    -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 2 2 0;
+}
+
+.segmented-button-bar .button:pressed, .segmented-button-bar .button.active  {
+    -fx-background-color: -darkest-black, rgb(55, 57, 58), linear-gradient(to top, -light-black 2%, -dark-black 98%);
+}
+
+/* List View */
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-font-size: 24;
+    -fx-padding: 1;
+}
+
+.list-cell {
+    -fx-background-color: #000;
+    -fx-text-fill: #e8e8e8;
+}
+
+.list-cell:focused {
+    -fx-background-color: #333;
 }
 
