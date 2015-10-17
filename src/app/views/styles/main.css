@@ -1,6 +1,9 @@
 .root {
     -fx-background-color: #000000;
 }
+.inner {
+    -fx-padding: 25;
+}
 
 .top-bar, .bottom-bar {
     -fx-padding: 5;
@@ -29,3 +32,4 @@
     -fx-font-size: 18;
     -fx-padding: 5;
 }
+
