@@ -20,7 +20,7 @@
                 </VBox>
             </HBox>
             <HBox styleClass="dashboard-icons" alignment="CENTER" spacing="50">
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" fx:id="radioBox" onMouseClicked="#handleRadioClick">
                     <Label fx:id="radio"/>
                     <Label text="Radio" styleClass="icon-label"/>
                 </VBox>
