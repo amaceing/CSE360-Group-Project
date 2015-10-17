@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.VistaNavigator;
 import app.models.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,5 +49,6 @@ public class BottomBarController implements Initializable {
     public void endSession() {
         session.endSession();
         session.printDuration();
+        VistaNavigator.loadVista(VistaNavigator.LOGIN);
     }
 }
