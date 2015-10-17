@@ -1,13 +1,17 @@
 package app.controllers;
 
+
 import app.VistaNavigator;
+import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 /**
  * Created by arinhouck on 10/9/15.
@@ -26,17 +30,44 @@ public class BottomBarController implements Initializable {
     @FXML
     private Button accel;
 
+    @FXML
+    private Label mph;
+
+    int speed = 0;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
+        mph.setText("MPH: " + speed);
     }
 
-    @FXML
-    protected void accelerateAction(ActionEvent actionEvent) {
-        System.out.println("Test");
+
+
+    @FXML public void accelerateAction(MouseEvent arg0) {
+        //System.out.println("Up");
+        if(speed <= 100)
+        {
+            speed++;
+            mph.setText("MPH: " + speed);
+        }
+
     }
+
+
+    @FXML public void decelerateAction(MouseEvent arg0) {
+        //System.out.println("Up");
+        if (speed >= 1)
+        {
+            speed--;
+            mph.setText("MPH: " + speed);
+        }
+
+    }
+
+
+
+
 
     public Label getRight() {
         return right;
@@ -50,4 +81,13 @@ public class BottomBarController implements Initializable {
         return center;
     }
 
+
+
+
+
+
+
+
+
 }
+

@@ -57,6 +57,7 @@ public class DashboardController implements Initializable {
 
         info.setFont(font);
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
+
     }
 
 
