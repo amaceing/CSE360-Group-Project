@@ -19,6 +19,12 @@ public class TopBarController implements Initializable {
     @FXML
     private Label time;
 
+    @FXML
+    private Label left;
+
+    @FXML
+    private Label right;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set time eg. 12:00 PM
