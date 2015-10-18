@@ -1,10 +1,13 @@
 package app.controllers;
 
+import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import java.net.URL;
@@ -35,6 +38,8 @@ public class DashboardController implements Initializable {
 
 //    @FXML
 //    private BottomBarController bottomBar;
+    @FXML
+    private VBox radioBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,5 +58,10 @@ public class DashboardController implements Initializable {
 
         info.setFont(font);
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
+    }
+
+    @FXML
+    public void handleRadioClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
 }
