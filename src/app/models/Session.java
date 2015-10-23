@@ -45,6 +45,7 @@ public class Session {
     }
 
     public boolean validateLogin() {
+        //will eventually check against file filled with usernames/passwords
         if (sessionUserName.equals("Anthony") && sessionPassword.equals("abc123")) {
             System.out.println("valid");
             return true;
