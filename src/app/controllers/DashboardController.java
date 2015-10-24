@@ -6,8 +6,9 @@ import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.net.URL;
@@ -59,4 +60,8 @@ public class DashboardController implements Initializable {
     public void handleRadioClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
+    @FXML public void infoClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.INFORMATION);
+    }
+
 }

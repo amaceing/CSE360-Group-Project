@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane fx:controller="app.controllers.InfoController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <fx:include source="topBar.fxml" fx:id="topBar"/>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="100">
+            <HBox spacing="125" alignment="CENTER">
+                <VBox alignment="CENTER">
+                    <Label fx:id="avgSpeed" text="Average Speed: 23.56 mph" styleClass="medium-label" style=" -fx-border-color:white; -fx-border-width: 1; -fx-border-style: solid;"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="maxSpeed" text="Maximum Speed: 92 mph" styleClass="medium-label" style=" -fx-border-color:white; -fx-border-width: 1; -fx-border-style: solid;"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="info-icons" alignment="CENTER" spacing="100">
+                <VBox alignment="CENTER">
+                    <Label fx:id="sessionHistory"/>
+                    <Label text="Session History" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="drivingHistory"/>
+                    <Label text="Driving History" styleClass="icon-label"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label fx:id="sessionStats"/>
+                    <Label text="Session Statistics" styleClass="icon-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <fx:include source="bottomBar.fxml" fx:id="bottomBar"/>
+    </bottom>
+
+
+</BorderPane>

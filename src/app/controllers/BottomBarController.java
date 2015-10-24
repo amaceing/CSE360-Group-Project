@@ -26,6 +26,7 @@ public class BottomBarController implements Initializable {
         // View did load
     }
 
+
     public Label getRight() {
         return right;
     }
