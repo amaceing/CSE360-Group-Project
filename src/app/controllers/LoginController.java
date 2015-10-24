@@ -37,4 +37,5 @@ public class LoginController implements Initializable {
     protected void handleLoginAction(ActionEvent actionEvent) {
         VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
     }
+
 }
