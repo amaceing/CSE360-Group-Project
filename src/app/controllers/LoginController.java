@@ -10,10 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Font;
-import app.controllers.MainController;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import app.SqlDriver;
 
 public class LoginController implements Initializable {
     private static MainController mainController;
@@ -37,6 +36,8 @@ public class LoginController implements Initializable {
         user.setText(FxFontAwesome.Icons.faw_user.toString());
         bottomBarController.hideLogOutButton();
 
+        SqlDriver.
+
         mainController = VistaNavigator.getMainController();
     }
 
@@ -46,6 +47,7 @@ public class LoginController implements Initializable {
         Session session = new Session();
         mainController.setSession(session);
         mainController.getSession().setDriver(driver);
+        mainController.getSession().setDriverIDFromRecord();
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {

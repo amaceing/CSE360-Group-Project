@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.SqlDriver;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -10,6 +11,7 @@ import app.models.Session;
  */
 public class MainController {
     private static Session session;
+    private static SqlDriver sql;
 
     /** Holder of a switchable vista. */
     @FXML

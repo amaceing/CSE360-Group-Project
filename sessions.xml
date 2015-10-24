@@ -10,15 +10,15 @@
      <string>Mace</string>
     </void>
     <void property="password">
-     <string>abc123</string>
+     <string>password</string>
     </void>
     <void property="username">
-     <string>Anthony</string>
+     <string>example</string>
     </void>
    </object>
   </void>
   <void property="duration">
-   <long>21</long>
+   <long>1</long>
   </void>
  </object>
 </java>

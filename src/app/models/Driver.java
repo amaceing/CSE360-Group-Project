@@ -7,12 +7,14 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Driver {
 
+    private int ID;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
 
     public Driver() {
+        this.ID = 0;
         this.firstName = "";
         this.lastName = "";
         this.username = "";
@@ -24,6 +26,14 @@ public class Driver {
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {
