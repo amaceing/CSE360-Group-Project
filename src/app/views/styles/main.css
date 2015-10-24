@@ -97,7 +97,7 @@
 
 /*  Phone */
 .button.medium-label{
-    -fx-font: normal;
+    -fx-font-style: normal;
     -fx-background-color: black;
     -fx-border-color: black;
     -fx-text-fill: antiquewhite;
@@ -107,11 +107,11 @@
 .medium-label .button:pressed, .medium-label .button.active  {
     -fx-background-color: grey;
 }
+
 .left{
-    width:110px;
-    float:left;
-    text-align:left;
-    -fx-label-padding-right: ;
+    width: 110px;
+    float: left;
+    text-align: left;
 }
 
 .right{
@@ -122,7 +122,7 @@
 
 .middle{
     -fx-font-size: 24;
-    text-allign:center;
+    text-align:center;
     -fx-text-alignment: center;
 }
 

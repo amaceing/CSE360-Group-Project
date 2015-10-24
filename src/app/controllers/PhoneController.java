@@ -30,7 +30,7 @@ public class PhoneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        Font font = FxIconics.getAwesomeFont(70);
+        Font font = FxIconics.getAwesomeFont(52);
         call.setFont(font);
         call.setText(FxFontAwesome.Icons.faw_phone.toString());
 
