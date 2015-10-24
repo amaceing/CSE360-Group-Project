@@ -36,18 +36,16 @@ public class LoginController implements Initializable {
         user.setText(FxFontAwesome.Icons.faw_user.toString());
         bottomBarController.hideLogOutButton();
 
-        SqlDriver.
-
         mainController = VistaNavigator.getMainController();
     }
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
         Driver driver = new Driver("Anthony", "Mace", usernameTextField.getText(), passwordTextField.getText());
+        SqlDriver.insertRecord(driver);
         Session session = new Session();
         mainController.setSession(session);
         mainController.getSession().setDriver(driver);
-        mainController.getSession().setDriverIDFromRecord();
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {
@@ -57,6 +55,10 @@ public class LoginController implements Initializable {
             invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
             invalidLogin.showAndWait();
         }
+    }
+
+    public void createDriver() {
+
     }
 
 }

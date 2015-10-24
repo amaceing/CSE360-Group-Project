@@ -49,14 +49,9 @@ public class Session {
     public void endSession() {
         endTime = LocalTime.now();
         duration = ChronoUnit.SECONDS.between(startTime, endTime);
-        writeSessionToXML();
     }
 
     public void printDuration() {
         System.out.println("The duration of your session: " + duration);
-    }
-
-    public void writeSessionToXML() {
-        SessionClassWrapper.write(this, "sessions.xml");
     }
 }
