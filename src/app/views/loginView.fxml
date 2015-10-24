@@ -7,11 +7,11 @@
         <fx:include source="topBar.fxml" fx:id="topBar"/>
     </top>
 
-    <center>
+    <left>
         <VBox styleClass="driver-login" alignment="CENTER">
             <Label fx:id="user"/>
         </VBox>
-    </center>
+    </left>
 
     <center>
         <VBox styleClass="driver-login" alignment="CENTER_LEFT" spacing="15">
