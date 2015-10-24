@@ -24,7 +24,7 @@
                     <Label fx:id="radio"/>
                     <Label text="Radio" styleClass="icon-label"/>
                 </VBox>
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" fx:id="phoneBox" onMouseClicked="#handlePhoneClick">
                     <Label fx:id="phone"/>
                     <Label text="Phone" styleClass="icon-label"/>
                 </VBox>
