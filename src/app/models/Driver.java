@@ -75,6 +75,6 @@ public class Driver {
     }
 
     public void writeDriverToXML() {
-        DriverClassWrapper.write(this, "sessions.xml");
+        DriverClassWrapper.write(this, "drivers.xml");
     }
 }

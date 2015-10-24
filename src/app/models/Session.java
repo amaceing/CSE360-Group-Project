@@ -12,8 +12,6 @@ import app.controllers.MainController;
 public class Session {
     private LocalTime startTime;
     private LocalTime endTime;
-    private String sessionUserName;
-    private String sessionPassword;
     private long duration;
     private Driver driver;
 
@@ -21,24 +19,8 @@ public class Session {
         startTime = LocalTime.now();
     }
 
-    public String getSessionUserName() {
-        return sessionUserName;
-    }
-
-    public String getSessionPassword() {
-        return sessionPassword;
-    }
-
     public long getDuration() {
         return duration;
-    }
-
-    public void setSessionUserName(String sessionUserName) {
-        this.sessionUserName = sessionUserName;
-    }
-
-    public void setSessionPassword(String sessionPassword) {
-        this.sessionPassword = sessionPassword;
     }
 
     public void setDuration(long duration) {
@@ -64,12 +46,11 @@ public class Session {
         }
     }
 
-
     public void endSession() {
         endTime = LocalTime.now();
         duration = ChronoUnit.SECONDS.between(startTime, endTime);
         writeSessionToXML();
-        this.driver.writeDriverToXML();
+        //this.driver.writeDriverToXML();
     }
 
     public void printDuration() {
