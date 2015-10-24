@@ -20,6 +20,7 @@ public class VistaNavigator {
     public static final String DASHBOARD = "views/dashboardView.fxml";
     public static final String PHONE = "views/phoneView.fxml";
     public static final String RADIO = "views/radioView.fxml";
+    public static final String call = "views/phoneView.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;

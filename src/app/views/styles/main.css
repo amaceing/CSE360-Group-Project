@@ -75,7 +75,7 @@
 }
 
 .segmented-button-bar .button:pressed, .segmented-button-bar .button.active  {
-    -fx-background-color: -darkest-black, rgb(55, 57, 58), linear-gradient(to top, -light-black 2%, -dark-black 98%);
+    -fx-background-color: -darkest-black, rgb(55, 57, 58), linear-gradient(to top,-light-black 2%, -dark-black 98%);
 }
 
 /* List View */
@@ -95,3 +95,40 @@
     -fx-background-color: #333;
 }
 
+/*  Phone */
+.button.medium-label{
+    -fx-font: normal;
+    -fx-background-color: black;
+    -fx-border-color: black;
+    -fx-text-fill: antiquewhite;
+    -fx-font-size: 24;
+}
+
+.medium-label .button:pressed, .medium-label .button.active  {
+    -fx-background-color: grey;
+}
+.left{
+    width:110px;
+    float:left;
+    text-align:left;
+    -fx-label-padding-right: ;
+}
+
+.right{
+    width:110px;
+    float:right;
+    text-align:right;
+}
+
+.middle{
+    -fx-font-size: 24;
+    text-allign:center;
+    -fx-text-alignment: center;
+}
+
+.check-box{
+    -fx-alignment: center;
+    -fx-font-style: normal;
+    -fx-font-size: 20;
+
+}
