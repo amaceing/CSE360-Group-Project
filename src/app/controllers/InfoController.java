@@ -1,4 +1,5 @@
 package app.controllers;
+import app.VistaNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +13,9 @@ import java.util.ResourceBundle;
 public class InfoController implements Initializable {
 
     @FXML
+    private TopBarController topBarController;
+
+    @FXML
     private Label sessionHistory;
 
     @FXML
@@ -22,6 +26,8 @@ public class InfoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+
         Font font = FxIconics.getAwesomeFont(114);
         sessionHistory.setFont(font);
         sessionHistory.setText(FxFontAwesome.Icons.faw_history.toString());
