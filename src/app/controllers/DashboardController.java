@@ -4,17 +4,16 @@ import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-
 
 /**
  * Created by arinhouck on 10/12/15.
@@ -39,6 +38,12 @@ public class DashboardController implements Initializable {
     @FXML
     private BottomBarController bottomBarController;
 
+    @FXML
+    private VBox phoneBox;
+
+    @FXML
+    private VBox radioBox;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,8 +62,21 @@ public class DashboardController implements Initializable {
 
         info.setFont(font);
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
-
     }
 
+    @FXML
+    public void handlePhoneClick(MouseEvent arg0)
+    {
+        VistaNavigator.loadVista(VistaNavigator.PHONE);
+    }
+
+    @FXML
+    public void handleRadioClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.RADIO);
+    }
+
+    @FXML public void infoClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.INFORMATION);
+    }
 
 }

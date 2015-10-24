@@ -1,9 +1,5 @@
 package app.controllers;
 
-
-import app.VistaNavigator;
-import javafx.animation.KeyFrame;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -35,14 +31,11 @@ public class BottomBarController implements Initializable {
 
     int speed = 0;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
         mph.setText("MPH: " + speed);
     }
-
-
 
     @FXML public void accelerateAction(MouseEvent arg0) {
         //System.out.println("Up");
@@ -54,7 +47,6 @@ public class BottomBarController implements Initializable {
 
     }
 
-
     @FXML public void decelerateAction(MouseEvent arg0) {
         //System.out.println("Up");
         if (speed >= 1)
@@ -64,10 +56,6 @@ public class BottomBarController implements Initializable {
         }
 
     }
-
-
-
-
 
     public Label getRight() {
         return right;
@@ -80,14 +68,6 @@ public class BottomBarController implements Initializable {
     public Label getCenter() {
         return center;
     }
-
-
-
-
-
-
-
-
 
 }
 
