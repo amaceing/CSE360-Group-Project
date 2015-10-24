@@ -53,11 +53,11 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
-        String sql;
+        String sql = "";
         if (obj instanceof Driver) {
             sql = "INSERT INTO DRIVER  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) ";
             sql += "VALUES ('" + ((Driver) obj).getFirstName() + "', '" + ((Driver) obj).getLastName() + "', '";
-            sql += ((Driver) obj).getUsername()
+            sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
         }
         Connection c = null;
         Statement stmt = null;
@@ -66,11 +66,7 @@ public class SqlDriver {
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
-
             stmt = c.createStatement();
-            String sql = "INSERT INTO " +  table + " (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) " +
-                    "VALUES ('"+ this.session.getDriver().getFirstName() + "', '";
-            sql += session.getDriver().getLastName() + "', '" + session.getDriver().getUsername() + "', '" + session.getDriver().getPassword() + "');";
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
@@ -80,10 +76,10 @@ public class SqlDriver {
             System.exit(0);
         }
         System.out.println("Records created successfully");
-        setDriverIDFromRecord();
+        setDriverIDFromRecord((Driver) obj);
     }
 
-    public static void insertDriverRecord() {
+    public static void setDriverIDFromRecord(Driver driver) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -93,35 +89,10 @@ public class SqlDriver {
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO DRIVER (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) " +
-                    "VALUES ('"+ this.session.getDriver().getFirstName() + "', '";
-            sql += session.getDriver().getLastName() + "', '" + session.getDriver().getUsername() + "', '" + session.getDriver().getPassword() + "');";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            c.commit();
-            c.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Records created successfully");
-        setDriverIDFromRecord();
-    }
-
-    public static void setDriverIDFromRecord() {
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT ID FROM DRIVER WHERE USERNAME = '" + session.getDriver().getUsername() + "'");
+            ResultSet rs = stmt.executeQuery("SELECT ID FROM DRIVER WHERE USERNAME = '" + driver.getUsername() + "'");
             while ( rs.next() ) {
                 int id = rs.getInt("id");
-                session.getDriver().setID(id);
+                driver.setID(id);
             }
             rs.close();
             stmt.close();
