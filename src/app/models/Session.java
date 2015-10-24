@@ -69,6 +69,7 @@ public class Session {
         endTime = LocalTime.now();
         duration = ChronoUnit.SECONDS.between(startTime, endTime);
         writeSessionToXML();
+        this.driver.writeDriverToXML();
     }
 
     public void printDuration() {

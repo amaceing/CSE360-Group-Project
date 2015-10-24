@@ -1,5 +1,6 @@
 package app.models;
 
+import app.xmlModels.DriverClassWrapper;
 import javafx.beans.property.SimpleStringProperty;
 /**
  * Created by arinhouck on 10/9/15.
@@ -10,6 +11,13 @@ public class Driver {
     private String lastName;
     private String username;
     private String password;
+
+    public Driver() {
+        this.firstName = "";
+        this.lastName = "";
+        this.username = "";
+        this.password = "";
+    }
 
     public Driver(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
@@ -64,5 +72,9 @@ public class Driver {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void writeDriverToXML() {
+        DriverClassWrapper.write(this, "sessions.xml");
     }
 }
