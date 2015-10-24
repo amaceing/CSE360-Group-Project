@@ -37,7 +37,7 @@ public class Session {
 
     public boolean validateLogin() {
         //will eventually check against file filled with usernames/passwords
-        if (driver.getUsername().equals("Anthony") && driver.getPassword().equals("abc123")) {
+        if (driver.getUsername().equals("example") && driver.getPassword().equals("password")) {
             System.out.println("valid");
             return true;
         } else {
