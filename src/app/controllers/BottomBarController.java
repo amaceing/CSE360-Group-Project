@@ -39,6 +39,7 @@ public class BottomBarController implements Initializable {
         mainController = VistaNavigator.getMainController();
     }
 
+
     public Label getRight() {
         return right;
     }
