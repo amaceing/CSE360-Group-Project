@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.VistaNavigator;
+import app.models.Driver;
 import app.models.Session;
 import com.pepperonas.fxiconics.*;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
@@ -41,10 +42,10 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
+        Driver driver = new Driver("Anthony", "Mace", usernameTextField.getText(), passwordTextField.getText());
         Session session = new Session();
         mainController.setSession(session);
-        mainController.getSession().setSessionUserName(usernameTextField.getText());
-        mainController.getSession().setSessionPassword(passwordTextField.getText());
+        mainController.getSession().setDriver(driver);
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {

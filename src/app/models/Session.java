@@ -15,6 +15,7 @@ public class Session {
     private String sessionUserName;
     private String sessionPassword;
     private long duration;
+    private Driver driver;
 
     public Session() {
         startTime = LocalTime.now();
@@ -44,9 +45,17 @@ public class Session {
         this.duration = duration;
     }
 
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
     public boolean validateLogin() {
         //will eventually check against file filled with usernames/passwords
-        if (sessionUserName.equals("Anthony") && sessionPassword.equals("abc123")) {
+        if (driver.getUsername().equals("Anthony") && driver.getPassword().equals("abc123")) {
             System.out.println("valid");
             return true;
         } else {
