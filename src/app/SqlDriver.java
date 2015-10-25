@@ -53,14 +53,14 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
+        Connection c = null;
+        Statement stmt = null;
         String sql = "";
         if (obj instanceof Driver && !isRecord(obj)) {
             sql = "INSERT INTO DRIVER  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) ";
             sql += "VALUES ('" + ((Driver) obj).getFirstName() + "', '" + ((Driver) obj).getLastName() + "', '";
             sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
         }
-        Connection c = null;
-        Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
@@ -79,6 +79,37 @@ public class SqlDriver {
         setDriverIDFromRecord((Driver) obj);
     }
 
+    public static Object getRecord(Object obj) {
+        Connection c = null;
+        Statement stmt = null;
+        String select = "";
+        if (obj instanceof Driver) {
+            select = "SELECT * FROM DRIVER WHERE ID = " + ((Driver) obj).getID();
+        }
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+            while ( rs.next() ) {
+                int id = rs.getInt("ID");
+                String firstName = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+                String userName = rs.getString("USERNAME");
+                String password = rs.getString("PASSWORD");
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
     public static void setDriverIDFromRecord(Driver driver) {
         Connection c = null;
         Statement stmt = null;
@@ -91,7 +122,7 @@ public class SqlDriver {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT ID FROM DRIVER WHERE USERNAME = '" + driver.getUsername() + "'");
             while ( rs.next() ) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("ID");
                 driver.setID(id);
             }
             rs.close();
