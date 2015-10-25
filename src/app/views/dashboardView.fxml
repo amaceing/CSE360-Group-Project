@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:controller="app.controllers.DashboardController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:id="borderPane" fx:controller="app.controllers.DashboardController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased">
     <top>
         <fx:include source="topBar.fxml" fx:id="topBar"/>
     </top>
@@ -11,11 +11,11 @@
         <VBox alignment="CENTER" spacing="100">
             <HBox spacing="200" alignment="CENTER">
                 <VBox alignment="CENTER">
-                    <Label fx:id="speed" text="93" styleClass="large-label"/>
+                    <Label fx:id="speedLabel" styleClass="large-label"/>
                     <Label text="mph" styleClass="medium-label"/>
                 </VBox>
                 <VBox alignment="CENTER">
-                    <Label fx:id="mileageLeft" text="273" styleClass="large-label"/>
+                    <Label fx:id="milesLeftLabel" styleClass="large-label"/>
                     <Label text="miles left" styleClass="medium-label"/>
                 </VBox>
             </HBox>

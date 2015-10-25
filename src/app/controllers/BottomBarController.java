@@ -26,36 +26,11 @@ public class BottomBarController implements Initializable {
     @FXML
     private Button accel;
 
-    @FXML
-    private Label mph;
-
-    int speed = 0;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
-        mph.setText("MPH: " + speed);
     }
 
-    @FXML public void accelerateAction(MouseEvent arg0) {
-        //System.out.println("Up");
-        if(speed <= 100)
-        {
-            speed++;
-            mph.setText("MPH: " + speed);
-        }
-
-    }
-
-    @FXML public void decelerateAction(MouseEvent arg0) {
-        //System.out.println("Up");
-        if (speed >= 1)
-        {
-            speed--;
-            mph.setText("MPH: " + speed);
-        }
-
-    }
 
     public Label getRight() {
         return right;

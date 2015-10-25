@@ -3,17 +3,21 @@ package app.controllers;
 import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by arinhouck on 10/12/15.
@@ -39,15 +43,37 @@ public class DashboardController implements Initializable {
     private BottomBarController bottomBarController;
 
     @FXML
+    private Label speedLabel;
+
+    @FXML
+    private Label milesLeftLabel;
+
+    @FXML
     private VBox phoneBox;
 
     @FXML
     private VBox radioBox;
 
+    @FXML
+    private BorderPane borderPane;
+
+    private Double speed;
+    private Double milesLeft;
+
+    private boolean timerRunning = false;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font font = FxIconics.getAwesomeFont(114);
+        borderPane.setFocusTraversable(true);
+
+        speed = 0.0;
+        speedLabel.setText(speed.toString());
+
+        milesLeft = 300.0;
+        milesLeftLabel.setText(milesLeft.toString());
+
         radio.setFont(font);
         radio.setText(FxFontAwesome.Icons.faw_music.toString());
 
@@ -65,6 +91,50 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    private void keyPressed(final KeyEvent event)
+    {
+        if (event.getCode() == KeyCode.UP) {
+            if (speed < 100) {
+                speedLabel.setText((++speed).toString());
+            }
+        } else if (event.getCode() == KeyCode.DOWN) {
+            if (speed > 0) {
+                speedLabel.setText((--speed).toString());
+            }
+        }
+    }
+
+    @FXML
+    private void keyReleased(final KeyEvent event)
+    {
+        if (!timerRunning) {
+            timerRunning = true;
+            decrementSpeed();
+        }
+    }
+
+    private void decrementSpeed() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        speedLabel.setText((--speed).toString());
+                        if(milesLeft >= 0)
+                            milesLeft -= .5;
+                        if (speed <= 0) {
+                            timer.cancel();
+                            timerRunning = false;
+                            milesLeftLabel.setText((--milesLeft).toString());
+                        }
+                    }
+                });
+            }
+        }, 500, 500); //Every 1 second
+    }
+
+    @FXML
     public void handlePhoneClick(MouseEvent arg0)
     {
         VistaNavigator.loadVista(VistaNavigator.PHONE);
@@ -75,7 +145,8 @@ public class DashboardController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
 
-    @FXML public void infoClick(MouseEvent arg0) {
+    @FXML
+    public void infoClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }
 
