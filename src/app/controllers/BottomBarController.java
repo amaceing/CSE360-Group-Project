@@ -2,10 +2,12 @@ package app.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 /**
  * Created by arinhouck on 10/9/15.
@@ -35,7 +37,7 @@ public class BottomBarController implements Initializable {
         return left;
     }
 
-    public Label getCenter() {
-        return center;
-    }
+    public Label getCenter() { return center; }
+
 }
+
