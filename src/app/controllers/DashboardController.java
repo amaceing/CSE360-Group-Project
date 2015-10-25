@@ -40,7 +40,11 @@ public class DashboardController implements Initializable {
 //    @FXML
 //    private BottomBarController bottomBar;
     @FXML
+    private VBox phoneBox;
+
+    @FXML
     private VBox radioBox;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,12 +65,21 @@ public class DashboardController implements Initializable {
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
     }
 
+
+    @FXML public void handlePhoneClick(MouseEvent arg0)
+    {
+        VistaNavigator.loadVista(VistaNavigator.PHONE);
+    }
+
+
     @FXML
     public void handleRadioClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
+
     @FXML public void infoClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }
+
 
 }

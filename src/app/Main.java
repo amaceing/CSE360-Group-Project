@@ -60,7 +60,7 @@ public class Main extends Application {
      */
     private Scene createScene(Pane mainPane) {
         scene = new Scene(
-                mainPane, 800, 500
+                mainPane, 850, 550
         );
 
         scene.getStylesheets().setAll(
