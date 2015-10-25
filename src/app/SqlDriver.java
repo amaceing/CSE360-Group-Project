@@ -4,10 +4,7 @@ import app.models.Driver;
 import app.models.Session;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 import java.util.List;
 
@@ -17,12 +14,13 @@ import app.models.Session;
  * Created by anthonymace on 10/24/15.
  */
 public class SqlDriver {
+    private static Connection connection;
+    private static Statement stmt;
 
     public void createTestDBFile() {
-        Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
@@ -31,12 +29,10 @@ public class SqlDriver {
     }
 
     public void createDriverTable() {
-        Connection c = null;
-        Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            stmt = c.createStatement();
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            stmt = connection.createStatement();
             String sql = "CREATE TABLE DRIVER " +
                     "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
                     " FIRST_NAME    CHAR(50)    NOT NULL, " +
@@ -45,7 +41,7 @@ public class SqlDriver {
                     " PASSWORD      CHAR(50)    NOT NULL)";
             stmt.executeUpdate(sql);
             stmt.close();
-            c.close();
+            connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
@@ -53,8 +49,6 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
-        Connection c = null;
-        Statement stmt = null;
         String sql = "";
         if (obj instanceof Driver && !isRecord(obj)) {
             sql = "INSERT INTO DRIVER  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) ";
@@ -63,39 +57,42 @@ public class SqlDriver {
         }
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
-            c.commit();
-            c.close();
+            connection.commit();
+            connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Records created successfully");
         setDriverIDFromRecord((Driver) obj);
     }
 
     public static List<String> getRecords(String table) {
-        Connection c = null;
-        Statement stmt = null;
         String select = "SELECT * FROM " + table.toUpperCase();
         ResultSet rs = null;
         List results = new ArrayList<String>();
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
             rs = stmt.executeQuery(select);
-            while ( rs.next() ) {
-                results.add(rs.getString(1));
+            ResultSetMetaData rsData = rs.getMetaData();
+            int columnsInRow = rsData.getColumnCount();
+            while (rs.next()) {
+                String row = "";
+                for (int i = 1; i <= columnsInRow; i++) {
+                    row += rs.getString(i) + " ";
+                }
+                results.add(row);
             }
             rs.close();
             stmt.close();
-            c.close();
+            connection.close();
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
@@ -103,22 +100,20 @@ public class SqlDriver {
         return results;
     }
 
-    public static void setDriverIDFromRecord(Driver driver) {
-        Connection c = null;
-        Statement stmt = null;
+    private static void setDriverIDFromRecord(Driver driver) {
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT ID FROM DRIVER WHERE USERNAME = '" + driver.getUsername() + "'");
-            while ( rs.next() ) {
+            while (rs.next()) {
                 int id = rs.getInt("ID");
                 driver.setID(id);
             }
             rs.close();
             stmt.close();
-            c.close();
+            connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
@@ -126,24 +121,22 @@ public class SqlDriver {
     }
 
     private static boolean isRecord(Object obj) {
-        Connection c = null;
-        Statement stmt = null;
         String select = "";
         if (obj instanceof Driver) {
             select = "SELECT ID FROM DRIVER WHERE USERNAME = '" + ((Driver) obj).getUsername() + "'";
         }
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            c.setAutoCommit(false);
-            stmt = c.createStatement();
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(select);
             if (rs.isBeforeFirst()) {
                 return true;
             }
             rs.close();
             stmt.close();
-            c.close();
+            connection.close();
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

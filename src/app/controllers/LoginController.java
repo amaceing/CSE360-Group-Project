@@ -13,8 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.layout.GridPane;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import app.SqlDriver;
+
+import javax.sound.midi.SysexMessage;
 
 
 public class LoginController implements Initializable {
@@ -49,6 +52,7 @@ public class LoginController implements Initializable {
         Session session = new Session();
         mainController.setSession(session);
         mainController.getSession().setDriver(driver);
+        printRecords();
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {
@@ -57,6 +61,13 @@ public class LoginController implements Initializable {
             invalidLogin.setHeaderText("Invalid username and/or password");
             invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
             invalidLogin.showAndWait();
+        }
+    }
+
+    public void printRecords() {
+        List<String> records = SqlDriver.getRecords("DRIVER");
+        for (String record : records) {
+            System.out.println(record);
         }
     }
 
