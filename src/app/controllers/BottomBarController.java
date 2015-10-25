@@ -23,9 +23,6 @@ public class BottomBarController implements Initializable {
     @FXML
     private Label right;
 
-    @FXML
-    private Button accel;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // View did load
@@ -40,9 +37,7 @@ public class BottomBarController implements Initializable {
         return left;
     }
 
-    public Label getCenter() {
-        return center;
-    }
+    public Label getCenter() { return center; }
 
 }
 

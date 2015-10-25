@@ -4,7 +4,6 @@ import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.input.*;
 import javafx.fxml.Initializable;
@@ -131,7 +130,7 @@ public class DashboardController implements Initializable {
                     }
                 });
             }
-        }, 500, 500); //Every 1 second
+        }, 500, 500); //Every half second
     }
 
     @FXML
