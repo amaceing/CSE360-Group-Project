@@ -4,6 +4,7 @@ import app.VistaNavigator;
 import app.models.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import sun.rmi.rmic.Main;
@@ -11,9 +12,14 @@ import app.xmlModels.SessionClassWrapper;
 import app.controllers.MainController;
 
 
+=======
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+>>>>>>> 51eec8e4a2bb50b8e35747f453531667d4351d4c
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 /**
  * Created by arinhouck on 10/9/15.
@@ -48,6 +54,7 @@ public class BottomBarController implements Initializable {
         return left;
     }
 
+<<<<<<< HEAD
     public Label getCenter() {
         return center;
     }
@@ -66,5 +73,9 @@ public class BottomBarController implements Initializable {
     public void hideLogOutButton() {
         logoutButton.setVisible(false);
     }
+=======
+    public Label getCenter() { return center; }
+>>>>>>> 51eec8e4a2bb50b8e35747f453531667d4351d4c
 
 }
+
