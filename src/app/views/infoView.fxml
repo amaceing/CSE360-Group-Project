@@ -26,7 +26,7 @@
                     <Label fx:id="drivingHistory"/>
                     <Label text="Driving History" styleClass="icon-label"/>
                 </VBox>
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" onMouseClicked="#radioHistClick">
                     <Label fx:id="radioHistory"/>
                     <Label text="Radio History" styleClass="icon-label"/>
                 </VBox>
