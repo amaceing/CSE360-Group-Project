@@ -50,18 +50,16 @@ public class LoginController implements Initializable {
         mainController.getSession().setDriver(driver);
         printRecords();
 
-        //FIX BEFORE COMMIT
-//        if (mainController.getSession().validateLogin()) {
-//            VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
-//        } else {
-//            Alert invalidLogin = new Alert(Alert.AlertType.WARNING);
-//            invalidLogin.setTitle("Invalid login");
-//            invalidLogin.setHeaderText("Invalid username and/or password");
-//            invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
-//            invalidLogin.showAndWait();
-//        }
+        if (mainController.getSession().validateLogin()) {
+            VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
+        } else {
+            Alert invalidLogin = new Alert(Alert.AlertType.WARNING);
+            invalidLogin.setTitle("Invalid login");
+            invalidLogin.setHeaderText("Invalid username and/or password");
+            invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
+            invalidLogin.showAndWait();
+        }
 
-        VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
     }
 
     public void printRecords() {
