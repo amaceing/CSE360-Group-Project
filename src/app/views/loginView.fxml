@@ -23,9 +23,4 @@
         </VBox>
     </center>
 
-    <bottom>
-        <fx:include source="bottomBar.fxml" fx:id="bottomBar"/>
-    </bottom>
-
-
 </BorderPane>
