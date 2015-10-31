@@ -20,6 +20,7 @@ public class VistaNavigator {
     public static final String DASHBOARD = "views/dashboardView.fxml";
     public static final String RADIO = "views/radioView.fxml";
     public static final String INFORMATION = "views/infoView.fxml";
+    public static final String DRIVEHIST = "views/driveHistView.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;
