@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import sun.rmi.rmic.Main;
-import app.xmlModels.SessionClassWrapper;
 import app.controllers.MainController;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;

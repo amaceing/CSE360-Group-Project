@@ -1,6 +1,5 @@
 package app.models;
 
-import app.xmlModels.SessionClassWrapper;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
