@@ -68,7 +68,9 @@ public class SqlDriver {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        setDriverIDFromRecord((Driver) obj);
+        if (obj instanceof Driver) {
+            setDriverIDFromRecord((Driver) obj);
+        }
     }
 
     public static List<String> getRecords(String table) {
