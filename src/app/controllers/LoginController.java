@@ -49,6 +49,7 @@ public class LoginController implements Initializable {
         mainController.setSession(session);
         mainController.getSession().setDriver(driver);
         printRecords();
+
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {
@@ -58,6 +59,7 @@ public class LoginController implements Initializable {
             invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
             invalidLogin.showAndWait();
         }
+
     }
 
     public void printRecords() {

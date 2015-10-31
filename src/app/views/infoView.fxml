@@ -18,17 +18,17 @@
                 </VBox>
             </HBox>
             <HBox styleClass="info-icons" alignment="CENTER" spacing="100">
-                <VBox alignment="CENTER">
-                    <Label fx:id="sessionHistory"/>
-                    <Label text="Session History" styleClass="icon-label"/>
+                <VBox alignment="CENTER" onMouseClicked="#phoneHistClick">
+                    <Label fx:id="phoneHistory"/>
+                    <Label text="Phone History" styleClass="icon-label"/>
                 </VBox>
                 <VBox alignment="CENTER" onMouseClicked="#driveHistClick">
                     <Label fx:id="drivingHistory"/>
                     <Label text="Driving History" styleClass="icon-label"/>
                 </VBox>
                 <VBox alignment="CENTER">
-                    <Label fx:id="sessionStats"/>
-                    <Label text="Session Statistics" styleClass="icon-label"/>
+                    <Label fx:id="radioHistory"/>
+                    <Label text="Radio History" styleClass="icon-label"/>
                 </VBox>
             </HBox>
         </VBox>
