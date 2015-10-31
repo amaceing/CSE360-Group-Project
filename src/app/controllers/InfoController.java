@@ -48,4 +48,7 @@ public class InfoController implements Initializable {
 
     @FXML public void phoneHistClick(MouseEvent arg0) {VistaNavigator.loadVista(VistaNavigator.PHONEHIST);}
 
+    @FXML public void radioHistClick(MouseEvent arg0) {VistaNavigator.loadVista(VistaNavigator.RADIOHIST);}
+
+
 }

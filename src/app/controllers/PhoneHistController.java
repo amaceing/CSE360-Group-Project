@@ -22,7 +22,7 @@ public class PhoneHistController  implements Initializable {
     private TableColumn<PhoneHistory, String> name;
 
     @FXML
-    private  TableColumn<PhoneHistory, Double> number;
+    private  TableColumn<PhoneHistory, String> number;
 
     @FXML
     private TableColumn<PhoneHistory, String> date;
