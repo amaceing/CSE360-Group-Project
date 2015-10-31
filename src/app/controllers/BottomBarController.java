@@ -1,6 +1,8 @@
 package app.controllers;
 
+import app.SqlDriver;
 import app.VistaNavigator;
+import app.models.DriverHistory;
 import app.models.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -20,6 +25,7 @@ import java.util.ResourceBundle;
  */
 public class BottomBarController implements Initializable {
     private MainController mainController;
+    private DriverHistory driverHistory;
 
     @FXML
     private Label left;
@@ -61,6 +67,16 @@ public class BottomBarController implements Initializable {
         mainController.getSession().printDuration();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
         mainController.setSession(null);
+    }
+
+    public void createAndInsertDriverHistoryRecord() {
+        String name = mainController.getSession().getDriver().getFirstName();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateString = dateFormat.format(date).toString();
+        double duration = mainController.getSession().getDuration();
+        driverHistory = new DriverHistory(name, dateString, duration, 53.0, 25.9);
+        SqlDriver.insertRecord(driverHistory);
     }
 
     public void hideLogOutButton() {

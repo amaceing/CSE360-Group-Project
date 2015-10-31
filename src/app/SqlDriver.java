@@ -1,6 +1,7 @@
 package app;
 
 import app.models.Driver;
+import app.models.DriverHistory;
 import app.models.Session;
 
 import java.awt.*;
@@ -75,6 +76,11 @@ public class SqlDriver {
             sql = "INSERT INTO DRIVER  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) ";
             sql += "VALUES ('" + ((Driver) obj).getFirstName() + "', '" + ((Driver) obj).getLastName() + "', '";
             sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
+        } else if (obj instanceof DriverHistory && !isRecord(obj)) {
+            sql = "INSERT INTO DRIVER_HISTORY (FIRST_NAME, DATE, DURATION, MAX_SPEED, AVG_SPEED) ";
+            sql += "VALUES ('" + ((DriverHistory) obj).getName() + "', '" + ((DriverHistory) obj).getDate() + "', '";
+            sql += ((DriverHistory) obj).getDuration() + "', '" + ((DriverHistory) obj).getMaxSpeed() + "', '";
+            sql += ((DriverHistory) obj).getAvgSpeed() + "');";
         }
         try {
             Class.forName("org.sqlite.JDBC");
