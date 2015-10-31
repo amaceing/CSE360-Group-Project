@@ -22,7 +22,7 @@
                     <Label fx:id="sessionHistory"/>
                     <Label text="Session History" styleClass="icon-label"/>
                 </VBox>
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" onMouseClicked="#driveHistClick">
                     <Label fx:id="drivingHistory"/>
                     <Label text="Driving History" styleClass="icon-label"/>
                 </VBox>

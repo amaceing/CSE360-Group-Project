@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.net.URL;
@@ -39,6 +40,10 @@ public class InfoController implements Initializable {
         sessionStats.setText(FxFontAwesome.Icons.faw_bar_chart.toString());
 
 
+    }
+
+    @FXML public void driveHistClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.DRIVEHIST);
     }
 
 }
