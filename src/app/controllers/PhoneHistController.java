@@ -28,6 +28,9 @@ public class PhoneHistController  implements Initializable {
     private TableColumn<PhoneHistory, String> date;
 
     @FXML
+    private TableColumn<PhoneHistory, String> time;
+
+    @FXML
     private TableColumn<PhoneHistory, Double> duration;
 
 
@@ -37,14 +40,11 @@ public class PhoneHistController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         topBarController.setBackButton(VistaNavigator.INFORMATION);
 
-//        phoneTableView.setPrefWidth(600);
-
-
         phoneHistory = phoneTableView.getItems();
-        phoneHistory.add(new PhoneHistory("Drew", "555-555-5555", "10/31/15", 4.5));
-        phoneHistory.add(new PhoneHistory("Arin", "111-111-1111", "3/4/15", 10.0));
-        phoneHistory.add(new PhoneHistory("Mario", "123-456-7890", "4/6/15", 145.9));
-        phoneHistory.add(new PhoneHistory("Anthony","243-465-2349", "10/28/15", 354.89));
+        phoneHistory.add(new PhoneHistory("Drew", "555-555-5555", "10/31/15", "3:30 PM", 4.5));
+        phoneHistory.add(new PhoneHistory("Arin", "111-111-1111", "3/4/15", "5:45 PM", 10.0));
+        phoneHistory.add(new PhoneHistory("Mario", "123-456-7890", "4/6/15", "1:00 AM", 145.9));
+        phoneHistory.add(new PhoneHistory("Anthony","243-465-2349", "10/28/15", "2:30 AM", 354.89));
     }
 
 }

@@ -7,12 +7,14 @@ public class PhoneHistory {
     private String name;
     private String number;
     private String date;
+    private String time;
     private Double duration;
 
-    public PhoneHistory(String name, String number, String date, Double duration) {
+    public PhoneHistory(String name, String number, String date, String time, Double duration) {
         this.name = name;
         this.number = number;
         this.date = date;
+        this.time = time;
         this.duration = duration;
     }
 
@@ -38,6 +40,14 @@ public class PhoneHistory {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Double getDuration() {
