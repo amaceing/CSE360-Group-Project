@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane styleClass="bottom-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" fx:controller="app.controllers.BottomBarController">
+<GridPane styleClass="bottom-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml" fx:controller="app.controllers.BottomBarController" fx:id="bottomGrid">
     <columnConstraints>
         <ColumnConstraints percentWidth="33" halignment="LEFT"/>
         <ColumnConstraints percentWidth="33" halignment="CENTER"/>
