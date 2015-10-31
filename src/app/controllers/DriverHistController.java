@@ -1,4 +1,5 @@
 package app.controllers;
+import app.SqlDriver;
 import app.VistaNavigator;
 import app.models.Driver;
 import app.models.DriverHistory;
@@ -56,9 +57,6 @@ public class DriverHistController implements Initializable {
 
         driverHistory = tableView.getItems();
         driverHistory.add(new DriverHistory("Drew", "10/31/15", 4.5, 50.0, 100.0));
-        driverHistory.add(new DriverHistory("Arin", "3/4/15", 10.0, 88.9, 90.7));
-        driverHistory.add(new DriverHistory("Mario", "4/6/15", 145.9, 45.0, 67.8));
-        driverHistory.add(new DriverHistory("Anthony", "10/28/15", 354.89, 34.5, 78.7 ));
 
 
     }

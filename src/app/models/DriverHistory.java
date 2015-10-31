@@ -2,6 +2,8 @@ package app.models;
 
 //import java.util.Date;
 
+import app.SqlDriver;
+
 /**
  * Created by drewdavis on 10/24/15.
  */
@@ -11,15 +13,6 @@ public class DriverHistory {
     private Double duration;
     private Double maxSpeed;
     private Double avgSpeed;
-
-    //        public Driver(String firstName, String lastName, String username, String password) {
-//            this.firstName = new SimpleStringProperty(firstName);
-//            this.lastName = new SimpleStringProperty(lastName);
-//            this.username = new SimpleStringProperty(username);
-//            this.password = new SimpleStringProperty(password);
-//        }
-//
-
 
     public DriverHistory(String name, String date, Double duration, Double maxSpeed, Double avgSpeed) {
         this.name = name;

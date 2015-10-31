@@ -48,6 +48,27 @@ public class SqlDriver {
         }
     }
 
+    public void createDriverHistoryTable() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            stmt = connection.createStatement();
+            String sql = "CREATE TABLE DRIVER_HISTORY " +
+                    "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
+                    " FIRST_NAME    CHAR(50)    NOT NULL, " +
+                    " DATE          CHAR(50)    NOT NULL, " +
+                    " DURATION      REAL        NOT NULL, " +
+                    " MAX_SPEED     REAL        NOT NULL, " +
+                    " AVG_SPEED     REAL        NOT NULL)";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            connection.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
     public static void insertRecord(Object obj) {
         String sql = "";
         if (obj instanceof Driver && !isRecord(obj)) {
