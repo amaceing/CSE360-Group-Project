@@ -150,6 +150,11 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    public void handleRouteClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.ROUTE);
+    }
+
+    @FXML
     public void infoClick(MouseEvent arg0) {
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }

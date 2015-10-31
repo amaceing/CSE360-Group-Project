@@ -28,7 +28,7 @@
                     <Label fx:id="phone"/>
                     <Label text="Phone" styleClass="icon-label"/>
                 </VBox>
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" onMouseClicked="#handleRouteClick">
                     <Label fx:id="routes"/>
                     <Label text="Routes" styleClass="icon-label"/>
                 </VBox>
