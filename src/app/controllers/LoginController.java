@@ -27,9 +27,6 @@ public class LoginController implements Initializable {
     private Label user;
 
     @FXML
-    private BottomBarController bottomBarController;
-
-    @FXML
     private TextField usernameTextField;
 
     @FXML
@@ -40,7 +37,6 @@ public class LoginController implements Initializable {
         Font font = FxIconics.getAwesomeFont(196);
         user.setFont(font);
         user.setText(FxFontAwesome.Icons.faw_user.toString());
-        bottomBarController.hideLogOutButton();
 
         mainController = VistaNavigator.getMainController();
     }
