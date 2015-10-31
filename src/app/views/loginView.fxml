@@ -18,10 +18,14 @@
             <Label text="Username"/>
             <TextField fx:id="usernameTextField"/>
             <Label text="Password"/>
-            <TextField fx:id="passwordTextField"/>
+            <PasswordField fx:id="passwordTextField"/>
             <Button text="Log in" onAction="#handleLoginAction"/>
         </VBox>
     </center>
+
+    <bottom>
+        <fx:include source="bottomBar.fxml" fx:id="bottomBar"/>
+    </bottom>
 
 
 </BorderPane>

@@ -38,6 +38,11 @@ public class DashboardController implements Initializable {
     @FXML
     private Label info;
 
+//    @FXML
+//    private TopBarController topBar;
+
+//    @FXML
+//    private BottomBarController bottomBar;
     @FXML
     private BottomBarController bottomBarController;
 

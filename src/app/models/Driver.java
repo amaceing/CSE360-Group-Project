@@ -6,63 +6,80 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Driver {
 
-    private final SimpleStringProperty firstName;
-    private final SimpleStringProperty lastName;
-    private final SimpleStringProperty username;
-    private final SimpleStringProperty password;
+    private int ID;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
+
+    public Driver() {
+        this.ID = 0;
+        this.firstName = "";
+        this.lastName = "";
+        this.username = "";
+        this.password = "";
+    }
 
     public Driver(String firstName, String lastName, String username, String password) {
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.username = new SimpleStringProperty(username);
-        this.password = new SimpleStringProperty(password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {
-        return firstName.get();
+        return firstName;
     }
 
-    public SimpleStringProperty firstNameProperty() {
+    public String firstNameProperty() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return lastName.get();
+        return lastName;
     }
 
-    public SimpleStringProperty lastNameProperty() {
+    public String lastNameProperty() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName.set(lastName);
+        this.lastName = lastName;
     }
 
     public String getUsername() {
-        return username.get();
+        return username;
     }
 
-    public SimpleStringProperty usernameProperty() {
+    public String usernameProperty() {
         return username;
     }
 
     public void setUsername(String username) {
-        this.username.set(username);
+        this.username = username;
     }
 
     public String getPassword() {
-        return password.get();
+        return password;
     }
 
-    public SimpleStringProperty passwordProperty() {
+    public String passwordProperty() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.password.set(password);
+        this.password = password;
     }
 }
