@@ -65,6 +65,7 @@ public class BottomBarController implements Initializable {
     public void endSession() {
         mainController.getSession().endSession();
         mainController.getSession().printDuration();
+        createAndInsertDriverHistoryRecord();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
         mainController.setSession(null);
     }
@@ -77,10 +78,6 @@ public class BottomBarController implements Initializable {
         double duration = mainController.getSession().getDuration();
         driverHistory = new DriverHistory(name, dateString, duration, 53.0, 25.9);
         SqlDriver.insertRecord(driverHistory);
-    }
-
-    public void hideLogOutButton() {
-        logoutButton.setVisible(false);
     }
 
 }
