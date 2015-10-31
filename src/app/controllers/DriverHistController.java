@@ -28,7 +28,7 @@ public class DriverHistController implements Initializable {
     private TopBarController topBarController;
 
     @FXML
-    private TableView<DriverHistory> tableView;
+    private TableView<DriverHistory> driverTableView;
 
     @FXML
     private TableColumn<DriverHistory, String> name;
@@ -54,7 +54,7 @@ public class DriverHistController implements Initializable {
         topBarController.setBackButton(VistaNavigator.INFORMATION);
 
 
-        driverHistory = tableView.getItems();
+        driverHistory = driverTableView.getItems();
         driverHistory.add(new DriverHistory("Drew", "10/31/15", 4.5, 50.0, 100.0));
         driverHistory.add(new DriverHistory("Arin", "3/4/15", 10.0, 88.9, 90.7));
         driverHistory.add(new DriverHistory("Mario", "4/6/15", 145.9, 45.0, 67.8));
