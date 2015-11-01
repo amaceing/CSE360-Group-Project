@@ -3,7 +3,6 @@ package app.controllers;
 import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
-import com.pepperonas.fxiconics.gmd.FxFontGoogleMaterial;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,14 +14,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.scene.text.Text;
-import java.awt.color.*;
 /**
  * Created by arinhouck on 10/12/15.
  */
