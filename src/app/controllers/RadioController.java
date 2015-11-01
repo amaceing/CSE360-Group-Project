@@ -1,4 +1,5 @@
 package app.controllers;
+import app.SqlDriver;
 import app.VistaNavigator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,12 +8,11 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 /**
  * Created by arinhouck on 10/17/15.
  */
 public class RadioController  implements Initializable {
-
+    private static MainController mainController;
 
     @FXML
     private TopBarController topBarController;
@@ -38,7 +38,8 @@ public class RadioController  implements Initializable {
         AMButton.getStyleClass().add("active");
         topBarController.setBackButton(VistaNavigator.DASHBOARD);
 
-        volume = 0;
+        mainController = VistaNavigator.getMainController();
+        volume = mainController.getSession().getDriver().getRadioVolume();
         volumeLabel.setText(Integer.toString(volume));
 
         stations = stationList.getItems();
@@ -69,14 +70,20 @@ public class RadioController  implements Initializable {
 
     @FXML
     public void volumeUp() {
-        if (volume != 10)
+        if (volume != 10) {
             volumeLabel.setText(Integer.toString(++volume));
+            SqlDriver.updateRecord("DRIVERS", "RADIO_VOLUME", mainController.getSession().getDriver().getID(), volume);
+            mainController.getSession().getDriver().setRadioVolume(volume);
+        }
     }
 
     @FXML
     public void volumeDown() {
-        if (volume != 0)
+        if (volume != 0) {
             volumeLabel.setText(Integer.toString(--volume));
+            SqlDriver.updateRecord("DRIVERS", "RADIO_VOLUME", mainController.getSession().getDriver().getID(), volume);
+            mainController.getSession().getDriver().setRadioVolume(volume);
+        }
     }
 
     @FXML
