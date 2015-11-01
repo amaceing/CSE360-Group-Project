@@ -43,13 +43,24 @@ public class RadioController  implements Initializable {
         volumeLabel.setText(Integer.toString(volume));
 
         stations = stationList.getItems();
-        setStations("AM");
+
+        if (mainController.getSession().getDriver().getChannel() == null){
+            AMButton.getStyleClass().add("active");
+            SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "AM");
+            mainController.getSession().getDriver().setChannel("AM");
+        }
+        setStations(mainController.getSession().getDriver().getChannel());
     }
 
     private void setStations(String type) {
         stations.clear();
+
         switch (type) {
             case "FM":
+                AMButton.getStyleClass().removeAll("active");
+                FMButton.getStyleClass().add("active");
+                SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "FM");
+                mainController.getSession().getDriver().setChannel("FM");
                 stations.add("92.5");
                 stations.add("93.3");
                 stations.add("98.3");
@@ -58,6 +69,10 @@ public class RadioController  implements Initializable {
                 stations.add("107.9");
                 break;
             case "AM":
+                FMButton.getStyleClass().removeAll("active");
+                AMButton.getStyleClass().add("active");
+                SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "AM");
+                mainController.getSession().getDriver().setChannel("AM");
                 stations.add("1000");
                 stations.add("1100");
                 stations.add("1200");
@@ -88,15 +103,11 @@ public class RadioController  implements Initializable {
 
     @FXML
     public void setAM() {
-        FMButton.getStyleClass().removeAll("active");
-        AMButton.getStyleClass().add("active");
         setStations("AM");
     }
 
     @FXML
     public void setFM() {
-        AMButton.getStyleClass().removeAll("active");
-        FMButton.getStyleClass().add("active");
         setStations("FM");
     }
 

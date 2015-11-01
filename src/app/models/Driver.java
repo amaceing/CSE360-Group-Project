@@ -11,6 +11,7 @@ public class Driver {
     private String lastName;
     private String username;
     private String password;
+    private String channel;
     private int radioVolume;
 
     public Driver() {
@@ -19,15 +20,17 @@ public class Driver {
         this.lastName = "";
         this.username = "";
         this.password = "";
+        this.channel = "";
         this.radioVolume = 0;
     }
 
-    public Driver(int ID, String firstName, String lastName, String username, String password, int radioVolume) {
+    public Driver(int ID, String firstName, String lastName, String username, String password, String channel, int radioVolume) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.channel = channel;
         this.radioVolume = radioVolume;
     }
 
@@ -87,6 +90,14 @@ public class Driver {
         this.password = password;
     }
 
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
     public int getRadioVolume() {
         return radioVolume;
     }
@@ -94,4 +105,6 @@ public class Driver {
     public void setRadioVolume(int radioVolume) {
         this.radioVolume = radioVolume;
     }
+
+
 }

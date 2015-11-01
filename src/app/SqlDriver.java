@@ -33,12 +33,15 @@ public class SqlDriver {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection("jdbc:sqlite:test.db");
             stmt = connection.createStatement();
+
+            //TODO: CHAR (50) can't be manually created in sql browser so using TEXT?
             String sql = "CREATE TABLE DRIVERS " +
                     "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
                     " FIRST_NAME    CHAR(50)    NOT NULL, " +
                     " LAST_NAME     CHAR(50)    NOT NULL, " +
                     " USERNAME      CHAR(50)    NOT NULL, " +
                     " PASSWORD      CHAR(50)    NOT NULL, " +
+                    " CHANNEL      CHAR(50), " +
                     " RADIO_VOLUME  INTEGER)";
             stmt.executeUpdate(sql);
             stmt.close();
@@ -52,11 +55,12 @@ public class SqlDriver {
     public static void insertRecord(Object obj) {
         String sql = "";
         if (obj instanceof Driver && !isRecord(obj)) {
-            sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, RADIO_VOLUME, USERNAME, PASSWORD) ";
+            sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, RADIO_VOLUME, CHANNEL, USERNAME, PASSWORD) ";
             sql += "VALUES ('" +
                     ((Driver) obj).getFirstName() +
                     "', '" + ((Driver) obj).getLastName() +
                     "', '" + ((Driver) obj).getRadioVolume() +
+                    "', '" + ((Driver) obj).getChannel() +
                     "', '";
             sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
         }
@@ -140,7 +144,7 @@ public class SqlDriver {
         return results;
     }
 
-    public static void updateRecord(String table, String column, int ID, int value) {
+    public static void updateRecord(String table, String column, int ID, Object value) {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
@@ -151,7 +155,11 @@ public class SqlDriver {
                 "WHERE ID = ?"
             );
 
-            ps.setInt(1, value);
+            if (value instanceof String) {
+                ps.setString(1, value.toString());
+            } else {
+                ps.setInt(1, Integer.parseInt(value.toString()));
+            }
             ps.setInt(2, ID);
 
             ps.executeUpdate();

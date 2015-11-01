@@ -51,7 +51,8 @@ public class LoginController implements Initializable {
                 array[2], // Last Name
                 array[3], // Username
                 array[4], // Password
-                Integer.parseInt(array[5]) // Radio Volume
+                array[5], // Channel
+                Integer.parseInt(array[6]) // Radio Volume
         );
 
         Session session = new Session();
@@ -69,7 +70,6 @@ public class LoginController implements Initializable {
             invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
             invalidLogin.showAndWait();
 
-            mainController.getSession().setDriver(null);
             mainController.setSession(null);
         }
 
