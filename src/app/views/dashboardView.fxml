@@ -9,11 +9,12 @@
 
     <center>
         <VBox alignment="CENTER" spacing="100">
-            <HBox spacing="200" alignment="CENTER">
+            <HBox spacing="100" alignment="CENTER">
                 <VBox alignment="CENTER">
                     <Label fx:id="speedLabel" styleClass="large-label"/>
                     <Label text="mph" styleClass="medium-label"/>
                 </VBox>
+                <Label fx:id="lowFuel" styleClass="medium-label" prefWidth="150"/>
                 <VBox alignment="CENTER">
                     <Label fx:id="milesLeftLabel" styleClass="large-label"/>
                     <Label text="miles left" styleClass="medium-label"/>

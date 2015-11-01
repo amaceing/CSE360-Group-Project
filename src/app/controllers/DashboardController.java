@@ -5,6 +5,7 @@ import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -61,6 +62,9 @@ public class DashboardController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
+    @FXML
+    private Label lowFuel;
+
     private Double speed;
     private Double milesLeft;
 
@@ -97,13 +101,15 @@ public class DashboardController implements Initializable {
     @FXML
     private void keyPressed(final KeyEvent event)
     {
-        if (event.getCode() == KeyCode.UP) {
-            if (speed < 100) {
-                speedLabel.setText((++speed).toString());
-            }
-        } else if (event.getCode() == KeyCode.DOWN) {
-            if (speed > 0) {
-                speedLabel.setText((--speed).toString());
+        if (speed >= 0 && milesLeft > 0) {
+            if (event.getCode() == KeyCode.UP) {
+                if (speed < 100) {
+                    speedLabel.setText((++speed).toString());
+                }
+            } else if (event.getCode() == KeyCode.DOWN) {
+                if (speed > 0) {
+                    speedLabel.setText((--speed).toString());
+                }
             }
         }
     }
@@ -111,9 +117,27 @@ public class DashboardController implements Initializable {
     @FXML
     private void keyReleased(final KeyEvent event)
     {
-        if (!timerRunning) {
-            timerRunning = true;
-            decrementSpeed();
+        if (speed > 0) {
+            if (!timerRunning) {
+                timerRunning = true;
+                decrementSpeed();
+            }
+        } else {
+            speed = 0.0;
+            speedLabel.setText((speed).toString());
+        }
+
+        if (milesLeft < 0) {
+            milesLeft = 0.0;
+            milesLeftLabel.setText((milesLeft).toString());
+        }
+        if (milesLeft < 25) {
+            lowFuel.setStyle("-fx-text-fill:yellow;");
+            lowFuel.setText("Low Fuel");
+        }
+        if (milesLeft == 0) {
+            lowFuel.setStyle("-fx-text-fill:red;");
+            lowFuel.setText("No fuel");
         }
     }
 
@@ -125,8 +149,10 @@ public class DashboardController implements Initializable {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         speedLabel.setText((--speed).toString());
-                        if(milesLeft >= 0)
+                        if(milesLeft >= 0) {
                             milesLeft -= .5;
+                            milesLeftLabel.setText((milesLeft).toString());
+                        }
                         if (speed <= 0) {
                             timer.cancel();
                             timerRunning = false;
