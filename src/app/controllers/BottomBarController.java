@@ -71,7 +71,7 @@ public class BottomBarController implements Initializable {
     }
 
     public void createAndInsertDriverHistoryRecord() {
-        String name = mainController.getSession().getDriver().getFirstName();
+        String name = "test";
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String dateString = dateFormat.format(date).toString();

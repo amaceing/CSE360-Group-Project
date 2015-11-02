@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
         Session session = new Session();
         mainController.setSession(session);
         mainController.getSession().setDriver(driver);
-        printRecords();
+        //printRecords();
         if (mainController.getSession().validateLogin()) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {
