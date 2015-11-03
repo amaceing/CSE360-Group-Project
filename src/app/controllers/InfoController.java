@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.net.URL;
@@ -16,29 +17,38 @@ public class InfoController implements Initializable {
     private TopBarController topBarController;
 
     @FXML
-    private Label sessionHistory;
+    private Label phoneHistory;
 
     @FXML
     private Label drivingHistory;
 
     @FXML
-    private Label sessionStats;
+    private Label radioHistory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         topBarController.setBackButton(VistaNavigator.DASHBOARD);
 
         Font font = FxIconics.getAwesomeFont(114);
-        sessionHistory.setFont(font);
-        sessionHistory.setText(FxFontAwesome.Icons.faw_history.toString());
+        phoneHistory.setFont(font);
+        phoneHistory.setText(FxFontAwesome.Icons.faw_phone.toString());
 
         drivingHistory.setFont(font);
         drivingHistory.setText(FxFontAwesome.Icons.faw_car.toString());
 
-        sessionStats.setFont(font);
-        sessionStats.setText(FxFontAwesome.Icons.faw_bar_chart.toString());
+        radioHistory.setFont(font);
+        radioHistory.setText(FxFontAwesome.Icons.faw_music.toString());
 
 
     }
+
+    @FXML public void driveHistClick(MouseEvent arg0) {
+        VistaNavigator.loadVista(VistaNavigator.DRIVEHIST);
+    }
+
+    @FXML public void phoneHistClick(MouseEvent arg0) {VistaNavigator.loadVista(VistaNavigator.PHONEHIST);}
+
+    @FXML public void radioHistClick(MouseEvent arg0) {VistaNavigator.loadVista(VistaNavigator.RADIOHIST);}
+
 
 }

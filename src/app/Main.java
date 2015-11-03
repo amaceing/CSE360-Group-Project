@@ -1,5 +1,6 @@
 package app;
 
+import app.models.Session;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +10,6 @@ import app.controllers.MainController;
 import java.io.IOException;
 
 public class Main extends Application {
-
     private Scene scene;
 
     @Override
@@ -73,7 +73,6 @@ public class Main extends Application {
     public Scene getScene() {
         return scene;
     }
-
 
     public static void main(String[] args) {
         launch(args);
