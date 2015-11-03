@@ -228,6 +228,8 @@ public class SqlDriver {
         String select = "";
         if (obj instanceof Driver) {
             select = "SELECT ID FROM DRIVERS WHERE USERNAME = '" + ((Driver) obj).getUsername() + "'";
+        } else if (obj instanceof DriverHistory) {
+            select = "SELECT IF FROM DRIVER_HISTORY WHERE ";
         }
         try {
             Class.forName(LIBRARY);
