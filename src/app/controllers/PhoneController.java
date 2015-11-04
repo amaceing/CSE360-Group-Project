@@ -10,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
 
-
-
 /**
  * Created by Marius on 10/17/2015.
  */
@@ -55,7 +53,6 @@ public class PhoneController implements Initializable {
         contacts = contactsList.getItems();
 
         volume = 0;
-        volumeLabel.setFont(font);
         volumeLabel.setText(Integer.toString(volume));
 
         call.setFont(font);
@@ -77,13 +74,6 @@ public class PhoneController implements Initializable {
     }
 
     @FXML
-    public void removeContact(){
-         for(int i=0; i<10; i++) {
-             contacts.remove(i);
-         }
-    }
-
-    @FXML
     public void addNumber() {
         for (int i = 0; i < 10; i++) {
             if (phoneNumber.length() == 14) {
@@ -93,244 +83,91 @@ public class PhoneController implements Initializable {
         }
     }
 
-    @FXML
-    public void addDigit0() {
+    public void addDigit(String digit) {
         // Size of a US phone number is 14 when written as a string
         if (phoneNumber.length() < 14) {
             if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "0";
-                phoneNumberField.setText(phoneNumber);
+                phoneNumber += "(" + digit;
             } else if (phoneNumber.length() == 3) {
-                phoneNumber += "0" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
+                phoneNumber += digit + ")" + "-";
             } else if (phoneNumber.length() == 8) {
-                phoneNumber += "0" + "-";
-                phoneNumberField.setText(phoneNumber);
+                phoneNumber += digit + "-";
             } else {
-                phoneNumber += "0";
-                phoneNumberField.setText(phoneNumber);
+                phoneNumber += digit;
             }
+            phoneNumberField.setText(phoneNumber);
         }
+    }
+    @FXML
+    public void addDigit0() {
+        // Size of a US phone number is 14 when written as a string
+        addDigit("0");
     }
 
     @FXML
     public void addDigit1() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "1";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "1" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "1" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "1";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("1");
     }
 
     @FXML
     public void addDigit2() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "2";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "2" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "2" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "2";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("2");
     }
 
     @FXML
     public void addDigit3() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "3";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "3" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "3" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "3";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("3");
     }
 
     @FXML
     public void addDigit4() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "4";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "4" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "4" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "4";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("4");
     }
 
     @FXML
     public void addDigit5() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "5";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "5" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "5" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "5";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("5");
     }
 
     @FXML
     public void addDigit6() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "6";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "6" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "6" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "6";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("6");
     }
 
     @FXML
     public void addDigit7() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "7";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "7" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "7" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "7";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("7");
     }
 
     @FXML
     public void addDigit8() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "8";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "8" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "8" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "8";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("8");
     }
 
     @FXML
     public void addDigit9() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "9";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "9" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "9" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "9";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("9");
     }
 
     @FXML
     public void addDigitStar() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "*";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "*" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "*" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "*";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("*");
     }
 
     @FXML
     public void addDigitHashtag() {
         // Size of a US phone number is 14 when written as a string
-        if (phoneNumber.length() < 14) {
-            if (phoneNumber.isEmpty() == true) {
-                phoneNumber += "(" + "#";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 3) {
-                phoneNumber += "#" + ")" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else if (phoneNumber.length() == 8) {
-                phoneNumber += "#" + "-";
-                phoneNumberField.setText(phoneNumber);
-            } else {
-                phoneNumber += "#";
-                phoneNumberField.setText(phoneNumber);
-            }
-        }
+        addDigit("#");
     }
 
     @FXML
