@@ -166,9 +166,9 @@
 }
 
 .middle{
-    -fx-font-size: 24;
-    text-align:center;
-    -fx-text-alignment: center;
+    width:110px;
+    float:center;
+    text-align: center;
 }
 
 .check-box{
