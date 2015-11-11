@@ -5,18 +5,28 @@ package app.models;
  */
 public class RadioHistory {
 
+    private int driverID;
     private String name;
     private String station;
     private String date;
     private String time;
-    private Double duration;
+    private double duration;
 
-    public RadioHistory(String name, String station, String date, String time, Double duration) {
+    public RadioHistory(int driverID, String name, String station, String date, String time, double duration) {
         this.name = name;
         this.station = station;
         this.date = date;
         this.time = time;
         this.duration = duration;
+        this.driverID = driverID;
+    }
+
+    public int getdriverID() {
+        return driverID;
+    }
+
+    public void setdriverID(int driverID) {
+        this.driverID = driverID;
     }
 
     public String getName() {
@@ -51,7 +61,7 @@ public class RadioHistory {
         this.time = time;
     }
 
-    public Double getDuration() {
+    public double getDuration() {
         return duration;
     }
 
