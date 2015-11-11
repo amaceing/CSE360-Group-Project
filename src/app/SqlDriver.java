@@ -1,6 +1,8 @@
 package app;
 
 import app.models.Driver;
+import app.models.RadioHistory;
+
 import java.sql.*;
 import java.util.*;
 import java.util.List;
@@ -63,6 +65,16 @@ public class SqlDriver {
                     "', '" + ((Driver) obj).getChannel() +
                     "', '";
             sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
+        } else if (obj instanceof RadioHistory) {
+            sql = "INSERT INTO RADIO_HISTORIES  (DRIVER_ID, NAME, STATION, DATE, TIME, DURATION) ";
+            sql += "VALUES ('" +
+                    ((RadioHistory) obj).getdriverID() +
+                    "', '" + ((RadioHistory) obj).getName() +
+                    "', '" + ((RadioHistory) obj).getStation() +
+                    "', '" + ((RadioHistory) obj).getDate() +
+                    "', '" + ((RadioHistory) obj).getTime() +
+                    "', '" + ((RadioHistory) obj).getDuration() +
+                    "');";
         }
         try {
             Class.forName(LIBRARY);
