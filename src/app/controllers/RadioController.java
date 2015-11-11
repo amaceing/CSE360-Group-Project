@@ -1,17 +1,25 @@
 package app.controllers;
 import app.SqlDriver;
 import app.VistaNavigator;
+import app.models.RadioHistory;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 /**
  * Created by arinhouck on 10/17/15.
  */
-public class RadioController  implements Initializable {
+public class RadioController implements Initializable {
     private static MainController mainController;
 
     @FXML
@@ -31,12 +39,17 @@ public class RadioController  implements Initializable {
 
     private int volume;
 
+    private LocalDate date;
+    private LocalTime start;
+
     private ObservableList<String> stations;
+
+    private BooleanProperty closing;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AMButton.getStyleClass().add("active");
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        topBarController.setBackButton(VistaNavigator.DASHBOARD, RadioController.this);
 
         mainController = VistaNavigator.getMainController();
         volume = mainController.getSession().getDriver().getRadioVolume();
@@ -50,6 +63,29 @@ public class RadioController  implements Initializable {
             mainController.getSession().getDriver().setChannel("AM");
         }
         setStations(mainController.getSession().getDriver().getChannel());
+
+        date = LocalDate.now();
+        start = LocalTime.now();
+        closing = new SimpleBooleanProperty(false);
+
+        closing.addListener((observable, oldValue, newValue) -> {
+            saveHistory();
+        });
+
+    }
+
+    private void saveHistory() {
+        long duration = ChronoUnit.SECONDS.between(start, LocalTime.now());
+        DateTimeFormatter outputFormat = new DateTimeFormatterBuilder().appendPattern("hh:mm a").toFormatter();
+        SqlDriver.insertRecord(new RadioHistory(
+                        mainController.getSession().getDriver().getID(),
+                        mainController.getSession().getDriver().getFirstName(),
+                        stations.get(0), // TODO: change to selected or get from driver
+                        date.toString(),
+                        start.format(outputFormat).toString(),
+                        (double) duration
+                )
+        );
     }
 
     private void setStations(String type) {
@@ -110,5 +146,18 @@ public class RadioController  implements Initializable {
     public void setFM() {
         setStations("FM");
     }
+
+    public boolean getClosing() {
+        return closing.get();
+    }
+
+    public BooleanProperty closingProperty() {
+        return closing;
+    }
+
+    public void setClosing(boolean closing) {
+        this.closing.set(closing);
+    }
+
 
 }

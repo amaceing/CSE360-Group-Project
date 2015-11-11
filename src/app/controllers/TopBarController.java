@@ -29,6 +29,8 @@ public class TopBarController implements Initializable {
 
     private String location;
 
+    private Object controller;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set time eg. 12:00 PM
@@ -37,9 +39,10 @@ public class TopBarController implements Initializable {
         time.setText(currentTime.format(date).toString());
     }
 
-    public void setBackButton(String location) {
+    public void setBackButton(String location, Object controller) {
         left.setText("Back");
         this.location = location;
+        this.controller = controller;
     }
 
     @FXML
@@ -48,7 +51,9 @@ public class TopBarController implements Initializable {
             System.out.println("No location been set.");
             return;
         }
-
+        if (controller instanceof RadioController) {
+            ((RadioController) controller).setClosing(true);
+        }
         VistaNavigator.loadVista(location);
     }
 }

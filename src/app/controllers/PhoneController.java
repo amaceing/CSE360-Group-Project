@@ -64,7 +64,7 @@ public class PhoneController implements Initializable {
         add.setFont(font);
         add.setText(FxFontAwesome.Icons.faw_plus_square_o.toString());
 
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        topBarController.setBackButton(VistaNavigator.DASHBOARD, PhoneController.this);
     }
 
     @FXML
