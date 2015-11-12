@@ -58,7 +58,6 @@ public class SqlDriver {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
 
-            String sql = "";
             if (obj instanceof Driver && !isRecord(obj)) {
                 ps = connection.prepareStatement(
                         "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME, STATION, PHONE_VOLUME, MILES_REMAINING, AVERAGE_SPEED, MAX_SPEED) " +

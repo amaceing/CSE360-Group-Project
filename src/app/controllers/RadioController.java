@@ -75,7 +75,7 @@ public class RadioController implements Initializable {
         SqlDriver.insertRecord(new RadioHistory(
                         mainController.getSession().getDriver().getID(),
                         mainController.getSession().getDriver().getFirstName(),
-                        stationList.getSelectionModel().getSelectedItem().toString(), // TODO: change to selected or get from driver
+                        stationList.getSelectionModel().getSelectedItem().toString(),
                         date.toString(),
                         start.format(outputFormat).toString(),
                         (double) duration
