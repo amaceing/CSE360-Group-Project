@@ -41,10 +41,10 @@ public class RadioHistController  implements Initializable {
         topBarController.setBackButton(VistaNavigator.INFORMATION);
 
         radioHistory = radioTableView.getItems();
-        radioHistory.add(new RadioHistory("Drew", "92.5 FM", "10/31/15", "3:30 PM", 4.5));
-        radioHistory.add(new RadioHistory("Arin", "93.3 FM", "3/4/15", "5:45 PM", 10.0));
-        radioHistory.add(new RadioHistory("Mario", "1000 AM", "4/6/15", "1:00 AM", 145.9));
-        radioHistory.add(new RadioHistory("Anthony","1010 AM", "10/28/15", "2:30 AM", 354.89));
+        radioHistory.add(new RadioHistory(1, "Drew", "92.5 FM", "10/31/15", "3:30 PM", 4.5));
+        radioHistory.add(new RadioHistory(2, "Arin", "93.3 FM", "3/4/15", "5:45 PM", 10.0));
+        radioHistory.add(new RadioHistory(3, "Mario", "1000 AM", "4/6/15", "1:00 AM", 145.9));
+        radioHistory.add(new RadioHistory(4, "Anthony","1010 AM", "10/28/15", "2:30 AM", 354.89));
     }
 
 }
