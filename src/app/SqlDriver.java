@@ -61,16 +61,6 @@ public class SqlDriver {
 
             String sql = "";
             if (obj instanceof Driver && !isRecord(obj)) {
-//                sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME) ";
-//                sql += "VALUES ('" +
-//                        ((Driver) obj).getFirstName() +
-//                        "', '" + ((Driver) obj).getLastName() +
-//                        "', '" + ((Driver) obj).getUsername() +
-//                        "', '" + ((Driver) obj).getPassword() +
-//                        "', '" + ((Driver) obj).getChannel() +
-//                        "', '" + ((Driver) obj).getRadioVolume() +
-//                        "', '" + ((Driver) obj).getRadioVolume() +
-//                        "', '";
                 ps = connection.prepareStatement(
                         "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME, STATION, PHONE_VOLUME, MILES_REMAINING, AVERAGE_SPEED, MAX_SPEED) " +
                                 "VALUES(?, ?, ?, ?, ?, ?)"
