@@ -13,20 +13,16 @@ public class Driver {
     private String password;
     private String channel;
     private int radioVolume;
+    private int station;
     private int phoneVolume;
+    private double milesRemaining;
+    private double averageSpeed;
+    private double maxSpeed;
 
-    public Driver() {
-        this.ID = 0;
-        this.firstName = "";
-        this.lastName = "";
-        this.username = "";
-        this.password = "";
-        this.channel = "";
-        this.radioVolume = 0;
-        this.phoneVolume = 0;
-    }
+    public Driver(int ID, String firstName, String lastName, String username, String password,
+                  String channel, int radioVolume, int station, int phoneVolume,
+                  double milesRemaining, double averageSpeed, double maxSpeed) {
 
-    public Driver(int ID, String firstName, String lastName, String username, String password, String channel, int radioVolume, int phoneVolume) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,7 +30,11 @@ public class Driver {
         this.password = password;
         this.channel = channel;
         this.radioVolume = radioVolume;
+        this.station = station;
         this.phoneVolume = phoneVolume;
+        this.milesRemaining = milesRemaining;
+        this.averageSpeed = averageSpeed;
+        this.maxSpeed = maxSpeed;
     }
 
     public int getID() {
@@ -105,8 +105,44 @@ public class Driver {
 
     public void setRadioVolume(int radioVolume) { this.radioVolume = radioVolume; }
 
-    public int getPhoneVolume(){ return phoneVolume; }
+   public int getStation() {
+        return station;
+    }
 
-    public void setPhoneVolume (int phoneVolume) { this.phoneVolume = phoneVolume; }
+    public void setStation(int station) {
+        this.station = station;
+    }
+
+    public int getPhoneVolume() {
+        return phoneVolume;
+    }
+
+    public void setPhoneVolume(int phoneVolume) {
+        this.phoneVolume = phoneVolume;
+    }
+
+    public double getMilesRemaining() {
+        return milesRemaining;
+    }
+
+    public void setMilesRemaining(double milesRemaining) {
+        this.milesRemaining = milesRemaining;
+    }
+
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
+
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
+    }
+
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(double maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
 
 }
