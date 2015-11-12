@@ -44,11 +44,6 @@ public class RadioController  implements Initializable {
 
         stations = stationList.getItems();
 
-        if (mainController.getSession().getDriver().getChannel() == null){
-            AMButton.getStyleClass().add("active");
-            SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "AM");
-            mainController.getSession().getDriver().setChannel("AM");
-        }
         setStations(mainController.getSession().getDriver().getChannel());
     }
 

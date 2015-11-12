@@ -1,6 +1,7 @@
 package app;
 
 import app.models.Driver;
+import app.models.RadioHistory;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
@@ -53,25 +54,53 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
-        String sql = "";
-        if (obj instanceof Driver && !isRecord(obj)) {
-            sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, RADIO_VOLUME, CHANNEL, USERNAME, PASSWORD) ";
-            sql += "VALUES ('" +
-                    ((Driver) obj).getFirstName() +
-                    "', '" + ((Driver) obj).getLastName() +
-                    "', '" + ((Driver) obj).getRadioVolume() +
-                    "', '" + ((Driver) obj).getChannel() +
-                    "', '";
-            sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
-        }
+
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-            stmt.executeUpdate(sql);
-            stmt.close();
-            connection.commit();
+
+            String sql = "";
+            if (obj instanceof Driver && !isRecord(obj)) {
+//                sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME) ";
+//                sql += "VALUES ('" +
+//                        ((Driver) obj).getFirstName() +
+//                        "', '" + ((Driver) obj).getLastName() +
+//                        "', '" + ((Driver) obj).getUsername() +
+//                        "', '" + ((Driver) obj).getPassword() +
+//                        "', '" + ((Driver) obj).getChannel() +
+//                        "', '" + ((Driver) obj).getRadioVolume() +
+//                        "', '" + ((Driver) obj).getRadioVolume() +
+//                        "', '";
+                ps = connection.prepareStatement(
+                        "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME, STATION, PHONE_VOLUME, MILES_REMAINING, AVERAGE_SPEED, MAX_SPEED) " +
+                                "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+                ps.setString(1, ((Driver) obj).getFirstName());
+                ps.setString(2, ((Driver) obj).getLastName());
+                ps.setString(3, ((Driver) obj).getUsername());
+                ps.setString(4, ((Driver) obj).getPassword());
+                ps.setString(5,  ((Driver) obj).getChannel());
+                ps.setInt(6, ((Driver) obj).getRadioVolume());
+                ps.setInt(7,  ((Driver) obj).getStation());
+                ps.setInt(8,  ((Driver) obj).getPhoneVolume());
+                ps.setDouble(9, ((Driver) obj).getMilesRemaining());
+                ps.setDouble(10, ((Driver) obj).getAverageSpeed());
+                ps.setDouble(11,  ((Driver) obj).getMaxSpeed());
+            } else if (obj instanceof RadioHistory) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO RADIO_HISTORIES  (DRIVER_ID, NAME, STATION, DATE, TIME, DURATION) " +
+                        "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+                ps.setInt(1,  ((RadioHistory) obj).getdriverID());
+                ps.setString(2, ((RadioHistory) obj).getName());
+                ps.setString(3, ((RadioHistory) obj).getStation());
+                ps.setString(4, ((RadioHistory) obj).getDate());
+                ps.setString(5,  ((RadioHistory) obj).getTime());
+                ps.setDouble(6, ((RadioHistory) obj).getDuration());
+            }
+
+            ps.executeUpdate();
+            ps.close();
             connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
