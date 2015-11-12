@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.SqlDriver;
 import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
@@ -19,10 +20,15 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Created by arinhouck on 10/12/15.
  */
 public class DashboardController implements Initializable {
+
+    private static MainController mainController;
 
     @FXML
     private Label radio;
@@ -39,11 +45,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Label info;
 
-//    @FXML
-//    private TopBarController topBar;
-
-//    @FXML
-//    private BottomBarController bottomBar;
     @FXML
     private BottomBarController bottomBarController;
 
@@ -70,16 +71,21 @@ public class DashboardController implements Initializable {
 
     private boolean timerRunning = false;
 
+    private List<Double> speedList = new ArrayList<Double>();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        mainController = VistaNavigator.getMainController();
+
         Font font = FxIconics.getAwesomeFont(114);
         borderPane.setFocusTraversable(true);
 
         speed = 0.0;
         speedLabel.setText(speed.toString());
 
-        milesLeft = 300.0;
+        milesLeft = mainController.getSession().getDriver().getMilesRemaining();
         milesLeftLabel.setText(milesLeft.toString());
 
         radio.setFont(font);
@@ -104,10 +110,12 @@ public class DashboardController implements Initializable {
         if (speed >= 0 && milesLeft > 0) {
             if (event.getCode() == KeyCode.UP) {
                 if (speed < 100) {
+                    speedList.add(speed);
                     speedLabel.setText((++speed).toString());
                 }
             } else if (event.getCode() == KeyCode.DOWN) {
                 if (speed > 0) {
+                    speedList.add(speed);
                     speedLabel.setText((--speed).toString());
                 }
             }
@@ -149,6 +157,7 @@ public class DashboardController implements Initializable {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         speedLabel.setText((--speed).toString());
+                        speedList.add(speed);
                         if(milesLeft >= 0) {
                             milesLeft -= .5;
                             milesLeftLabel.setText((milesLeft).toString());
@@ -165,24 +174,72 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void handlePhoneClick(MouseEvent arg0)
-    {
+    public void handlePhoneClick(MouseEvent arg0) {
+        UpdateSession();
         VistaNavigator.loadVista(VistaNavigator.PHONE);
     }
 
     @FXML
     public void handleRadioClick(MouseEvent arg0) {
+        UpdateSession();
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
 
     @FXML
     public void handleRouteClick(MouseEvent arg0) {
+        UpdateSession();
         VistaNavigator.loadVista(VistaNavigator.ROUTE);
     }
 
     @FXML
     public void infoClick(MouseEvent arg0) {
+        UpdateSession();
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
+    }
+
+
+
+    private void UpdateSession() {
+
+        double sum = 0.0;
+        double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
+        double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
+
+        for (int i = 0; i < speedList.size(); i++) {
+            if(speedList.get(i) > maxSpeed)
+                maxSpeed = speedList.get(i);
+
+            sum += speedList.get(i);
+        }
+
+        double temp = avgSpeed;
+        //check that the user drove the car, otherwise don't do anything
+        if(Double.isNaN(speedList.size()) == false && speedList.size() != 0)
+        {
+            //if the user has previous avg speed, then take the average of the new average and the old average
+            if (temp != 0)
+                avgSpeed = ((sum / speedList.size()) + temp) / 2;
+            else
+                avgSpeed = sum / speedList.size();
+        }
+
+        if (Double.isNaN(avgSpeed))
+            avgSpeed = 0.0;
+        if (Double.isNaN(maxSpeed))
+            maxSpeed = 0.0;
+        if (Double.isNaN(milesLeft))
+            milesLeft = 0.0;
+
+
+        SqlDriver.updateRecord("DRIVERS", "MAX_SPEED", mainController.getSession().getDriver().getID(), maxSpeed);
+        mainController.getSession().getDriver().setMaxSpeed(maxSpeed);
+
+        SqlDriver.updateRecord("DRIVERS", "AVERAGE_SPEED", mainController.getSession().getDriver().getID(), avgSpeed);
+        mainController.getSession().getDriver().setAverageSpeed(avgSpeed);
+
+        SqlDriver.updateRecord("DRIVERS", "MILES_REMAINING", mainController.getSession().getDriver().getID(), milesLeft);
+        mainController.getSession().getDriver().setMilesRemaining(milesLeft);
+
     }
 
 }

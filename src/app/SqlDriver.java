@@ -176,8 +176,10 @@ public class SqlDriver {
 
             if (value instanceof String) {
                 ps.setString(1, value.toString());
-            } else {
+            } else if(value instanceof Integer) {
                 ps.setInt(1, Integer.parseInt(value.toString()));
+            } else if(value instanceof Double) {
+                ps.setDouble(1, Double.parseDouble(value.toString()));
             }
             ps.setInt(2, ID);
 
