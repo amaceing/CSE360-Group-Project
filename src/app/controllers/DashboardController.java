@@ -175,31 +175,31 @@ public class DashboardController implements Initializable {
 
     @FXML
     public void handlePhoneClick(MouseEvent arg0) {
-        UpdateSession();
+        updateSession();
         VistaNavigator.loadVista(VistaNavigator.PHONE);
     }
 
     @FXML
     public void handleRadioClick(MouseEvent arg0) {
-        UpdateSession();
+        updateSession();
         VistaNavigator.loadVista(VistaNavigator.RADIO);
     }
 
     @FXML
     public void handleRouteClick(MouseEvent arg0) {
-        UpdateSession();
+        updateSession();
         VistaNavigator.loadVista(VistaNavigator.ROUTE);
     }
 
     @FXML
     public void infoClick(MouseEvent arg0) {
-        UpdateSession();
+        updateSession();
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }
 
 
 
-    private void UpdateSession() {
+    private void updateSession() {
 
         double sum = 0.0;
         double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
