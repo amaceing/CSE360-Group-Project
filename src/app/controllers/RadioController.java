@@ -63,7 +63,7 @@ public class RadioController implements Initializable {
             mainController.getSession().getDriver().setChannel("AM");
         }
         setStations(mainController.getSession().getDriver().getChannel());
-
+        stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
         date = LocalDate.now();
         start = LocalTime.now();
         closing = new SimpleBooleanProperty(false);
@@ -80,7 +80,7 @@ public class RadioController implements Initializable {
         SqlDriver.insertRecord(new RadioHistory(
                         mainController.getSession().getDriver().getID(),
                         mainController.getSession().getDriver().getFirstName(),
-                        stations.get(0), // TODO: change to selected or get from driver
+                        stationList.getSelectionModel().getSelectedItem().toString(), // TODO: change to selected or get from driver
                         date.toString(),
                         start.format(outputFormat).toString(),
                         (double) duration
