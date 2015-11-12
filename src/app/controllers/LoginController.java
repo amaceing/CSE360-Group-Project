@@ -52,7 +52,8 @@ public class LoginController implements Initializable {
                 array[3], // Username
                 array[4], // Password
                 array[5], // Channel
-                Integer.parseInt(array[6]) // Radio Volume
+                Integer.parseInt(array[6]), // Radio Volume
+                Integer.parseInt(array[7]) // Phone Volume
         );
 
         Session session = new Session();

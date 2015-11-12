@@ -9,6 +9,10 @@ import com.pepperonas.fxiconics.awf.FxFontAwesome;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
+import app.SqlDriver;
+import app.models.Driver;
+import app.models.Session;
+import app.models.Contact;
 
 /**
  * Created by Marius on 10/17/2015.
@@ -16,7 +20,7 @@ import javafx.scene.text.Font;
 
 
 public class PhoneController implements Initializable {
-
+    private MainController mainController;
     @FXML
     private Label call;
 
@@ -47,12 +51,14 @@ public class PhoneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         Font font = FxIconics.getAwesomeFont(52);
-
         phoneNumberField.setText(phoneNumber);
-
         contacts = contactsList.getItems();
 
         volume = 0;
+        volumeLabel.setText(Integer.toString(volume));
+
+        mainController = VistaNavigator.getMainController();
+        volume = mainController.getSession().getDriver().getPhoneVolume();
         volumeLabel.setText(Integer.toString(volume));
 
         call.setFont(font);
@@ -63,6 +69,7 @@ public class PhoneController implements Initializable {
 
         add.setFont(font);
         add.setText(FxFontAwesome.Icons.faw_plus_square_o.toString());
+
 
         topBarController.setBackButton(VistaNavigator.DASHBOARD);
     }
@@ -78,6 +85,7 @@ public class PhoneController implements Initializable {
         for (int i = 0; i < 10; i++) {
             if (phoneNumber.length() == 14) {
                 contacts.add(i,phoneNumber);
+
                 clearNumber();
             }
         }
@@ -174,12 +182,16 @@ public class PhoneController implements Initializable {
     public void volumeUp() {
         if (volume != 10)
             volumeLabel.setText(Integer.toString(++volume));
+        SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
+        mainController.getSession().getDriver().setPhoneVolume(volume);
     }
 
     @FXML
     public void volumeDown() {
         if (volume != 0)
             volumeLabel.setText(Integer.toString(--volume));
+        SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
+        mainController.getSession().getDriver().setPhoneVolume(volume);
     }
 }
 

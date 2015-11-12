@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.SqlDriver;
+import app.models.Contact;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -30,7 +31,5 @@ public class MainController {
         return session;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
-    }
+    public void setSession(Session session) { this.session = session; }
 }
