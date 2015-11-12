@@ -53,7 +53,6 @@ public class LoginController implements Initializable {
                 array[4], // Password
                 array[5], // Channel
                 Integer.parseInt(array[6]), // Radio Volume
-                Integer.parseInt(array[7]) // Phone Volume
                 Integer.parseInt(array[7]), // Station
                 Integer.parseInt(array[8]), // Phone Volume
                 Double.parseDouble(array[9]), // Miles remaining
