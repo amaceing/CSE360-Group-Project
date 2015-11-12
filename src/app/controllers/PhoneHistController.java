@@ -38,7 +38,7 @@ public class PhoneHistController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        topBarController.setBackButton(VistaNavigator.INFORMATION);
+        topBarController.setBackButton(VistaNavigator.INFORMATION, PhoneHistController.this);
 
         phoneHistory = phoneTableView.getItems();
         phoneHistory.add(new PhoneHistory("Drew", "555-555-5555", "10/31/15", "3:30 PM", 4.5));

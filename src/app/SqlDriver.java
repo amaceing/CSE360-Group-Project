@@ -4,6 +4,7 @@ import app.models.Driver;
 import app.models.DriverHistory;
 import app.models.Session;
 import java.awt.*;
+import app.models.RadioHistory;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
@@ -77,32 +78,46 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
-        String sql = "";
-        boolean inserting = false;
-        if (obj instanceof Driver && !isRecord(obj)) {
-            sql = "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, RADIO_VOLUME, CHANNEL, USERNAME, PASSWORD) ";
-            sql += "VALUES ('" +
-                    ((Driver) obj).getFirstName() +
-                    "', '" + ((Driver) obj).getLastName() +
-                    "', '" + ((Driver) obj).getRadioVolume() +
-                    "', '" + ((Driver) obj).getChannel() +
-                    "', '";
-            sql += ((Driver) obj).getUsername() + "', '" + ((Driver) obj).getPassword() + "');";
-        } else if (obj instanceof DriverHistory && !isRecord(obj)) {
-            inserting = true;
-            sql = "INSERT INTO DRIVER_HISTORY (FIRST_NAME, DATE, DURATION, MAX_SPEED, AVG_SPEED) ";
-            sql += "VALUES ('" + ((DriverHistory) obj).getName() + "', '" + ((DriverHistory) obj).getDate() + "', '";
-            sql += ((DriverHistory) obj).getDuration() + "', '" + ((DriverHistory) obj).getMaxSpeed() + "', '";
-            sql += ((DriverHistory) obj).getAvgSpeed() + "');";
-        }
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-            stmt.executeUpdate(sql);
-            stmt.close();
-            connection.commit();
+
+            if (obj instanceof Driver && !isRecord(obj)) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME, STATION, PHONE_VOLUME, MILES_REMAINING, AVERAGE_SPEED, MAX_SPEED) " +
+                                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                );
+                ps.setString(1, ((Driver) obj).getFirstName());
+                ps.setString(2, ((Driver) obj).getLastName());
+                ps.setString(3, ((Driver) obj).getUsername());
+                ps.setString(4, ((Driver) obj).getPassword());
+                ps.setString(5,  ((Driver) obj).getChannel());
+                ps.setInt(6, ((Driver) obj).getRadioVolume());
+                ps.setInt(7,  ((Driver) obj).getStation());
+                ps.setInt(8,  ((Driver) obj).getPhoneVolume());
+                ps.setDouble(9, ((Driver) obj).getMilesRemaining());
+                ps.setDouble(10, ((Driver) obj).getAverageSpeed());
+                ps.setDouble(11,  ((Driver) obj).getMaxSpeed());
+            } else if (obj instanceof RadioHistory) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO RADIO_HISTORIES  (DRIVER_ID, NAME, STATION, DATE, TIME, DURATION) " +
+                        "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+                ps.setInt(1,  ((RadioHistory) obj).getdriverID());
+                ps.setString(2, ((RadioHistory) obj).getName());
+                ps.setString(3, ((RadioHistory) obj).getStation());
+                ps.setString(4, ((RadioHistory) obj).getDate());
+                ps.setString(5,  ((RadioHistory) obj).getTime());
+                ps.setDouble(6, ((RadioHistory) obj).getDuration());
+            }  else if (obj instanceof DriverHistory && !isRecord(obj)) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO DRIVER_HISTORY (FIRST_NAME, DATE, DURATION, MAX_SPEED, AVG_SPEED) " +
+                                "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+            }
+
+            ps.executeUpdate();
+            ps.close();
             connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -113,37 +128,39 @@ public class SqlDriver {
         }
     }
 
-    public static String[] findBy(String table, String column, String value) {
-        String[] array = new String[0];
-        String select = "";
-        switch(table) {
-            case "DRIVERS":
-                select = "SELECT * FROM DRIVERS WHERE " + column + " = '" + value + "'";
-                break;
-        }
+    public static List<String> findBy(String table, String column, Object value) {
+        List results = new ArrayList<String>();
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(select);
+            ps = connection.prepareStatement("SELECT * FROM " + table + " WHERE " + column + " = ?");
+
+            if (value instanceof String) {
+                ps.setString(1, value.toString());
+            } else {
+                ps.setInt(1, Integer.parseInt(value.toString()));
+            }
+
+            ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsData = rs.getMetaData();
             int columnsInRow = rsData.getColumnCount();
-            array = new String[columnsInRow];
-            if (rs.isBeforeFirst()) {
-                for (int i = 0; i < columnsInRow; i++) {
-                    array[i] = rs.getString(i + 1);
+            while(rs.next()) {
+                String row = "";
+                for (int i = 1; i <= columnsInRow; i++) {
+                    row += rs.getString(i) + "  ";
                 }
+
+                results.add(row);
             }
             rs.close();
-            stmt.close();
+            ps.close();
             connection.close();
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
 
-        return array;
+        return results;
     }
 
     public static List<String> getRecords(String table) {
@@ -187,8 +204,10 @@ public class SqlDriver {
 
             if (value instanceof String) {
                 ps.setString(1, value.toString());
-            } else {
+            } else if(value instanceof Integer) {
                 ps.setInt(1, Integer.parseInt(value.toString()));
+            } else if(value instanceof Double) {
+                ps.setDouble(1, Double.parseDouble(value.toString()));
             }
             ps.setInt(2, ID);
 

@@ -52,7 +52,7 @@ public class DriverHistController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        topBarController.setBackButton(VistaNavigator.INFORMATION);
+        topBarController.setBackButton(VistaNavigator.INFORMATION, DriverHistController.this);
 
 
         driverHistory = driverTableView.getItems();

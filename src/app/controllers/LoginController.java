@@ -43,7 +43,8 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-        String[] array = SqlDriver.findBy("DRIVERS", "USERNAME", usernameTextField.getText());
+        List<String> results = SqlDriver.findBy("DRIVERS", "USERNAME", usernameTextField.getText());
+        String[] array = results.get(0).split("  ");
 
         Driver driver = new Driver(
                 Integer.parseInt(array[0]), // ID
@@ -52,7 +53,12 @@ public class LoginController implements Initializable {
                 array[3], // Username
                 array[4], // Password
                 array[5], // Channel
-                Integer.parseInt(array[6]) // Radio Volume
+                Integer.parseInt(array[6]), // Radio Volume
+                Integer.parseInt(array[7]), // Station
+                Integer.parseInt(array[8]), // Phone Volume
+                Double.parseDouble(array[9]), // Miles remaining
+                Double.parseDouble(array[10]), // Average Speed
+                Double.parseDouble(array[11]) // Max Speed
         );
 
         Session session = new Session();
