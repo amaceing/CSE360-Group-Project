@@ -1,4 +1,5 @@
 package app.controllers;
+import app.SqlDriver;
 import app.VistaNavigator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,9 +9,11 @@ import javafx.scene.control.TableView;
 import app.models.RadioHistory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RadioHistController  implements Initializable {
+    private static MainController mainController;
 
     @FXML
     private TopBarController topBarController;
@@ -38,13 +41,27 @@ public class RadioHistController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        topBarController.setBackButton(VistaNavigator.INFORMATION);
+        topBarController.setBackButton(VistaNavigator.INFORMATION, RadioHistController.this);
 
+        mainController = VistaNavigator.getMainController();
+
+        List<String> results = SqlDriver.findBy("RADIO_HISTORIES", "DRIVER_ID", mainController.getSession().getDriver().getID());
         radioHistory = radioTableView.getItems();
-        radioHistory.add(new RadioHistory(1, "Drew", "92.5 FM", "10/31/15", "3:30 PM", 4.5));
-        radioHistory.add(new RadioHistory(2, "Arin", "93.3 FM", "3/4/15", "5:45 PM", 10.0));
-        radioHistory.add(new RadioHistory(3, "Mario", "1000 AM", "4/6/15", "1:00 AM", 145.9));
-        radioHistory.add(new RadioHistory(4, "Anthony","1010 AM", "10/28/15", "2:30 AM", 354.89));
+
+        for(int i = 0; i < results.size(); i++) {
+            String[] array = results.get(i).split("  ");
+
+            radioHistory.add(
+                    new RadioHistory(
+                            Integer.parseInt(array[1]),
+                            array[2],
+                            array[3],
+                            array[4],
+                            array[5],
+                            Double.parseDouble(array[6])
+                    )
+            );
+        }
     }
 
 }
