@@ -54,16 +54,14 @@ public class SqlDriver {
     }
 
     public static void insertRecord(Object obj) {
-
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
 
-            String sql = "";
             if (obj instanceof Driver && !isRecord(obj)) {
                 ps = connection.prepareStatement(
                         "INSERT INTO DRIVERS  (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CHANNEL, RADIO_VOLUME, STATION, PHONE_VOLUME, MILES_REMAINING, AVERAGE_SPEED, MAX_SPEED) " +
-                                "VALUES(?, ?, ?, ?, ?, ?)"
+                                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 ps.setString(1, ((Driver) obj).getFirstName());
                 ps.setString(2, ((Driver) obj).getLastName());
@@ -101,37 +99,39 @@ public class SqlDriver {
         }
     }
 
-    public static String[] findBy(String table, String column, String value) {
-        String[] array = new String[0];
-        String select = "";
-        switch(table) {
-            case "DRIVERS":
-                select = "SELECT * FROM DRIVERS WHERE " + column + " = '" + value + "'";
-                break;
-        }
+    public static List<String> findBy(String table, String column, Object value) {
+        List results = new ArrayList<String>();
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(select);
+            ps = connection.prepareStatement("SELECT * FROM " + table + " WHERE " + column + " = ?");
+
+            if (value instanceof String) {
+                ps.setString(1, value.toString());
+            } else {
+                ps.setInt(1, Integer.parseInt(value.toString()));
+            }
+
+            ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsData = rs.getMetaData();
             int columnsInRow = rsData.getColumnCount();
-            array = new String[columnsInRow];
-            if (rs.isBeforeFirst()) {
-                for (int i = 0; i < columnsInRow; i++) {
-                    array[i] = rs.getString(i + 1);
+            while(rs.next()) {
+                String row = "";
+                for (int i = 1; i <= columnsInRow; i++) {
+                    row += rs.getString(i) + "  ";
                 }
+
+                results.add(row);
             }
             rs.close();
-            stmt.close();
+            ps.close();
             connection.close();
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
 
-        return array;
+        return results;
     }
 
     public static List<String> getRecords(String table) {

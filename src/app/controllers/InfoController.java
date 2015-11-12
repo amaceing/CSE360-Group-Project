@@ -37,7 +37,7 @@ public class InfoController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mainController = VistaNavigator.getMainController();
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        topBarController.setBackButton(VistaNavigator.DASHBOARD, InfoController.this);
 
         Font font = FxIconics.getAwesomeFont(114);
         phoneHistory.setFont(font);

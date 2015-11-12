@@ -43,7 +43,8 @@ public class LoginController implements Initializable {
 
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
-        String[] array = SqlDriver.findBy("DRIVERS", "USERNAME", usernameTextField.getText());
+        List<String> results = SqlDriver.findBy("DRIVERS", "USERNAME", usernameTextField.getText());
+        String[] array = results.get(0).split("  ");
 
         Driver driver = new Driver(
                 Integer.parseInt(array[0]), // ID

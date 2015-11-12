@@ -21,7 +21,7 @@ public class RouteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        topBarController.setBackButton(VistaNavigator.DASHBOARD, RouteController.this);
         slider.setValue(0);
         slider.setMin(0);
         slider.setMax(10);
