@@ -9,9 +9,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
+import java.math.RoundingMode;
 
 public class InfoController implements Initializable {
+    private static MainController mainController;
 
     @FXML
     private TopBarController topBarController;
@@ -25,9 +28,16 @@ public class InfoController implements Initializable {
     @FXML
     private Label radioHistory;
 
+    @FXML
+    private Label avgSpeed;
+
+    @FXML
+    private Label maxSpeed;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        mainController = VistaNavigator.getMainController();
+        topBarController.setBackButton(VistaNavigator.DASHBOARD, InfoController.this);
 
         Font font = FxIconics.getAwesomeFont(114);
         phoneHistory.setFont(font);
@@ -39,6 +49,11 @@ public class InfoController implements Initializable {
         radioHistory.setFont(font);
         radioHistory.setText(FxFontAwesome.Icons.faw_music.toString());
 
+        DecimalFormat df = new DecimalFormat("##.##");
+        df.setRoundingMode(RoundingMode.DOWN);
+
+        maxSpeed.setText("Maximum Speed: " + String.valueOf(df.format(mainController.getSession().getDriver().getMaxSpeed())) + " mph");
+        avgSpeed.setText("Average Speed: " + String.valueOf(df.format(mainController.getSession().getDriver().getAverageSpeed())) + " mph");
 
     }
 

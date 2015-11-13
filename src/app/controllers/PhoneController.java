@@ -75,7 +75,9 @@ public class PhoneController implements Initializable {
         contacts = contactsList.getItems();
         contacts.add(0,"");
 
-        topBarController.setBackButton(VistaNavigator.DASHBOARD);
+        topBarController.setBackButton(VistaNavigator.DASHBOARD,PhoneController.this);
+
+
     }
 
     @FXML

@@ -28,7 +28,7 @@
                     <TableColumn text="Date" fx:id="date" prefWidth="150.0"  styleClass="row-style">
                         <cellValueFactory><PropertyValueFactory property="date"/></cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Duration (min)" fx:id="duration" prefWidth="150.0" styleClass="row-style">
+                    <TableColumn text="Duration (sec)" fx:id="duration" prefWidth="150.0" styleClass="row-style">
                         <cellValueFactory><PropertyValueFactory property="duration"/></cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Avg. Speed (mph)" fx:id="avgSpeed" prefWidth="150.0" styleClass="row-style">
