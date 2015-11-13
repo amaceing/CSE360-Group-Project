@@ -1,7 +1,9 @@
 package app.controllers;
+import com.sun.javafx.scene.traversal.ContainerTabOrder;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import java.net.URL;
+import java.sql.SQLData;
 import java.util.ResourceBundle;
 import app.VistaNavigator;
 import com.pepperonas.fxiconics.FxIconics;
@@ -10,9 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import app.SqlDriver;
-import app.models.Driver;
-import app.models.Session;
-import app.models.Contact;
+import app.models.*;
+import org.omg.CORBA.*;
 
 /**
  * Created by Marius on 10/17/2015.
@@ -36,13 +37,14 @@ public class PhoneController implements Initializable {
 
     @FXML
     private Label phoneNumberField;
-    private  String phoneNumber = "";
+    private  String phoneNumber;
 
     @FXML
     private ObservableList<String> contacts;
 
     @FXML
     private ListView contactsList;
+    private Contact myContact;
 
     @FXML
     private TopBarController topBarController;
@@ -50,17 +52,16 @@ public class PhoneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Font font = FxIconics.getAwesomeFont(52);
-        phoneNumberField.setText(phoneNumber);
-        contacts = contactsList.getItems();
+        myContact.setdriverID(mainController.getSession().getDriver().getID());
 
-        volume = 0;
-        volumeLabel.setText(Integer.toString(volume));
+        phoneNumber = phoneNumberField.getText();
+        phoneNumberField.setText(phoneNumber);
 
         mainController = VistaNavigator.getMainController();
         volume = mainController.getSession().getDriver().getPhoneVolume();
         volumeLabel.setText(Integer.toString(volume));
 
+        Font font = FxIconics.getAwesomeFont(52);
         call.setFont(font);
         call.setText(FxFontAwesome.Icons.faw_phone.toString());
 
@@ -70,6 +71,9 @@ public class PhoneController implements Initializable {
         add.setFont(font);
         add.setText(FxFontAwesome.Icons.faw_plus_square_o.toString());
 
+
+        contacts = contactsList.getItems();
+        contacts.add(0,"");
 
         topBarController.setBackButton(VistaNavigator.DASHBOARD);
     }
@@ -82,13 +86,19 @@ public class PhoneController implements Initializable {
 
     @FXML
     public void addNumber() {
-        for (int i = 0; i < 10; i++) {
-            if (phoneNumber.length() == 14) {
-                contacts.add(i,phoneNumber);
-
-                clearNumber();
+            for (int i = 0; i < 10; i++) {
+                if (phoneNumber.length() == 14) {
+                    if (contacts.get(0) == "") {
+                        contacts.add(0, phoneNumber);
+                        contacts.remove(1);
+                        SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(),phoneNumber));
+                    } else {
+                        contacts.add(i, phoneNumber);
+                        SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(),phoneNumber));
+                    }
+                    clearNumber();
+                }
             }
-        }
     }
 
     public void addDigit(String digit) {

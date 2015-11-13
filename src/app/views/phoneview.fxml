@@ -4,6 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.collections.*?>
 <?import java.lang.String ?>
+
+<?import com.sun.javafx.scene.control.skin.SplitPaneSkin.Content?>
+<?import com.sun.javafx.scene.control.skin.TabPaneSkin.TabContentRegion?>
 <BorderPane fx:controller="app.controllers.PhoneController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
     <top>
         <fx:include source="topBar.fxml" fx:id="topBar"/>
@@ -47,11 +50,10 @@
              </VBox>
 
             <VBox alignment="TOP_CENTER" spacing="10">
-                <Label  text="Favourites" styleClass="medium-header"/>
+                <Label  text="Contacts" styleClass="medium-header"/>
                 <ListView fx:id="contactsList">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                        <String fx:id=""/>
                         </FXCollections>
                     </items>
                 </ListView>

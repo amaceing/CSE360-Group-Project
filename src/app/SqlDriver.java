@@ -93,7 +93,7 @@ public class SqlDriver {
                 ps = connection.prepareStatement(
                         "INSERT INTO CONTACTS   (DRIVER_ID, PHONE_NUMBER) " + "VALUES(?, ?)"
                 );
-                ps.setInt(1, ((Contact) obj).getDriverID());
+                ps.setInt(1, ((Contact) obj).getdriverID());
                 ps.setString(2, ((Contact) obj).getPhoneNumber());
             }
 

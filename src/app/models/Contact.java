@@ -5,29 +5,20 @@ package app.models;
  */
 public class Contact {
 
-    private int ID;
     private int driverID;
     private String PhoneNumber;
 
-    public Contact() {
-        this.ID = 0;
-        this.PhoneNumber = "";
-    }
-
-    public Contact(int ID, String phoneNumber) {
-        this.ID = ID;
+    public Contact(int driverID, String PhoneNumber) {
+        this.driverID = driverID;
         this.PhoneNumber = PhoneNumber;
     }
 
-    public void setDriverID(int driverID) { this.driverID = driverID; }
 
-    public int getDriverID() { return driverID; }
+    public void setdriverID(int driverID) { this.driverID = driverID; }
 
-    public void setID(int ID) { this.ID = ID; }
+    public int getdriverID() { return driverID; }
 
-    public int getID() { return ID; }
-
-    public void setphoneNumber(String phoneNumber) { this.PhoneNumber = PhoneNumber; }
+    public void setphoneNumber(String PhoneNumber) { this.PhoneNumber = PhoneNumber; }
 
     public String getPhoneNumber() { return PhoneNumber; }
 }
