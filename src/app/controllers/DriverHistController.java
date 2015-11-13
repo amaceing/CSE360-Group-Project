@@ -73,11 +73,4 @@ public class DriverHistController implements Initializable {
 
     }
 
-    public void getRecords() {
-        List<String> records = SqlDriver.getRecords("DRIVER_HISTORY");
-        for (String record : records) {
-            System.out.println(record);
-        }
-    }
-
 }
