@@ -109,11 +109,17 @@ public class SqlDriver {
                 ps.setString(4, ((RadioHistory) obj).getDate());
                 ps.setString(5,  ((RadioHistory) obj).getTime());
                 ps.setDouble(6, ((RadioHistory) obj).getDuration());
-            }  else if (obj instanceof DriverHistory && !isRecord(obj)) {
+            }  else if (obj instanceof DriverHistory) {
                 ps = connection.prepareStatement(
-                        "INSERT INTO DRIVER_HISTORY (FIRST_NAME, DATE, DURATION, MAX_SPEED, AVG_SPEED) " +
+                        "INSERT INTO DRIVER_HISTORIES (DRIVER_ID, NAME, DATE, DURATION, AVERAGE_SPEED, MAX_SPEED) " +
                                 "VALUES(?, ?, ?, ?, ?, ?)"
                 );
+                ps.setInt(1, ((DriverHistory) obj).getDriverID());
+                ps.setString(2, ((DriverHistory) obj).getName());
+                ps.setString(3, ((DriverHistory) obj).getDate());
+                ps.setDouble(4, ((DriverHistory) obj).getDuration());
+                ps.setDouble(5, ((DriverHistory) obj).getAvgSpeed());
+                ps.setDouble(6, ((DriverHistory) obj).getMaxSpeed());
             }
 
             ps.executeUpdate();
@@ -169,7 +175,6 @@ public class SqlDriver {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
             rs =stmt.executeQuery(select);
             ResultSetMetaData rsData = rs.getMetaData();
@@ -227,7 +232,6 @@ public class SqlDriver {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
             rs = stmt.executeQuery("SELECT ID FROM DRIVERS WHERE USERNAME = '" + driver.getUsername() + "'");
             while (rs.next()) {
@@ -248,12 +252,11 @@ public class SqlDriver {
         if (obj instanceof Driver) {
             select = "SELECT ID FROM DRIVERS WHERE USERNAME = '" + ((Driver) obj).getUsername() + "'";
         } else if (obj instanceof DriverHistory) {
-            select = "SELECT IF FROM DRIVER_HISTORY WHERE ";
+            select = "SELECT ID FROM DRIVER_HISTORIES WHERE DRIVER_ID = '" + ((DriverHistory) obj).getDriverID() + "'";
         }
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
             rs =stmt.executeQuery(select);
             if (rs.isBeforeFirst()) {

@@ -56,8 +56,19 @@ public class DriverHistController implements Initializable {
 
 
         driverHistory = driverTableView.getItems();
-        driverHistory.add(new DriverHistory("Drew", "10/31/15", 4.5, 50.0, 100.0));
-
+        List<String> driverHistoryRecords = SqlDriver.getRecords("DRIVER_HISTORIES");
+        for (String record : driverHistoryRecords) {
+            String[] driverHistoryStr = record.split(" ");
+            for (String str : driverHistoryStr) {
+                System.out.println(str);
+            }
+            String driverName = driverHistoryStr[2] + driverHistoryStr[3];
+            String driverDate = driverHistoryStr[4];
+            String driverDuration = driverHistoryStr[5];
+            String driverAvgSpeed = driverHistoryStr[6];
+            String driverMaxSpeed = driverHistoryStr[7];
+            //driverHistory.add(record);
+        }
 
     }
 

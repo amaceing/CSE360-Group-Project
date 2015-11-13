@@ -70,12 +70,15 @@ public class BottomBarController implements Initializable {
     }
 
     public void createAndInsertDriverHistoryRecord() {
-        String name = "test";
+        int driverID = mainController.getSession().getDriver().getID();
+        String name = mainController.getSession().getDriver().getFirstName() + " " + mainController.getSession().getDriver().getLastName();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        String dateString = dateFormat.format(date).toString();
+        String dateString = dateFormat.format(date);
         double duration = mainController.getSession().getDuration();
-        driverHistory = new DriverHistory(name, dateString, duration, 53.0, 25.9);
+        double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
+        double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
+        driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
         SqlDriver.insertRecord(driverHistory);
     }
 
