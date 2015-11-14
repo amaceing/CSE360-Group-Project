@@ -96,30 +96,36 @@ public class RadioController implements Initializable {
     private void setStations(String type) {
         stations.clear();
 
+        double milesRemaining = mainController.getSession().getDriver().getMilesRemaining();
+
         switch (type) {
             case "FM":
                 AMButton.getStyleClass().removeAll("active");
                 FMButton.getStyleClass().add("active");
                 SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "FM");
                 mainController.getSession().getDriver().setChannel("FM");
-                stations.add("92.5");
-                stations.add("93.3");
-                stations.add("98.3");
-                stations.add("103.9");
-                stations.add("104.7");
-                stations.add("107.9");
+
+                if (milesRemaining < 100) {
+                    stationsFM(1);
+                } else if (milesRemaining >= 100 && milesRemaining < 200) {
+                    stationsFM(2);
+                } else {
+                    stationsFM(3);
+                }
                 break;
             case "AM":
                 FMButton.getStyleClass().removeAll("active");
                 AMButton.getStyleClass().add("active");
                 SqlDriver.updateRecord("DRIVERS", "CHANNEL", mainController.getSession().getDriver().getID(), "AM");
                 mainController.getSession().getDriver().setChannel("AM");
-                stations.add("1000");
-                stations.add("1100");
-                stations.add("1200");
-                stations.add("1300");
-                stations.add("1400");
-                stations.add("1500");
+
+                if (milesRemaining < 100) {
+                    stationsAM(1);
+                } else if (milesRemaining >= 100 && milesRemaining < 200) {
+                    stationsAM(2);
+                } else {
+                    stationsAM(3);
+                }
                 break;
         }
     }
@@ -154,6 +160,58 @@ public class RadioController implements Initializable {
         setStations("FM");
         saveStation(0);
         stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
+    }
+
+    private void stationsAM(int location) {
+        switch(location) {
+            case 1:
+                stations.add("550");
+                stations.add("580");
+                stations.add("620");
+                stations.add("710");
+                stations.add("740");
+                break;
+            case 2:
+                stations.add("780");
+                stations.add("830");
+                stations.add("860");
+                stations.add("910");
+                stations.add("960");
+                break;
+            case 3:
+                stations.add("990");
+                stations.add("1010");
+                stations.add("1060");
+                stations.add("1100");
+                stations.add("1150");
+                break;
+        }
+    }
+
+    private void stationsFM (int location) {
+        switch(location) {
+            case 1:
+                stations.add("88.3");
+                stations.add("88.7");
+                stations.add("88.9");
+                stations.add("89.1");
+                stations.add("89.5");
+                break;
+            case 2:
+                stations.add("89.7");
+                stations.add("89.9");
+                stations.add("90.3");
+                stations.add("90.9");
+                stations.add("91.1");
+                break;
+            case 3:
+                stations.add("96.9");
+                stations.add("97.5");
+                stations.add("97.9");
+                stations.add("98.3");
+                stations.add("98.7");
+                break;
+        }
     }
 
     private void saveStation(int stationIndex) {
