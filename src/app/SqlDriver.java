@@ -178,7 +178,7 @@ public class SqlDriver {
         }
     }
 
-    public static void updateRecords(String table, String column, Object value) {
+    public static void updateAllRecords(String table, String column, Object value) {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
