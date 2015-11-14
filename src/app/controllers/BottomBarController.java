@@ -1,16 +1,16 @@
 package app.controllers;
 
+import app.SqlDriver;
 import app.VistaNavigator;
-import app.models.Session;
+import app.models.DriverHistory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import app.controllers.MainController;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -58,12 +58,22 @@ public class BottomBarController implements Initializable {
     public void endSession() {
         mainController.getSession().endSession();
         mainController.getSession().printDuration();
+        createAndInsertDriverHistoryRecord();
         VistaNavigator.loadVista(VistaNavigator.LOGIN);
         mainController.setSession(null);
     }
 
-    public void hideLogOutButton() {
-        logoutButton.setVisible(false);
+    public void createAndInsertDriverHistoryRecord() {
+        int driverID = mainController.getSession().getDriver().getID();
+        String name = mainController.getSession().getDriver().getFirstName() + " " + mainController.getSession().getDriver().getLastName();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateString = dateFormat.format(date);
+        double duration = mainController.getSession().getDuration();
+        double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
+        double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
+        DriverHistory driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
+        SqlDriver.insertRecord(driverHistory);
     }
 
 }

@@ -2,6 +2,7 @@ package app;
 
 import app.models.Contact;
 import app.models.Driver;
+import app.models.DriverHistory;
 import app.models.RadioHistory;
 import java.sql.*;
 import java.util.*;
@@ -15,6 +16,7 @@ public class SqlDriver {
     private static Connection connection;
     private static Statement stmt;
     private static PreparedStatement ps;
+    private static ResultSet rs;
 
     private static String DB_NAME = "jdbc:sqlite:test.db";
     private static String LIBRARY = "org.sqlite.JDBC";
@@ -23,31 +25,6 @@ public class SqlDriver {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        createDriverTable();
-    }
-
-    public void createDriverTable() {
-        try {
-            Class.forName(LIBRARY);
-            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-            stmt = connection.createStatement();
-
-            //TODO: CHAR (50) can't be manually created in sql browser so using TEXT?
-            String sql = "CREATE TABLE DRIVERS " +
-                    "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
-                    " FIRST_NAME    CHAR(50)    NOT NULL, " +
-                    " LAST_NAME     CHAR(50)    NOT NULL, " +
-                    " USERNAME      CHAR(50)    NOT NULL, " +
-                    " PASSWORD      CHAR(50)    NOT NULL, " +
-                    " CHANNEL      CHAR(50), " +
-                    " RADIO_VOLUME  INTEGER)";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            connection.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
@@ -86,6 +63,17 @@ public class SqlDriver {
                 ps.setString(4, ((RadioHistory) obj).getDate());
                 ps.setString(5,  ((RadioHistory) obj).getTime());
                 ps.setDouble(6, ((RadioHistory) obj).getDuration());
+            }  else if (obj instanceof DriverHistory) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO DRIVER_HISTORIES (DRIVER_ID, NAME, DATE, DURATION, AVERAGE_SPEED, MAX_SPEED) " +
+                                "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+                ps.setInt(1, ((DriverHistory) obj).getDriverID());
+                ps.setString(2, ((DriverHistory) obj).getName());
+                ps.setString(3, ((DriverHistory) obj).getDate());
+                ps.setDouble(4, ((DriverHistory) obj).getDuration());
+                ps.setDouble(5, ((DriverHistory) obj).getAvgSpeed());
+                ps.setDouble(6, ((DriverHistory) obj).getMaxSpeed());
             }
             else if (obj instanceof Contact) {
                 ps = connection.prepareStatement(
@@ -144,14 +132,12 @@ public class SqlDriver {
 
     public static List<String> getRecords(String table) {
         String select = "SELECT * FROM " + table.toUpperCase();
-        ResultSet rs = null;
         List results = new ArrayList<String>();
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(select);
+            rs =stmt.executeQuery(select);
             ResultSetMetaData rsData = rs.getMetaData();
             int columnsInRow = rsData.getColumnCount();
             while (rs.next()) {
@@ -200,13 +186,38 @@ public class SqlDriver {
         }
     }
 
+    public static void updateAllRecords(String table, String column, Object value) {
+        try {
+            Class.forName(LIBRARY);
+            connection = DriverManager.getConnection(DB_NAME);
+
+            ps = connection.prepareStatement(
+                    "UPDATE " + table.toUpperCase() + " " + "SET " + column.toUpperCase() + " = ? "
+            );
+
+            if (value instanceof String) {
+                ps.setString(1, value.toString());
+            } else if(value instanceof Integer) {
+                ps.setInt(1, Integer.parseInt(value.toString()));
+            } else if(value instanceof Double) {
+                ps.setDouble(1, Double.parseDouble(value.toString()));
+            }
+
+            ps.executeUpdate();
+            ps.close();
+            connection.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
     private static void setDriverIDFromRecord(Driver driver) {
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT ID FROM DRIVERS WHERE USERNAME = '" + driver.getUsername() + "'");
+            rs = stmt.executeQuery("SELECT ID FROM DRIVERS WHERE USERNAME = '" + driver.getUsername() + "'");
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 driver.setID(id);
@@ -224,14 +235,18 @@ public class SqlDriver {
         String select = "";
         if (obj instanceof Driver) {
             select = "SELECT ID FROM DRIVERS WHERE USERNAME = '" + ((Driver) obj).getUsername() + "'";
+        } else if (obj instanceof DriverHistory) {
+            select = "SELECT ID FROM DRIVER_HISTORIES WHERE DRIVER_ID = '" + ((DriverHistory) obj).getDriverID() + "'";
         }
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
-            connection.setAutoCommit(false);
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(select);
+            rs =stmt.executeQuery(select);
             if (rs.isBeforeFirst()) {
+                rs.close();
+                stmt.close();
+                connection.close();
                 return true;
             }
             rs.close();

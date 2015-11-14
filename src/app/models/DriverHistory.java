@@ -2,31 +2,34 @@ package app.models;
 
 //import java.util.Date;
 
+import app.SqlDriver;
+
 /**
  * Created by drewdavis on 10/24/15.
  */
 public class DriverHistory {
     private String name;
     private String date;
-    private Double duration;
-    private Double maxSpeed;
-    private Double avgSpeed;
+    private int driverID;
+    private double duration;
+    private double maxSpeed;
+    private double avgSpeed;
 
-    //        public Driver(String firstName, String lastName, String username, String password) {
-//            this.firstName = new SimpleStringProperty(firstName);
-//            this.lastName = new SimpleStringProperty(lastName);
-//            this.username = new SimpleStringProperty(username);
-//            this.password = new SimpleStringProperty(password);
-//        }
-//
-
-
-    public DriverHistory(String name, String date, Double duration, Double maxSpeed, Double avgSpeed) {
+    public DriverHistory(int driverID, String name, String date, double duration, double avgSpeed, double maxSpeed) {
+        this.driverID = driverID;
         this.name = name;
         this.date = date;
         this.duration = duration;
         this.maxSpeed = maxSpeed;
         this.avgSpeed = avgSpeed;
+    }
+
+    public int getDriverID() {
+        return driverID;
+    }
+
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
     }
 
     public String getName() {
@@ -45,27 +48,27 @@ public class DriverHistory {
         this.date = date;
     }
 
-    public Double getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 
-    public Double getMaxSpeed() {
+    public double getMaxSpeed() {
         return maxSpeed;
     }
 
-    public void setMaxSpeed(Double maxSpeed) {
+    public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
 
-    public Double getAvgSpeed() {
+    public double getAvgSpeed() {
         return avgSpeed;
     }
 
-    public void setAvgSpeed(Double avgSpeed) {
+    public void setAvgSpeed(double avgSpeed) {
         this.avgSpeed = avgSpeed;
     }
 }

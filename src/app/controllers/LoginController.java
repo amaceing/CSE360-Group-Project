@@ -9,15 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import app.SqlDriver;
-
-import javax.sound.midi.SysexMessage;
 
 
 public class LoginController implements Initializable {
@@ -44,48 +40,46 @@ public class LoginController implements Initializable {
     @FXML
     protected void handleLoginAction(ActionEvent actionEvent) {
         List<String> results = SqlDriver.findBy("DRIVERS", "USERNAME", usernameTextField.getText());
-        String[] array = results.get(0).split("  ");
-
-        Driver driver = new Driver(
-                Integer.parseInt(array[0]), // ID
-                array[1], // First Name
-                array[2], // Last Name
-                array[3], // Username
-                array[4], // Password
-                array[5], // Channel
-                Integer.parseInt(array[6]), // Radio Volume
-                Integer.parseInt(array[7]), // Station
-                Integer.parseInt(array[8]), // Phone Volume
-                Double.parseDouble(array[9]), // Miles remaining
-                Double.parseDouble(array[10]), // Average Speed
-                Double.parseDouble(array[11]) // Max Speed
-        );
-
-        Session session = new Session();
-        mainController.setSession(session);
-        mainController.getSession().setDriver(driver);
-
-        printRecords();
+        if(results.size() > 0) {
+            String[] array = results.get(0).split("  ");
+            Driver driver = new Driver(
+                    Integer.parseInt(array[0]), // ID
+                    array[1], // First Name
+                    array[2], // Last Name
+                    array[3], // Username
+                    array[4], // Password
+                    array[5], // Channel
+                    Integer.parseInt(array[6]), // Radio Volume
+                    Integer.parseInt(array[7]), // Station
+                    Integer.parseInt(array[8]), // Phone Volume
+                    Double.parseDouble(array[9]), // Miles remaining
+                    Double.parseDouble(array[10]), // Average Speed
+                    Double.parseDouble(array[11]) // Max Speed
+            );
+            Session session = new Session();
+            mainController.setSession(session);
+            mainController.getSession().setDriver(driver);
+        } else {
+            invalidLogin();
+            return;
+        }
 
         if (mainController.getSession().validateLogin(usernameTextField.getText(), passwordTextField.getText())) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
         } else {
-            Alert invalidLogin = new Alert(Alert.AlertType.WARNING);
-            invalidLogin.setTitle("Invalid login");
-            invalidLogin.setHeaderText("Invalid username and/or password");
-            invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
-            invalidLogin.showAndWait();
-
-            mainController.setSession(null);
+            invalidLogin();
         }
 
     }
 
-    public void printRecords() {
-        List<String> records = SqlDriver.getRecords("DRIVERS");
-        for (String record : records) {
-            System.out.println(record);
-        }
+    public void invalidLogin() {
+        Alert invalidLogin = new Alert(Alert.AlertType.WARNING);
+        invalidLogin.setTitle("Invalid login");
+        invalidLogin.setHeaderText("Invalid username and/or password");
+        invalidLogin.setContentText("The username and/or password you entered are not valid! Please enter a valid login or register.");
+        invalidLogin.showAndWait();
+
+        mainController.setSession(null);
     }
 
 }

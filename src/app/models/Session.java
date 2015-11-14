@@ -36,12 +36,9 @@ public class Session {
 
     public boolean validateLogin(String username, String password) {
         if (driver.getUsername().equals(username) && driver.getPassword().equals(password)) {
-            System.out.println("valid");
             return true;
-        } else {
-            System.out.println("invalid");
-            return false;
         }
+        return false;
     }
 
     public void endSession() {

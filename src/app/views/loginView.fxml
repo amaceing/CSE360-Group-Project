@@ -19,7 +19,7 @@
             <TextField fx:id="usernameTextField"/>
             <Label text="Password"/>
             <PasswordField fx:id="passwordTextField"/>
-            <Button text="Log in" onAction="#handleLoginAction"/>
+            <Button text="Start Car" onAction="#handleLoginAction"/>
         </VBox>
     </center>
 
