@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
  */
 public class BottomBarController implements Initializable {
     private MainController mainController;
-    private DriverHistory driverHistory;
 
     @FXML
     private Label left;
@@ -73,7 +72,7 @@ public class BottomBarController implements Initializable {
         double duration = mainController.getSession().getDuration();
         double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
         double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
-        driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
+        DriverHistory driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
         SqlDriver.insertRecord(driverHistory);
     }
 
