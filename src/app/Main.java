@@ -10,7 +10,9 @@ import app.controllers.MainController;
 import java.io.IOException;
 
 public class Main extends Application {
+    public static int MAX_MILEAGE = 300;
     private Scene scene;
+
 
     @Override
     public void start(Stage stage) throws Exception{
