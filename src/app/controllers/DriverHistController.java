@@ -1,17 +1,12 @@
 package app.controllers;
+import app.SqlDriver;
 import app.VistaNavigator;
-import app.models.Driver;
 import app.models.DriverHistory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.Date;
-
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -55,11 +50,20 @@ public class DriverHistController implements Initializable {
 
 
         driverHistory = driverTableView.getItems();
-        driverHistory.add(new DriverHistory("Drew", "10/31/15", 4.5, 50.0, 100.0));
-        driverHistory.add(new DriverHistory("Arin", "3/4/15", 10.0, 88.9, 90.7));
-        driverHistory.add(new DriverHistory("Mario", "4/6/15", 145.9, 45.0, 67.8));
-        driverHistory.add(new DriverHistory("Anthony", "10/28/15", 354.89, 34.5, 78.7 ));
-
+        List<String> driverHistoryRecords = SqlDriver.getRecords("DRIVER_HISTORIES");
+        for (String record : driverHistoryRecords) {
+            String[] driverHistoryStr = record.split(" ");
+            DriverHistory display =
+                    new DriverHistory(
+                            Integer.parseInt(driverHistoryStr[1]),
+                            driverHistoryStr[2] + " " + driverHistoryStr[3],
+                            driverHistoryStr[4],
+                            Double.parseDouble(driverHistoryStr[5]),
+                            Double.parseDouble(driverHistoryStr[6]),
+                            Double.parseDouble(driverHistoryStr[7])
+                    );
+            driverHistory.add(display);
+        }
 
     }
 
