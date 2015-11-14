@@ -176,3 +176,20 @@
     -fx-font-style: normal;
     -fx-font-size: 20;
 }
+
+.slider .thumb {
+    -fx-background-color: #0066ff;
+}
+
+.slider .track {
+    -fx-background-color: #333;
+}
+
+.slider:disabled {
+    -fx-opacity: 1;
+}
+
+.black {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
