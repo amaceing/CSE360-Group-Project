@@ -1,18 +1,12 @@
 package app.controllers;
 import app.SqlDriver;
 import app.VistaNavigator;
-import app.models.Driver;
 import app.models.DriverHistory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.Date;
-
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

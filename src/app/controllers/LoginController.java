@@ -9,15 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import app.SqlDriver;
-
-import javax.sound.midi.SysexMessage;
 
 
 public class LoginController implements Initializable {

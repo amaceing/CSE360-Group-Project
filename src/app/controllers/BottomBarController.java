@@ -3,15 +3,10 @@ package app.controllers;
 import app.SqlDriver;
 import app.VistaNavigator;
 import app.models.DriverHistory;
-import app.models.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import app.controllers.MainController;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
