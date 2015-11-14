@@ -63,7 +63,6 @@ public class LoginController implements Initializable {
             invalidLogin();
             return;
         }
-        printRecords();
 
         if (mainController.getSession().validateLogin(usernameTextField.getText(), passwordTextField.getText())) {
             VistaNavigator.loadVista(VistaNavigator.DASHBOARD);
@@ -81,13 +80,6 @@ public class LoginController implements Initializable {
         invalidLogin.showAndWait();
 
         mainController.setSession(null);
-    }
-
-    public void printRecords() {
-        List<String> records = SqlDriver.getRecords("DRIVERS");
-        for (String record : records) {
-            System.out.println(record);
-        }
     }
 
 }
