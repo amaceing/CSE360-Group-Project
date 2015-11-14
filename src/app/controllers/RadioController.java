@@ -4,6 +4,8 @@ import app.VistaNavigator;
 import app.models.RadioHistory;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,6 +67,14 @@ public class RadioController implements Initializable {
 
         closing.addListener((observable, oldValue, newValue) -> {
             saveHistory();
+        });
+
+        stationList.getSelectionModel().selectedItemProperty()
+        .addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                saveStation(stationList.getSelectionModel().getSelectedIndex());
+            }
         });
 
     }
@@ -135,11 +145,20 @@ public class RadioController implements Initializable {
     @FXML
     public void setAM() {
         setStations("AM");
+        saveStation(0);
+        stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
     }
 
     @FXML
     public void setFM() {
         setStations("FM");
+        saveStation(0);
+        stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
+    }
+
+    private void saveStation(int stationIndex) {
+        mainController.getSession().getDriver().setStation(stationIndex);
+        SqlDriver.updateRecord("DRIVERS", "STATION", mainController.getSession().getDriver().getID(), stationIndex);
     }
 
     public boolean getClosing() {
