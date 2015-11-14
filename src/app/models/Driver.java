@@ -22,6 +22,7 @@ public class Driver {
     public Driver(int ID, String firstName, String lastName, String username, String password,
                   String channel, int radioVolume, int station, int phoneVolume,
                   double milesRemaining, double averageSpeed, double maxSpeed) {
+
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,9 +53,7 @@ public class Driver {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) {this.firstName = firstName; }
 
     public String getLastName() {
         return lastName;
@@ -96,19 +95,15 @@ public class Driver {
         return channel;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
+    public void setChannel(String channel) { this.channel = channel; }
 
     public int getRadioVolume() {
         return radioVolume;
     }
 
-    public void setRadioVolume(int radioVolume) {
-        this.radioVolume = radioVolume;
-    }
+    public void setRadioVolume(int radioVolume) { this.radioVolume = radioVolume; }
 
-    public int getStation() {
+   public int getStation() {
         return station;
     }
 
@@ -147,6 +142,5 @@ public class Driver {
     public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
-
 
 }

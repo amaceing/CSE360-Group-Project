@@ -1,5 +1,6 @@
 package app;
 
+import app.models.Contact;
 import app.models.Driver;
 import app.models.DriverHistory;
 import app.models.RadioHistory;
@@ -73,6 +74,13 @@ public class SqlDriver {
                 ps.setDouble(4, ((DriverHistory) obj).getDuration());
                 ps.setDouble(5, ((DriverHistory) obj).getAvgSpeed());
                 ps.setDouble(6, ((DriverHistory) obj).getMaxSpeed());
+            }
+            else if (obj instanceof Contact) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO CONTACTS   (DRIVER_ID, PHONE_NUMBER) " + "VALUES(?, ?)"
+                );
+                ps.setInt(1, ((Contact) obj).getdriverID());
+                ps.setString(2, ((Contact) obj).getPhoneNumber());
             }
 
             ps.executeUpdate();
