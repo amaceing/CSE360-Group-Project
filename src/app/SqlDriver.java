@@ -28,51 +28,6 @@ public class SqlDriver {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        //createDriverTable();
-        //createDriverHistoryTable();
-    }
-
-    public void createDriverTable() {
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-            stmt = connection.createStatement();
-            //TODO: CHAR (50) can't be manually created in sql browser so using TEXT?
-            String sql = "CREATE TABLE DRIVERS " +
-                    "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
-                    " FIRST_NAME    CHAR(50)    NOT NULL, " +
-                    " LAST_NAME     CHAR(50)    NOT NULL, " +
-                    " USERNAME      CHAR(50)    NOT NULL, " +
-                    " PASSWORD      CHAR(50)    NOT NULL, " +
-                    " CHANNEL      CHAR(50), " +
-                    " RADIO_VOLUME  INTEGER)";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            connection.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-    }
-
-    public void createDriverHistoryTable() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-            Statement stmt = connection.createStatement();
-            String sql = "CREATE TABLE DRIVER_HISTORY " +
-                    "(ID    INTEGER     PRIMARY KEY    autoincrement    NOT NULL," +
-                    " FIRST_NAME    CHAR(50)    NOT NULL, " +
-                    " DATE          CHAR(50)    NOT NULL, " +
-                    " DURATION      REAL        NOT NULL, " +
-                    " MAX_SPEED     REAL        NOT NULL, " +
-                    " AVG_SPEED     REAL        NOT NULL)";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            connection.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
     }
 
     public static void insertRecord(Object obj) {
