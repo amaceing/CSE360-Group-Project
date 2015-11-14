@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.SqlDriver;
+import app.models.Contact;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -26,11 +27,13 @@ public class MainController {
         vistaHolder.getChildren().setAll(node);
     }
 
-    public Session getSession() {
+    public Session getSession()
+    {
         return session;
     }
 
-    public void setSession(Session session) {
+    public void setSession(Session session)
+    {
         this.session = session;
     }
 }
