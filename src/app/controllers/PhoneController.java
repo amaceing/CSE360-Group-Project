@@ -46,7 +46,6 @@ public class PhoneController implements Initializable {
 
     @FXML
     private ListView contactsList;
-    private Contact myContact;
 
     @FXML
     private TopBarController topBarController;
@@ -197,18 +196,21 @@ public class PhoneController implements Initializable {
 
     @FXML
     public void volumeUp() {
-        if (volume != 10)
+        if (volume != 10) {
             volumeLabel.setText(Integer.toString(++volume));
-        SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
-        mainController.getSession().getDriver().setPhoneVolume(volume);
+            SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
+            mainController.getSession().getDriver().setPhoneVolume(volume);
+
+        }
     }
 
     @FXML
     public void volumeDown() {
-        if (volume != 0)
+        if (volume != 0) {
             volumeLabel.setText(Integer.toString(--volume));
-        SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
-        mainController.getSession().getDriver().setPhoneVolume(volume);
+            SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
+            mainController.getSession().getDriver().setPhoneVolume(volume);
+        }
     }
 }
 

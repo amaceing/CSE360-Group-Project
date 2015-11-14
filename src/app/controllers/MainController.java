@@ -27,9 +27,13 @@ public class MainController {
         vistaHolder.getChildren().setAll(node);
     }
 
-    public Session getSession() {
+    public Session getSession()
+    {
         return session;
     }
 
-    public void setSession(Session session) { this.session = session; }
+    public void setSession(Session session)
+    {
+        this.session = session;
+    }
 }
