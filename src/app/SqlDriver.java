@@ -179,9 +179,6 @@ public class SqlDriver {
     }
 
     private static void setDriverIDFromRecord(Driver driver) {
-        Connection connection = null;
-        Statement stmt = null;
-        ResultSet  rs =null;
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
