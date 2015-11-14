@@ -178,6 +178,32 @@ public class SqlDriver {
         }
     }
 
+    public static void updateRecords(String table, String column, Object value) {
+        try {
+            Class.forName(LIBRARY);
+            connection = DriverManager.getConnection(DB_NAME);
+
+            ps = connection.prepareStatement(
+                    "UPDATE " + table.toUpperCase() + " " + "SET " + column.toUpperCase() + " = ? "
+            );
+
+            if (value instanceof String) {
+                ps.setString(1, value.toString());
+            } else if(value instanceof Integer) {
+                ps.setInt(1, Integer.parseInt(value.toString()));
+            } else if(value instanceof Double) {
+                ps.setDouble(1, Double.parseDouble(value.toString()));
+            }
+
+            ps.executeUpdate();
+            ps.close();
+            connection.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
     private static void setDriverIDFromRecord(Driver driver) {
         try {
             Class.forName(LIBRARY);

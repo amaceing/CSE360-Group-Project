@@ -234,8 +234,11 @@ public class DashboardController implements Initializable {
         SqlDriver.updateRecord("DRIVERS", "AVERAGE_SPEED", mainController.getSession().getDriver().getID(), avgSpeed);
         mainController.getSession().getDriver().setAverageSpeed(avgSpeed);
 
-        SqlDriver.updateRecord("DRIVERS", "MILES_REMAINING", mainController.getSession().getDriver().getID(), milesLeft);
+        SqlDriver.updateRecords("DRIVERS", "MILES_REMAINING", milesLeft);
         mainController.getSession().getDriver().setMilesRemaining(milesLeft);
+
+//        SqlDriver.updateRecord("DRIVERS", "MILES_REMAINING", mainController.getSession().getDriver().getID(), milesLeft);
+//        mainController.getSession().getDriver().setMilesRemaining(milesLeft);
 
     }
 
