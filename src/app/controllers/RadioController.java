@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * Created by arinhouck on 10/17/15.
  */
 public class RadioController implements Initializable {
-    private static MainController mainController;
+    private MainController mainController;
 
     @FXML
     private TopBarController topBarController;
@@ -53,13 +53,13 @@ public class RadioController implements Initializable {
         AMButton.getStyleClass().add("active");
         topBarController.setBackButton(VistaNavigator.DASHBOARD, RadioController.this);
 
-        mainController = VistaNavigator.getMainController();
-        volume = mainController.getSession().getDriver().getRadioVolume();
+        setMainController(VistaNavigator.getMainController());
+        setVolume(mainController.getSession().getDriver().getRadioVolume());
         volumeLabel.setText(Integer.toString(volume));
 
         stations = stationList.getItems();
 
-        setStations(mainController.getSession().getDriver().getChannel());
+        setStationType(mainController.getSession().getDriver().getChannel());
         stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
         date = LocalDate.now();
         start = LocalTime.now();
@@ -93,7 +93,7 @@ public class RadioController implements Initializable {
         );
     }
 
-    private void setStations(String type) {
+    public void setStationType(String type) {
         stations.clear();
 
         double milesRemaining = mainController.getSession().getDriver().getMilesRemaining();
@@ -131,33 +131,36 @@ public class RadioController implements Initializable {
     }
 
     @FXML
-    public void volumeUp() {
+    public int volumeUp() {
         if (volume != 10) {
             volumeLabel.setText(Integer.toString(++volume));
             SqlDriver.updateRecord("DRIVERS", "RADIO_VOLUME", mainController.getSession().getDriver().getID(), volume);
             mainController.getSession().getDriver().setRadioVolume(volume);
         }
+        return volume;
     }
 
     @FXML
-    public void volumeDown() {
+    public int volumeDown() {
         if (volume != 0) {
             volumeLabel.setText(Integer.toString(--volume));
             SqlDriver.updateRecord("DRIVERS", "RADIO_VOLUME", mainController.getSession().getDriver().getID(), volume);
             mainController.getSession().getDriver().setRadioVolume(volume);
         }
+
+        return volume;
     }
 
     @FXML
     public void setAM() {
-        setStations("AM");
+        setStationType("AM");
         saveStation(0);
         stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
     }
 
     @FXML
     public void setFM() {
-        setStations("FM");
+        setStationType("FM");
         saveStation(0);
         stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
     }
@@ -165,25 +168,13 @@ public class RadioController implements Initializable {
     private void stationsAM(int location) {
         switch(location) {
             case 1:
-                stations.add("550");
-                stations.add("580");
-                stations.add("620");
-                stations.add("710");
-                stations.add("740");
+                stations.addAll("550", "580", "620", "710", "740");
                 break;
             case 2:
-                stations.add("780");
-                stations.add("830");
-                stations.add("860");
-                stations.add("910");
-                stations.add("960");
+                stations.addAll("780", "830", "860", "910", "960");
                 break;
             case 3:
-                stations.add("990");
-                stations.add("1010");
-                stations.add("1060");
-                stations.add("1100");
-                stations.add("1150");
+                stations.addAll("990", "1010", "1060", "1100", "1150");
                 break;
         }
     }
@@ -191,25 +182,13 @@ public class RadioController implements Initializable {
     private void stationsFM (int location) {
         switch(location) {
             case 1:
-                stations.add("88.3");
-                stations.add("88.7");
-                stations.add("88.9");
-                stations.add("89.1");
-                stations.add("89.5");
+                stations.addAll("88.3", "88.7", "88.9", "89.1", "89.5");
                 break;
             case 2:
-                stations.add("89.7");
-                stations.add("89.9");
-                stations.add("90.3");
-                stations.add("90.9");
-                stations.add("91.1");
+                stations.addAll("89.7", "89.9", "90.3", "90.9", "91.1");
                 break;
             case 3:
-                stations.add("96.9");
-                stations.add("97.5");
-                stations.add("97.9");
-                stations.add("98.3");
-                stations.add("98.7");
+                stations.addAll("96.9", "97.5", "97.9", "98.3", "98.7");
                 break;
         }
     }
@@ -217,6 +196,62 @@ public class RadioController implements Initializable {
     private void saveStation(int stationIndex) {
         mainController.getSession().getDriver().setStation(stationIndex);
         SqlDriver.updateRecord("DRIVERS", "STATION", mainController.getSession().getDriver().getID(), stationIndex);
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public Button getAMButton() {
+        return AMButton;
+    }
+
+    public void setAMButton(Button AMButton) {
+        this.AMButton = AMButton;
+    }
+
+    public Button getFMButton() {
+        return FMButton;
+    }
+
+    public void setFMButton(Button FMButton) {
+        this.FMButton = FMButton;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public Label getVolumeLabel() {
+        return volumeLabel;
+    }
+
+    public void setVolumeLabel(Label volumeLabel) {
+        this.volumeLabel = volumeLabel;
+    }
+
+    public ObservableList<String> getStations() {
+        return stations;
+    }
+
+    public void setStations(ObservableList<String> stations) {
+        this.stations = stations;
+    }
+
+    public ListView getStationList() {
+        return stationList;
+    }
+
+    public void setStationList(ListView stationList) {
+        this.stationList = stationList;
     }
 
     public boolean getClosing() {
@@ -230,6 +265,7 @@ public class RadioController implements Initializable {
     public void setClosing(boolean closing) {
         this.closing.set(closing);
     }
+
 
 
 }
