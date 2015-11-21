@@ -87,6 +87,20 @@ public class RadioControllerTest {
         assertEquals(0, controller.getStationList().getSelectionModel().getSelectedIndex());
     }
 
+    @Test
+    public void stationsChangeOnLocation() {
+        // Change miles remaining
+        controller.getMainController().getSession().getDriver().setMilesRemaining(150);
+
+        // reload stations
+        String channel = controller.getMainController().getSession().getDriver().getChannel();
+        controller.setStationType(channel);
+
+        // Expect Location 2 on FM
+        assertArrayEquals(new String[]{"89.7", "89.9", "90.3", "90.9", "91.1"}, controller.getStations().toArray());
+        assertEquals(5, controller.getStations().size());
+    }
+
 
 
 }
