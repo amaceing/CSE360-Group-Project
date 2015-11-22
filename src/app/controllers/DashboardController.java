@@ -37,9 +37,6 @@ public class DashboardController implements Initializable {
     private Label routes;
 
     @FXML
-    private Label profile;
-
-    @FXML
     private Label info;
 
     @FXML
@@ -93,9 +90,6 @@ public class DashboardController implements Initializable {
 
         routes.setFont(font);
         routes.setText(FxFontAwesome.Icons.faw_location_arrow.toString());
-
-        profile.setFont(font);
-        profile.setText(FxFontAwesome.Icons.faw_user.toString());
 
         info.setFont(font);
         info.setText(FxFontAwesome.Icons.faw_info_circle.toString());
