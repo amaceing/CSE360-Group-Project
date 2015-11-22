@@ -11,7 +11,7 @@
     <children>
         <Label GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="left"/>
         <Label GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="center"/>
-        <Button GridPane.columnIndex="2" GridPane.rowIndex="0" text="Turn Off" fx:id="logoutButton" onAction="#endSession"/>
+        <Button GridPane.columnIndex="2" GridPane.rowIndex="0" text="Turn Off" fx:id="logoutButton" onAction="#turnOff"/>
         <!--<Label GridPane.columnIndex="2" GridPane.rowIndex="0" text="Right" fx:id="right"/>-->
     </children>
 </GridPane>

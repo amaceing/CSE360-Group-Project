@@ -55,7 +55,7 @@ public class BottomBarController implements Initializable {
         return logoutButton;
     }
 
-    public void endSession() {
+    public void turnOff() {
         mainController.getSession().endSession();
         mainController.getSession().printDuration();
         createAndInsertDriverHistoryRecord();
