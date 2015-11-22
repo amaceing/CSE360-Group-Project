@@ -1,6 +1,5 @@
 package app;
 
-import app.models.Session;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,8 +9,10 @@ import app.controllers.MainController;
 import java.io.IOException;
 
 public class Main extends Application {
+    public static boolean testing = false;
     public static int MAX_MILEAGE = 300;
-    private Scene scene;
+    private static Scene scene;
+
 
 
     @Override
@@ -72,7 +73,7 @@ public class Main extends Application {
         return scene;
     }
 
-    public Scene getScene() {
+    public static Scene getScene() {
         return scene;
     }
 

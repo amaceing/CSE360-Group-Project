@@ -96,6 +96,7 @@ public class SqlDriver {
     }
 
     public static List<String> findBy(String table, String column, Object value) {
+        if (Main.testing) return null;
         List results = new ArrayList<String>();
         try {
             Class.forName("org.sqlite.JDBC");
@@ -131,6 +132,7 @@ public class SqlDriver {
     }
 
     public static List<String> getRecords(String table) {
+        if (Main.testing) return null;
         String select = "SELECT * FROM " + table.toUpperCase();
         List results = new ArrayList<String>();
         try {
@@ -158,6 +160,7 @@ public class SqlDriver {
     }
 
     public static void updateRecord(String table, String column, int ID, Object value) {
+        if (Main.testing) return;
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
@@ -187,6 +190,7 @@ public class SqlDriver {
     }
 
     public static void updateAllRecords(String table, String column, Object value) {
+        if (Main.testing) return;
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
@@ -213,6 +217,7 @@ public class SqlDriver {
     }
 
     private static void setDriverIDFromRecord(Driver driver) {
+        if (Main.testing) return;
         try {
             Class.forName(LIBRARY);
             connection = DriverManager.getConnection(DB_NAME);
@@ -232,6 +237,7 @@ public class SqlDriver {
     }
 
     private static boolean isRecord(Object obj) {
+        if (Main.testing) return false;
         String select = "";
         if (obj instanceof Driver) {
             select = "SELECT ID FROM DRIVERS WHERE USERNAME = '" + ((Driver) obj).getUsername() + "'";
