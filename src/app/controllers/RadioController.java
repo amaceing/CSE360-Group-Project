@@ -106,11 +106,11 @@ public class RadioController implements Initializable {
                 mainController.getSession().getDriver().setChannel("FM");
 
                 if (milesRemaining < 100) {
-                    stationsFM(1);
+                    stationsFMByLocation(1);
                 } else if (milesRemaining >= 100 && milesRemaining < 200) {
-                    stationsFM(2);
+                    stationsFMByLocation(2);
                 } else {
-                    stationsFM(3);
+                    stationsFMByLocation(3);
                 }
                 break;
             case "AM":
@@ -120,11 +120,11 @@ public class RadioController implements Initializable {
                 mainController.getSession().getDriver().setChannel("AM");
 
                 if (milesRemaining < 100) {
-                    stationsAM(1);
+                    stationsAMByLocation(1);
                 } else if (milesRemaining >= 100 && milesRemaining < 200) {
-                    stationsAM(2);
+                    stationsAMByLocation(2);
                 } else {
-                    stationsAM(3);
+                    stationsAMByLocation(3);
                 }
                 break;
         }
@@ -165,7 +165,7 @@ public class RadioController implements Initializable {
         stationList.getSelectionModel().select(mainController.getSession().getDriver().getStation());
     }
 
-    private void stationsAM(int location) {
+    private void stationsAMByLocation(int location) {
         switch(location) {
             case 1:
                 stations.addAll("550", "580", "620", "710", "740");
@@ -179,7 +179,7 @@ public class RadioController implements Initializable {
         }
     }
 
-    private void stationsFM (int location) {
+    private void stationsFMByLocation(int location) {
         switch(location) {
             case 1:
                 stations.addAll("88.3", "88.7", "88.9", "89.1", "89.5");
