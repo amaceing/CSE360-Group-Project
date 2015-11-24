@@ -55,7 +55,7 @@ public class BottomBarController implements Initializable {
         return logoutButton;
     }
 
-    public void endSession() {
+    public void turnOff() {
         mainController.getSession().endSession();
         mainController.getSession().printDuration();
         createAndInsertDriverHistoryRecord();
@@ -66,7 +66,7 @@ public class BottomBarController implements Initializable {
     public void createAndInsertDriverHistoryRecord() {
         int driverID = mainController.getSession().getDriver().getID();
         String name = mainController.getSession().getDriver().getFirstName() + " " + mainController.getSession().getDriver().getLastName();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
         String dateString = dateFormat.format(date);
         double duration = mainController.getSession().getDuration();
