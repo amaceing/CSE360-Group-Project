@@ -169,9 +169,7 @@ public class RadioController implements Initializable {
         return closing;
     }
 
-    public void setClosing(boolean closing) {
-        this.closing.set(closing);
-    }
+    public void setClosing(boolean closing) { this.closing.set(closing);}
 
 
 }

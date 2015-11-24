@@ -1,20 +1,29 @@
 package app.controllers;
-
 import app.SqlDriver;
 import app.VistaNavigator;
 import app.models.Contact;
+import app.models.PhoneHistory;
 import com.pepperonas.fxiconics.FxIconics;
 import com.pepperonas.fxiconics.awf.FxFontAwesome;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by Marius on 10/17/2015.
@@ -39,7 +48,10 @@ public class PhoneController implements Initializable {
 
     @FXML
     private Label phoneNumberField;
-    private  String phoneNumber;
+    private String phoneNumber;
+
+    private LocalDate date;
+    private LocalTime start;
 
     @FXML
     private ObservableList<String> contacts;
@@ -57,6 +69,7 @@ public class PhoneController implements Initializable {
         phoneNumberField.setText(phoneNumber);
 
         mainController = VistaNavigator.getMainController();
+
         volume = mainController.getSession().getDriver().getPhoneVolume();
         volumeLabel.setText(Integer.toString(volume));
 
@@ -70,41 +83,80 @@ public class PhoneController implements Initializable {
         add.setFont(font);
         add.setText(FxFontAwesome.Icons.faw_plus_square_o.toString());
 
-        List<String> results=  SqlDriver.findBy("CONTACTS","DRIVER_ID",mainController.getSession().getDriver().getID());
+        List<String> results = SqlDriver.findBy("CONTACTS", "DRIVER_ID", mainController.getSession().getDriver().getID());
         contacts = contactsList.getItems();
-        contacts.add(0,"");
+        contacts.add(0, "");
 
-        for(int i = 0; i < results.size(); i++) {
+        for (int i = 0; i < results.size(); i++) {
             String[] array = results.get(i).split("  ");
             contacts.add(i, array[2]);
         }
-
+        date = LocalDate.now();
+        start = LocalTime.now();
         topBarController.setBackButton(VistaNavigator.DASHBOARD, PhoneController.this);
     }
 
-
     @FXML
     public void clearNumber() {
-            phoneNumber = "";
-            phoneNumberField.setText(phoneNumber);
+        phoneNumber = "";
+        phoneNumberField.setText(phoneNumber);
     }
 
     @FXML
     public void addNumber() {
-            for (int i = 0; i < 10; i++) {
-                if (phoneNumber.length() == 14) {
-                    if (contacts.get(0) == "") {
-                        contacts.add(0, phoneNumber);
-                        contacts.remove(1);
-                        SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(),phoneNumber));
-                    } else {
-                        contacts.add(i, phoneNumber);
-                        SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(),phoneNumber));
-                    }
-                    clearNumber();
+        for (int i = 0; i < 10; i++) {
+            if (phoneNumber.length() == 14) {
+                if (contacts.get(0) == "") {
+                    contacts.add(0, phoneNumber);
+                    contacts.remove(1);
+                    SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(), phoneNumber));
+                } else {
+                    contacts.add(i, phoneNumber);
+                    SqlDriver.insertRecord(new Contact(mainController.getSession().getDriver().getID(), phoneNumber));
                 }
+                clearNumber();
             }
+        }
     }
+
+    @FXML
+    public void callNumber() {
+        if(phoneNumber != "") {
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3600)));
+            timeline.play();
+            Alert a = new Alert(Alert.AlertType.NONE);
+            a.setTitle("Phone Call");
+            a.setHeaderText(phoneNumber);
+            a.setContentText("Calling...");
+            a.setResizable(true);
+            ButtonType end = new ButtonType("End");
+            a.getButtonTypes().setAll(end);
+
+            Optional<ButtonType> result = a.showAndWait();
+
+            if (result.get() == end) {
+                long duration = ChronoUnit.SECONDS.between(start, LocalTime.now());
+                DateTimeFormatter outputFormat = new DateTimeFormatterBuilder().appendPattern("hh:mm a").toFormatter();
+                SqlDriver.insertRecord(new PhoneHistory(
+                                mainController.getSession().getDriver().getID(),
+                                mainController.getSession().getDriver().getFirstName(),
+                                phoneNumber,
+                                date.toString(),
+                                start.format(outputFormat).toString(),
+                                (double) duration)
+                );
+                timeline.stop();
+                clearNumber();
+                VistaNavigator.loadVista(VistaNavigator.PHONE);
+            }
+        }
+        else
+        {
+            VistaNavigator.loadVista(VistaNavigator.PHONE);
+        }
+    }
+
 
     public void addDigit(String digit) {
         // Size of a US phone number is 14 when written as a string
@@ -213,4 +265,3 @@ public class PhoneController implements Initializable {
         }
     }
 }
-
