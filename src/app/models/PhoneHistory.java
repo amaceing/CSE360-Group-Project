@@ -20,9 +20,13 @@ public class PhoneHistory {
         this.duration = duration;
     }
 
-    public int getDriverID() {return driverID; }
+    public int getDriverID() {
+        return driverID;
+    }
 
-    public void setDriverID(int driverID) { this.driverID = driverID; }
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
+    }
 
     public String getName() {
         return name;
@@ -32,9 +36,12 @@ public class PhoneHistory {
         this.name = name;
     }
 
-    public String getNumber() { return phoneNumber; }
+    public String getNumber() {
+        return phoneNumber;
+    }
 
-    public void setNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber; }
 
     public String getDate() {
         return date;

@@ -121,7 +121,7 @@ public class PhoneController implements Initializable {
 
     @FXML
     public void callNumber() {
-        if(phoneNumber != "") {
+        if(phoneNumber.length() == 14) {
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.seconds(3600)));
             timeline.play();
