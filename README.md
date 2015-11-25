@@ -8,7 +8,7 @@
 * Set Language in IDE settings to at least Java 8
 
 ####Cloning
-*To install this program from github, simply clone the repo with the clone URL
+To install this program from github, simply clone the repo with the clone URL
 * Clone this git repo into a directory on your local machine
 
 ####Manually
