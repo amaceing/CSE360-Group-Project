@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.utils.FXTestUtils;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +23,6 @@ public class RadioControllerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        FXTestUtils.launchApp(Main.class);
         Main.testing = true; // Stops SQL Queries from executing during tests
         controller = new RadioController();
         controller.setMainController(new MainController());

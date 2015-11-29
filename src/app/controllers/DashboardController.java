@@ -187,7 +187,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void infoClick(MouseEvent arg0) {
+    public void handleInfoClick(MouseEvent arg0) {
         updateSession();
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }
