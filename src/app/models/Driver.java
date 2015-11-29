@@ -53,7 +53,9 @@ public class Driver {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {this.firstName = firstName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getLastName() {
         return lastName;
@@ -95,13 +97,17 @@ public class Driver {
         return channel;
     }
 
-    public void setChannel(String channel) { this.channel = channel; }
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 
     public int getRadioVolume() {
         return radioVolume;
     }
 
-    public void setRadioVolume(int radioVolume) { this.radioVolume = radioVolume; }
+    public void setRadioVolume(int radioVolume) {
+        this.radioVolume = radioVolume;
+    }
 
    public int getStation() {
         return station;

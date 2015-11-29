@@ -14,11 +14,19 @@ public class Contact {
     }
 
 
-    public void setdriverID(int driverID) { this.driverID = driverID; }
+    public void setdriverID(int driverID) {
+        this.driverID = driverID;
+    }
 
-    public int getdriverID() { return driverID; }
+    public int getdriverID() {
+        return driverID;
+    }
 
-    public void setphoneNumber(String PhoneNumber) { this.PhoneNumber = PhoneNumber; }
+    public void setphoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
+    }
 
-    public String getPhoneNumber() { return PhoneNumber; }
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
 }
