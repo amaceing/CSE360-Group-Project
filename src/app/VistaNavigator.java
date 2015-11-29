@@ -27,6 +27,7 @@ public class VistaNavigator {
     public static final String RADIOHIST = "views/radioHistView.fxml";
 
 
+
     /** The main application layout controller. */
     private static MainController mainController;
 
@@ -39,9 +40,7 @@ public class VistaNavigator {
         VistaNavigator.mainController = mainController;
     }
 
-    public static MainController getMainController() {
-        return mainController;
-    }
+    public static MainController getMainController() {return mainController; }
 
     /**
      * Loads the vista specified by the fxml file into the

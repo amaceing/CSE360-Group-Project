@@ -1,4 +1,5 @@
 package app.controllers;
+import app.SqlDriver;
 import app.VistaNavigator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,10 +8,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import app.models.PhoneHistory;
 
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PhoneHistController  implements Initializable {
+    private static MainController mainController;
+
 
     @FXML
     private TopBarController topBarController;
@@ -22,7 +27,7 @@ public class PhoneHistController  implements Initializable {
     private TableColumn<PhoneHistory, String> name;
 
     @FXML
-    private  TableColumn<PhoneHistory, String> number;
+    private TableColumn<PhoneHistory, String> number;
 
     @FXML
     private TableColumn<PhoneHistory, String> date;
@@ -40,11 +45,24 @@ public class PhoneHistController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         topBarController.setBackButton(VistaNavigator.INFORMATION, PhoneHistController.this);
 
-        phoneHistory = phoneTableView.getItems();
-        phoneHistory.add(new PhoneHistory("Drew", "555-555-5555", "10/31/15", "3:30 PM", 4.5));
-        phoneHistory.add(new PhoneHistory("Arin", "111-111-1111", "3/4/15", "5:45 PM", 10.0));
-        phoneHistory.add(new PhoneHistory("Mario", "123-456-7890", "4/6/15", "1:00 AM", 145.9));
-        phoneHistory.add(new PhoneHistory("Anthony","243-465-2349", "10/28/15", "2:30 AM", 354.89));
-    }
+        mainController = VistaNavigator.getMainController();
 
+        List<String> results = SqlDriver.findBy("PHONE_HISTORIES", "DRIVER_ID", mainController.getSession().getDriver().getID());
+        phoneHistory = phoneTableView.getItems();
+
+        for (int i = 0; i < results.size(); i++) {
+            String[] array = results.get(i).split("  ");
+
+            phoneHistory.add(
+                    new PhoneHistory(
+                            Integer.parseInt(array[1]),
+                            array[2],
+                            array[3],
+                            array[4],
+                            array[5],
+                            Double.parseDouble(array[6])
+                    )
+            );
+        }
+    }
 }

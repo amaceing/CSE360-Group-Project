@@ -1,9 +1,8 @@
 package app;
 
-import app.models.Contact;
+import app.models.*;
 import app.models.Driver;
-import app.models.DriverHistory;
-import app.models.RadioHistory;
+
 import java.sql.*;
 import java.util.*;
 import java.util.List;
@@ -74,8 +73,19 @@ public class SqlDriver {
                 ps.setDouble(4, ((DriverHistory) obj).getDuration());
                 ps.setDouble(5, ((DriverHistory) obj).getAvgSpeed());
                 ps.setDouble(6, ((DriverHistory) obj).getMaxSpeed());
-            }
-            else if (obj instanceof Contact) {
+            }   else if (obj instanceof PhoneHistory) {
+                ps = connection.prepareStatement(
+                        "INSERT INTO PHONE_HISTORIES (DRIVER_ID, NAME, PHONE_NUMBER, DATE, TIME, DURATION) " +
+                                "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+                ps.setInt(1, ((PhoneHistory) obj).getDriverID());
+                ps.setString(2, ((PhoneHistory) obj).getName());
+                ps.setString(3, ((PhoneHistory) obj).getNumber());
+                ps.setString(4, ((PhoneHistory) obj).getDate());
+                ps.setString(5, ((PhoneHistory) obj).getTime());
+                ps.setDouble(6, ((PhoneHistory) obj).getDuration());
+
+            } else if (obj instanceof Contact) {
                 ps = connection.prepareStatement(
                         "INSERT INTO CONTACTS   (DRIVER_ID, PHONE_NUMBER) " + "VALUES(?, ?)"
                 );
