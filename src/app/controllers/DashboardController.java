@@ -99,16 +99,20 @@ public class DashboardController implements Initializable {
     private void keyPressed(final KeyEvent event)
     {
         if (speed >= 0 && milesLeft > 0) {
-            if (event.getCode() == KeyCode.UP) {
-                if (speed < 100) {
-                    speedList.add(speed);
-                    speedLabel.setText((++speed).toString());
-                }
-            } else if (event.getCode() == KeyCode.DOWN) {
-                if (speed > 0) {
-                    speedList.add(speed);
-                    speedLabel.setText((--speed).toString());
-                }
+            changeSpeed(event);
+        }
+    }
+
+    private void changeSpeed(final KeyEvent event) {
+        if (event.getCode() == KeyCode.UP) {
+            if (speed < 100) {
+                speedList.add(speed);
+                speedLabel.setText((++speed).toString());
+            }
+        } else if (event.getCode() == KeyCode.DOWN) {
+            if (speed > 0) {
+                speedList.add(speed);
+                speedLabel.setText((--speed).toString());
             }
         }
     }
