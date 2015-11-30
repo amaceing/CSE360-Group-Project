@@ -4,6 +4,17 @@
 ###Installation
 * Download and install Java SDK 1.8.0.* (updates range from 1-60).
 * Download and install Java IDE of choice
-* Clone this git repo into a directory on your local machine
 * Set up IDE to use Java SDK 1.8.0.* that was downloaded in step 1 as SDK for the project
 * Set Language in IDE settings to at least Java 8
+
+####Cloning
+To install this program from github, simply clone the repo with the clone URL
+* Clone this git repo into a directory on your local machine
+
+####Manually
+* Download and install sqlite 3.8.11.2 jar
+* Download and install fx-icons 0.0.4 jar 
+* Download and install guava 14.0.1 jar
+* Download and install testFx 3.1.0 jar
+* Download and install junit 4.10 jar
+* Download and install hamcrest 1.3 jar

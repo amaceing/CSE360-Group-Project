@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.loadui.testfx.utils.FXTestUtils;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +23,6 @@ public class RadioControllerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        FXTestUtils.launchApp(Main.class);
         Main.testing = true; // Stops SQL Queries from executing during tests
         controller = new RadioController();
         controller.setMainController(new MainController());
@@ -101,6 +99,16 @@ public class RadioControllerTest {
         assertEquals(5, controller.getStations().size());
     }
 
+    @Test
+    public void validateMaxVolume() {
+        controller.setVolume(10);
+        assertEquals(10, controller.volumeUp());
+    }
 
+    @Test
+    public void validateMinVolume() {
+        controller.setVolume(0);
+        assertEquals(0, controller.volumeDown());
+    }
 
 }

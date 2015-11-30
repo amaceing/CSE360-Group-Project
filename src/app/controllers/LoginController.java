@@ -72,6 +72,30 @@ public class LoginController implements Initializable {
 
     }
 
+    public TextField getUsernameTextField() {
+        return usernameTextField;
+    }
+
+    public void setUsernameTextField(TextField usernameTextField) {
+        this.usernameTextField = usernameTextField;
+    }
+
+    public PasswordField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public void setPasswordTextField(PasswordField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public static void setMainController(MainController mainController) {
+        LoginController.mainController = mainController;
+    }
+
     public void invalidLogin() {
         Alert invalidLogin = new Alert(Alert.AlertType.WARNING);
         invalidLogin.setTitle("Invalid login");

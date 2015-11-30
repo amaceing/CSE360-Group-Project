@@ -33,7 +33,7 @@
                     <Label fx:id="routes"/>
                     <Label text="Routes" styleClass="icon-label"/>
                 </VBox>
-                <VBox alignment="CENTER" onMouseClicked="#infoClick">
+                <VBox alignment="CENTER" onMouseClicked="#handleInfoClick">
                     <Label fx:id="info"/>
                     <Label text="Info" styleClass="icon-label"/>
                 </VBox>
