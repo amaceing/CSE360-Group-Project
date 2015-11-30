@@ -28,6 +28,9 @@ public class RadioController implements Initializable {
     private TopBarController topBarController;
 
     @FXML
+    private BottomBarController bottomBarController;
+
+    @FXML
     private Button AMButton;
 
     @FXML
@@ -264,6 +267,14 @@ public class RadioController implements Initializable {
 
     public void setClosing(boolean closing) {
         this.closing.set(closing);
+    }
+
+    public BottomBarController getBottomBarController() {
+        return bottomBarController;
+    }
+
+    public void setBottomBarController(BottomBarController bottomBarController) {
+        this.bottomBarController = bottomBarController;
     }
 
 
