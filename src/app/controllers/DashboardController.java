@@ -61,6 +61,7 @@ public class DashboardController implements Initializable {
     private Label lowFuel;
 
     private Double speed;
+
     private Double milesLeft;
 
     private boolean timerRunning = false;
@@ -76,7 +77,7 @@ public class DashboardController implements Initializable {
         Font font = FxIconics.getAwesomeFont(114);
         borderPane.setFocusTraversable(true);
 
-        speed = 0.0;
+        setSpeed(0.0);
         speedLabel.setText(speed.toString());
 
         milesLeft = mainController.getSession().getDriver().getMilesRemaining();
@@ -99,17 +100,18 @@ public class DashboardController implements Initializable {
     private void keyPressed(final KeyEvent event)
     {
         if (speed >= 0 && milesLeft > 0) {
-            changeSpeed(event);
+
+            changeSpeed(event.getCode());
         }
     }
 
-    private void changeSpeed(final KeyEvent event) {
-        if (event.getCode() == KeyCode.UP) {
+    public void changeSpeed(final KeyCode code) {
+        if (code == KeyCode.UP) {
             if (speed < 100) {
                 speedList.add(speed);
                 speedLabel.setText((++speed).toString());
             }
-        } else if (event.getCode() == KeyCode.DOWN) {
+        } else if (code == KeyCode.DOWN) {
             if (speed > 0) {
                 speedList.add(speed);
                 speedLabel.setText((--speed).toString());
@@ -153,7 +155,7 @@ public class DashboardController implements Initializable {
                     public void run() {
                         speedLabel.setText((--speed).toString());
                         speedList.add(speed);
-                        if(milesLeft >= 0) {
+                        if (milesLeft >= 0) {
                             milesLeft -= .5;
                             milesLeftLabel.setText((milesLeft).toString());
                         }
@@ -192,10 +194,7 @@ public class DashboardController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.INFORMATION);
     }
 
-
-
-    private void updateSession() {
-
+    public double[] calculateAverageAndMax() {
         double sum = 0.0;
         double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
         double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
@@ -218,6 +217,15 @@ public class DashboardController implements Initializable {
                 avgSpeed = sum / speedList.size();
         }
 
+        return new double[] {avgSpeed, maxSpeed};
+    }
+
+    private void updateSession() {
+        double avgSpeed, maxSpeed;
+        double[] result = calculateAverageAndMax();
+        avgSpeed = result[0];
+        maxSpeed = result[1];
+
         if (Double.isNaN(avgSpeed))
             avgSpeed = 0.0;
         if (Double.isNaN(maxSpeed))
@@ -236,5 +244,38 @@ public class DashboardController implements Initializable {
         mainController.getSession().getDriver().setMilesRemaining(milesLeft);
 
     }
+
+    public List<Double> getSpeedList() {
+        return speedList;
+    }
+
+    public void setSpeedList(List<Double> speedList) {
+        this.speedList = speedList;
+    }
+
+    public Label getSpeedLabel() {
+        return speedLabel;
+    }
+
+    public void setSpeedLabel(Label speedLabel) {
+        this.speedLabel = speedLabel;
+    }
+
+    public static MainController getMainController() {
+        return mainController;
+    }
+
+    public static void setMainController(MainController mainController) {
+        DashboardController.mainController = mainController;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
 
 }
