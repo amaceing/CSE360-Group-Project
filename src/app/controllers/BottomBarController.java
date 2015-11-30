@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.Main;
 import app.SqlDriver;
 import app.VistaNavigator;
 import app.models.DriverHistory;
@@ -38,6 +39,27 @@ public class BottomBarController implements Initializable {
         mainController = VistaNavigator.getMainController();
     }
 
+    public void turnOff() {
+        mainController.getSession().endSession();
+        mainController.getSession().printDuration();
+        createAndInsertDriverHistoryRecord();
+        if(!Main.testing)
+            VistaNavigator.loadVista(VistaNavigator.LOGIN);
+        mainController.setSession(null);
+    }
+
+    public void createAndInsertDriverHistoryRecord() {
+        int driverID = mainController.getSession().getDriver().getID();
+        String name = mainController.getSession().getDriver().getFirstName() + " " + mainController.getSession().getDriver().getLastName();
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        String dateString = dateFormat.format(date);
+        double duration = mainController.getSession().getDuration();
+        double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
+        double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
+        DriverHistory driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
+        SqlDriver.insertRecord(driverHistory);
+    }
 
     public Label getRight() {
         return right;
@@ -55,25 +77,8 @@ public class BottomBarController implements Initializable {
         return logoutButton;
     }
 
-    public void turnOff() {
-        mainController.getSession().endSession();
-        mainController.getSession().printDuration();
-        createAndInsertDriverHistoryRecord();
-        VistaNavigator.loadVista(VistaNavigator.LOGIN);
-        mainController.setSession(null);
-    }
-
-    public void createAndInsertDriverHistoryRecord() {
-        int driverID = mainController.getSession().getDriver().getID();
-        String name = mainController.getSession().getDriver().getFirstName() + " " + mainController.getSession().getDriver().getLastName();
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        Date date = new Date();
-        String dateString = dateFormat.format(date);
-        double duration = mainController.getSession().getDuration();
-        double avgSpeed = mainController.getSession().getDriver().getAverageSpeed();
-        double maxSpeed = mainController.getSession().getDriver().getMaxSpeed();
-        DriverHistory driverHistory = new DriverHistory(driverID, name, dateString, duration, avgSpeed, maxSpeed);
-        SqlDriver.insertRecord(driverHistory);
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
 }
