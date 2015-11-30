@@ -24,6 +24,7 @@ public class RouteControllerTest {
 
     @BeforeClass
     public static void setUpClass() {
+        FXTestUtils.launchApp(Main.class);
         Main.testing = true; // Stops SQL Queries from executing during tests
         controller = new RouteController();
         controller.setMainController(new MainController());
