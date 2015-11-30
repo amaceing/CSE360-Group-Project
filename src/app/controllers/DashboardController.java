@@ -108,13 +108,13 @@ public class DashboardController implements Initializable {
     public void changeSpeed(final KeyCode code) {
         if (code == KeyCode.UP) {
             if (speed < 100) {
-                speedList.add(speed);
                 speedLabel.setText((++speed).toString());
+                speedList.add(speed);
             }
         } else if (code == KeyCode.DOWN) {
             if (speed > 0) {
-                speedList.add(speed);
                 speedLabel.setText((--speed).toString());
+                speedList.add(speed);
             }
         }
     }

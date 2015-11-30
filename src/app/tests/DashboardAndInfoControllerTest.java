@@ -59,21 +59,19 @@ public class DashboardAndInfoControllerTest {
     @Test
     public void getMaxAndAverageSpeedFromDashboard() {
 
-        // Speed up to 19
+        // Speed up to 20
         for(int i = 0; i < 20; i++)
             dashboardController.changeSpeed(KeyCode.UP);
 
         assertEquals(20.0 , dashboardController.getSpeed(), 0);
-        assertEquals("20.0", dashboardController.getSpeedLabel().getText());
 
         double[] result = dashboardController.calculateAverageAndMax();
 
         infoController.getAvgSpeed().setText(String.valueOf(result[0]));
         infoController.getMaxSpeed().setText(String.valueOf(result[1]));
 
-        assertEquals("9.5", infoController.getAvgSpeed().getText());
-        assertEquals("19.0", infoController.getMaxSpeed().getText());
-
+        assertEquals("10.5", infoController.getAvgSpeed().getText());
+        assertEquals("20.0", infoController.getMaxSpeed().getText());
 
     }
 
