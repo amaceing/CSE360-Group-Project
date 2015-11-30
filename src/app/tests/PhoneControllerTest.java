@@ -110,6 +110,33 @@
             assertEquals(4, controller.volumeDown());
         }
 
+        @Test
+        public void validateMaxVolume() {
+            controller.setVolume(10);
+            assertEquals(10, controller.volumeUp());
+        }
+
+        @Test
+        public void validateMinVolume() {
+            controller.setVolume(0);
+            assertEquals(0, controller.volumeDown());
+        }
+
+        @Test
+        public void validatePhoneNumberLength(){
+            controller.addDigit6();
+            controller.addDigit2();
+            controller.addDigit2();
+            controller.addDigit3();
+            controller.addDigit0();
+            controller.addDigit5();
+            controller.addDigit6();
+            controller.addDigit8();
+            controller.addDigit9();
+            assertEquals("(622)-305-689", controller.getPhoneNumberField().getText());
+            controller.addNumber();
+            assertEquals("", controller.getContacts().get(0));
+        }
 
     }
 
