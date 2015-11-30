@@ -99,6 +99,16 @@ public class RadioControllerTest {
         assertEquals(5, controller.getStations().size());
     }
 
+    @Test
+    public void validateMaxVolume() {
+        controller.setVolume(10);
+        assertEquals(10, controller.volumeUp());
+    }
 
+    @Test
+    public void validateMinVolume() {
+        controller.setVolume(0);
+        assertEquals(0, controller.volumeDown());
+    }
 
 }
