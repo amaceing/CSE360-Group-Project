@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.math.RoundingMode;
 
 public class InfoController implements Initializable {
+
     private static MainController mainController;
 
     @FXML
@@ -69,5 +70,28 @@ public class InfoController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.RADIOHIST);
     }
 
+    public static MainController getMainController() {
+        return mainController;
+    }
+
+    public static void setMainController(MainController mainController) {
+        InfoController.mainController = mainController;
+    }
+
+    public Label getAvgSpeed() {
+        return avgSpeed;
+    }
+
+    public void setAvgSpeed(Label avgSpeed) {
+        this.avgSpeed = avgSpeed;
+    }
+
+    public Label getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(Label maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
 
 }
