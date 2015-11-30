@@ -121,40 +121,40 @@ public class PhoneController implements Initializable {
 
     @FXML
     public void callNumber() {
-        if(phoneNumber.length() == 14) {
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.seconds(3600)));
-            timeline.play();
-            Alert a = new Alert(Alert.AlertType.NONE);
-            a.setTitle("Phone Call");
-            a.setHeaderText(phoneNumber);
-            a.setContentText("Calling...");
-            a.setResizable(true);
-            ButtonType end = new ButtonType("End");
-            a.getButtonTypes().setAll(end);
-
-            Optional<ButtonType> result = a.showAndWait();
-
-            if (result.get() == end) {
-                long duration = ChronoUnit.SECONDS.between(start, LocalTime.now());
-                DateTimeFormatter outputFormat = new DateTimeFormatterBuilder().appendPattern("hh:mm a").toFormatter();
-                SqlDriver.insertRecord(new PhoneHistory(
-                                mainController.getSession().getDriver().getID(),
-                                mainController.getSession().getDriver().getFirstName(),
-                                phoneNumber,
-                                date.toString(),
-                                start.format(outputFormat).toString(),
-                                (double) duration)
-                );
-                timeline.stop();
-                clearNumber();
-                VistaNavigator.loadVista(VistaNavigator.PHONE);
-            }
-        }
-        else
-        {
-            VistaNavigator.loadVista(VistaNavigator.PHONE);
-        }
+//        if(phoneNumber.length() == 14) {
+//            Timeline timeline = new Timeline(new KeyFrame(
+//                    Duration.seconds(3600)));
+//            timeline.play();
+//            Alert a = new Alert(Alert.AlertType.NONE);
+//            a.setTitle("Phone Call");
+//            a.setHeaderText(phoneNumber);
+//            a.setContentText("Calling...");
+//            a.setResizable(true);
+//            ButtonType end = new ButtonType("End");
+//            a.getButtonTypes().setAll(end);
+//
+//            Optional<ButtonType> result = a.showAndWait();
+//
+//            if (result.get() == end) {
+//                long duration = ChronoUnit.SECONDS.between(start, LocalTime.now());
+//                DateTimeFormatter outputFormat = new DateTimeFormatterBuilder().appendPattern("hh:mm a").toFormatter();
+//                SqlDriver.insertRecord(new PhoneHistory(
+//                                mainController.getSession().getDriver().getID(),
+//                                mainController.getSession().getDriver().getFirstName(),
+//                                phoneNumber,
+//                                date.toString(),
+//                                start.format(outputFormat).toString(),
+//                                (double) duration)
+//                );
+//                timeline.stop();
+//                clearNumber();
+//                VistaNavigator.loadVista(VistaNavigator.PHONE);
+//            }
+//        }
+//        else
+//        {
+//            VistaNavigator.loadVista(VistaNavigator.PHONE);
+//        }
     }
 
 
