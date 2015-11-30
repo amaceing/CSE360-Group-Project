@@ -276,32 +276,6 @@ public class PhoneController implements Initializable {
         this.mainController = mainController;
     }
 
-
-    public Label getCallLabel() {
-        return call;
-    }
-
-    public void setCallLabel(Label call) {
-        this.call = call;
-    }
-
-    public Label getClearLabel() {
-        return clear;
-    }
-
-    public void setClearLabel(Label clear) {
-        this.clear = clear;
-    }
-
-    public Label getAddLabel(){
-        return add;
-    }
-
-    public void setAddLabel(Label add)
-    {
-        this.add = add;
-    }
-
     public int getVolume() {
         return volume;
     }
