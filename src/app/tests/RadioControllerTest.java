@@ -1,6 +1,7 @@
 package app.tests;
 
 import app.Main;
+import app.controllers.BottomBarController;
 import app.controllers.MainController;
 import app.controllers.RadioController;
 import app.models.Driver;
@@ -26,6 +27,7 @@ public class RadioControllerTest {
         Main.testing = true; // Stops SQL Queries from executing during tests
         controller = new RadioController();
         controller.setMainController(new MainController());
+        controller.setBottomBarController(new BottomBarController());
     }
 
     @Before
@@ -35,6 +37,8 @@ public class RadioControllerTest {
 
         controller.getMainController().setSession(session);
         controller.getMainController().getSession().setDriver(driver);
+
+        controller.getBottomBarController().setMainController(controller.getMainController());
 
         // Create Buttons
         controller.setAMButton(new Button("AM"));
@@ -109,6 +113,12 @@ public class RadioControllerTest {
     public void validateMinVolume() {
         controller.setVolume(0);
         assertEquals(0, controller.volumeDown());
+    }
+
+    @Test
+    public void integrateLogOutTest() {
+        controller.getBottomBarController().turnOff();
+        assertNull(controller.getMainController().getSession());
     }
 
 }
