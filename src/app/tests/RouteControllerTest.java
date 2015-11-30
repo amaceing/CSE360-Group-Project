@@ -37,9 +37,8 @@ public class RouteControllerTest {
 
         controller.getMainController().setSession(session);
         controller.getMainController().getSession().setDriver(driver);
-
-
     }
+
 
     @Test
     public void canInitSlider() {

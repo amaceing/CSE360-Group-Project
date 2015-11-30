@@ -48,6 +48,7 @@ public class PhoneController implements Initializable {
 
     @FXML
     private Label phoneNumberField;
+
     private String phoneNumber;
 
     private LocalDate date;
@@ -55,6 +56,7 @@ public class PhoneController implements Initializable {
 
     @FXML
     private ObservableList<String> contacts;
+
 
     @FXML
     private ListView contactsList;
@@ -247,21 +249,79 @@ public class PhoneController implements Initializable {
     }
 
     @FXML
-    public void volumeUp() {
+    public int volumeUp() {
         if (volume != 10) {
             volumeLabel.setText(Integer.toString(++volume));
             SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
             mainController.getSession().getDriver().setPhoneVolume(volume);
-
         }
+        return volume;
     }
 
     @FXML
-    public void volumeDown() {
+    public int volumeDown() {
         if (volume != 0) {
             volumeLabel.setText(Integer.toString(--volume));
             SqlDriver.updateRecord("DRIVERS", "PHONE_VOLUME", mainController.getSession().getDriver().getID(), volume);
             mainController.getSession().getDriver().setPhoneVolume(volume);
         }
+        return volume;
     }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public Label getVolumeLabel() {
+        return volumeLabel;
+    }
+
+    public void setVolumeLabel(Label volumeLabel) {
+        this.volumeLabel = volumeLabel;
+    }
+
+    public ListView getContactsList() {
+        return contactsList;
+    }
+
+    public void setContactsList(ListView contactsList) {
+        this.contactsList = contactsList;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Label getPhoneNumberField() {
+        return phoneNumberField;
+    }
+
+    public void setPhoneNumberField(Label phoneNumberField) {
+        this.phoneNumberField = phoneNumberField;
+    }
+
+    public ObservableList<String> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(ObservableList<String> contacts) {
+        this.contacts = contacts;
+    }
+
 }
