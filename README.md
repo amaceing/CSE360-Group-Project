@@ -18,3 +18,9 @@ To install this program from github, simply clone the repo with the clone URL
 * Download and install testFx 3.1.0 jar
 * Download and install junit 4.10 jar
 * Download and install hamcrest 1.3 jar
+
+###Tests
+
+Tests are setup to be ran as one folder, hence the A_Setup test file to launch the application for testing. Right click `tests` folder and pick the following option to run test suite:
+
+![](http://s11.postimg.org/ighkud9cz/Screen_Shot_2015_12_02_at_10_49_30_PM.png)
