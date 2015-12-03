@@ -19,7 +19,7 @@ To install this program from github, simply clone the repo with the clone URL
 * Download and install junit 4.10 jar
 * Download and install hamcrest 1.3 jar
 
-####Tests
+###Tests
 
 Tests are setup to be ran as one folder, hence the A_Setup test file to launch the application for testing. Right click `tests` folder and pick the following option to run test suite:
 
